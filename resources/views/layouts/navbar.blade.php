@@ -2,13 +2,25 @@
     <div class="mdk-drawer__content ">
         <div class="sidebar sidebar-left sidebar-dark bg-dark o-hidden" data-perfect-scrollbar>
             <div class="sidebar-p-y">
-                <div class="sidebar-heading">APPLICATIONS</div>
-                <ul class="sidebar-menu sm-active-button-bg">
-                    <li class="sidebar-menu-item active">
-                        <a class="sidebar-menu-button" href="/">
-                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_box</i> Home
-                        </a>
-                    </li>
+                @if ($main_menus)
+                    @foreach ($main_menus as $main_menu)
+                        <div class="sidebar-heading">{{ $main_menu->title }}</div>
+                        @if ($main_menu->parent == 1)
+                            @if ($main_menu->menus)
+                                <ul class="sidebar-menu sm-active-button-bg">
+                                    @foreach ($main_menu->menus as $menu)
+                                        <li class="sidebar-menu-item active">
+                                            <a class="sidebar-menu-button" href="{{ $menu->url }}">
+                                                <i class="sidebar-menu-icon sidebar-menu-icon--left {{ $menu->icon }}" style="font-size: 18px"></i>{{ $menu->title }} 
+                                            </a>
+                                        </li> 
+                                    @endforeach
+                                </ul>
+                            @endif
+                        @endif
+                    @endforeach
+                @endif
+                
                     <li class="sidebar-menu-item">
                         <a class="sidebar-menu-button" href="instructor-dashboard.html">
                             <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">school</i> Instructor
@@ -22,7 +34,7 @@
                         <a class="sidebar-menu-button sidebar-js-collapse"
                             data-toggle="collapse"
                             href="#account_menu">
-                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">person_outline</i>
+                            <i class="sidebar-menu-icon sidebar-menu-icon--left fa fa-school" style="font-size: 18px"></i>
                             Account
                             <span class="ml-auto sidebar-menu-toggle-icon"></span>
                         </a>
@@ -112,7 +124,7 @@
                         <a class="sidebar-menu-button"
                             data-toggle="collapse"
                             href="#messages_menu">
-                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">comment</i> Messages
+                            <i class="sidebar-menu-icon sidebar-menu-icon--left fa fa-star"></i> Messages
                             <span class="ml-auto sidebar-menu-toggle-icon"></span>
                         </a>
                         <ul class="sidebar-submenu sm-indent collapse"

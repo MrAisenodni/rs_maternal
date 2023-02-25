@@ -10,6 +10,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             // Seeder untuk Tabel Setting
+            Settings\MainMenuSeeder::class,
+            Settings\MenuSeeder::class,
             Settings\ProviderSeeder::class,
     
             // Seeder untuk Tabel Master
