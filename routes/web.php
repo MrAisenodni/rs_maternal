@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\Patient\{
+    ListCoursesController
+};
+use App\Http\Controllers\Settings\{
+    LoginController
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +20,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('patient/dashboard');
+// Dashboard
+Route::get('/', [PageController::class, 'index']);
+
+// Login or Logout or Registration
+Route::resource('/login', LoginController::class);
+Route::get('/logout', [LoginController::class, 'logout']);
+
+// Patient Menu
+Route::resource('/list-courses', ListCoursesController::class);
+
+// Menu must be login first
+Route::middleware('authcheck')->group(function() {
+    
 });

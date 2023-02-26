@@ -22,7 +22,7 @@ class CreateMstUser extends Migration
             $table->string('address_2', 3)->nullable();
             $table->string('address_3', 3)->nullable();
             $table->unsignedInteger('religion_id')->nullable(); // Join ke Tabel mst_religion
-            $table->unsignedInteger('position_id')->nullable(); // Join ke Tabel mst_position
+            $table->enuM('role', ['adm', 'pat']);
             
             // Struktur Baku
             $table->string('access_code')->nullable();

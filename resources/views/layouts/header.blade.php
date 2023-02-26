@@ -10,9 +10,8 @@
                 </button>
 
                 <!-- Brand -->
-                <a href="student-dashboard.html"
-                   class="navbar-brand">
-                    <img src="{{ asset('assets/images/logo/white.svg') }}" class="mr-2" alt="E-Learning Maternal" />
+                <a href="/" class="navbar-brand">
+                    <img src="{{ asset('/assets/images/logo/white.svg') }}" class="mr-2" alt="E-Learning Maternal" />
                     <span class="d-none d-xs-md-block">E-Learning Maternal</span>
                 </a>
 
@@ -21,13 +20,13 @@
                     <!-- User dropdown -->
                     <li class="nav-item dropdown ml-1 ml-md-3">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                            <img src="{{ asset('assets/images/people/50/guy-6.jpg') }}" alt="Avatar" class="rounded-circle" width="40">
+                            <img src="{{ asset('/assets/images/people/50/guy-6.jpg') }}" alt="Avatar" class="rounded-circle" width="40">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="student-profile.html">
+                            <a class="dropdown-item" href="/profil/{{ session()->get('suser_id') }}">
                                 <i class="material-icons">person</i> Profil
                             </a>
-                            <a class="dropdown-item" href="guest-login.html">
+                            <a class="dropdown-item" href="/logout">
                                 <i class="material-icons">lock</i> Keluar
                             </a>
                         </div>
