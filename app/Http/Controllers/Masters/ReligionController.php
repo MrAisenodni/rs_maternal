@@ -7,19 +7,16 @@ use Illuminate\Http\Request;
 
 class ReligionController extends Controller
 {
-    protected $path = '/master/agama';
+    protected $path = '/master/religion';
 
     public function index()
     {
         $data = [
-            'menu'          => $this->submenu->select('id', 'title', 'menu_id', 'url')->where('url', $this->path)->first(),
+            'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
             'data'          => $this->religion->select('id', 'name')->where('disabled', 0)->get(),
         ];
-        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('login_id', session()->get('sid'))->where('submenu_id', $data['menu']->id)->first();
-        if ($data['access']->view == 0) abort(403);
 
-        return view('masters.religion.index', $data);
+        return view('admin.masters.religion.index', $data);
     }
 
     public function store(Request $request)
@@ -40,29 +37,23 @@ class ReligionController extends Controller
     public function show($id)
     {
         $data = [
-            'menu'          => $this->submenu->select('id', 'title', 'menu_id', 'url')->where('url', $this->path)->first(),
+            'c_menu'        => $this->menu->select('id', 'title', 'url')->where('url', $this->path)->first(),
             'detail'        => $this->religion->select('id', 'name')->where('id', $id)->where('disabled', 0)->first(),
             'data'          => $this->religion->select('id', 'name')->where('disabled', 0)->get(),
         ];
-        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('login_id', session()->get('sid'))->where('submenu_id', $data['menu']->id)->first();
-        if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
         
-        return view('masters.religion.index', $data);
+        return view('admin.masters.religion.index', $data);
     }
 
     public function edit($id)
     {
         $data = [
-            'menu'          => $this->submenu->select('id', 'title', 'menu_id', 'url')->where('url', $this->path)->first(),
+            'c_menu'        => $this->menu->select('id', 'title', 'url')->where('url', $this->path)->first(),
             'detail'        => $this->religion->select('id', 'name')->where('id', $id)->where('disabled', 0)->first(),
             'data'          => $this->religion->select('id', 'name')->where('disabled', 0)->get(),
         ];
-        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('login_id', session()->get('sid'))->where('submenu_id', $data['menu']->id)->first();
-        if ($data['access']->view == 0 || $data['access']->edit == 0) abort(403);
         
-        return view('masters.religion.index', $data);
+        return view('admin.masters.religion.index', $data);
     }
 
     public function update(Request $request, $id)

@@ -1,11 +1,16 @@
 <?php
 
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\Masters\{
+    CategoryController,
+    LevelController,
+    ReligionController,
+};
 use App\Http\Controllers\Patient\{
-    ListCoursesController
+    ListCoursesController,
 };
 use App\Http\Controllers\Settings\{
-    LoginController
+    LoginController,
 };
 use Illuminate\Support\Facades\Route;
 
@@ -32,5 +37,7 @@ Route::resource('/list-courses', ListCoursesController::class);
 
 // Menu must be login first
 Route::middleware('authcheck')->group(function() {
-    
+    Route::resource('/master/category', CategoryController::class);
+    Route::resource('/master/level', LevelController::class);
+    Route::resource('/master/religion', ReligionController::class);
 });

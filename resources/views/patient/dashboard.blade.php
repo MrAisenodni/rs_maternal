@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Dashboard')
+@section('title', $c_menu->title)
 
 @section('styles')
 @endsection

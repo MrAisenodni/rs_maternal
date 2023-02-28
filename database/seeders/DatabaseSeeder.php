@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             Masters\CitySeeder::class,
             Masters\DistrictSeeder::class,
             // Masters\WardSeeder::class, // Komentar sementara untuk mempercepat Migrasi
+            Masters\CategorySeeder::class,
+            Masters\LevelSeeder::class,
 
             // Seeder untuk Tabel Setting
             Settings\LoginSeeder::class,

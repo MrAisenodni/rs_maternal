@@ -27,6 +27,8 @@
 
         <!-- App CSS -->
         <link type="text/css" href="{{ asset('/assets/css/app.css') }}" rel="stylesheet">
+
+        @yield('styles')
     </head>
 
     <body class="layout-fluid">
@@ -114,5 +116,7 @@
         <!-- Student Dashboard Page JS -->
         <!-- <script src="assets/js/chartjs-rounded-bar.js"></script> -->
         <script src="{{ asset('/assets/js/page.student-dashboard.js') }}"></script>
+
+        @yield('scripts')
     </body>
 </html>

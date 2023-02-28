@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Masters\{
+    Category,
+    Level,
+    Religion,
+};
 use App\Models\Settings\{
     Login,
     Menu,
@@ -22,5 +27,10 @@ class Controller extends BaseController
         $this->login                = new Login();
         $this->menu                 = new Menu();
         $this->user                 = new User();
+
+        // Global Variabel untuk Master
+        $this->category             = new Category();
+        $this->level                = new Level();
+        $this->religion             = new Religion();
     }
 }
