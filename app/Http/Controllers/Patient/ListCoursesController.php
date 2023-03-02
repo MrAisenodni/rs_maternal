@@ -9,10 +9,14 @@ class ListCoursesController extends Controller
 {
     protected $path = '/list-courses';
 
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->search;
+
         $data = [
             'c_menu'    => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
+            'data'      => $this->course_header->select('id', 'title', 'picture', 'rating', 'category_id', 'level_id', 'description')->where('disabled', 0)->where('title', 'LIKE', '%'.$search.'%')->paginate(4),
+            'search'    => $search,
         ];
 
         return view('patient.list_courses', $data);

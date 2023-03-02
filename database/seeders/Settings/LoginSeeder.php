@@ -10,7 +10,7 @@ class LoginSeeder extends CsvSeeder
 {
     public function __construct()
     {
-        $this->file = '/database/csv/Login.csv';
+        $this->file = '/database/csv/Settings/Login.csv';
         $this->tablename = 'stg_login';
         $this->defaults = [
             'created_by'    => 'Migrasi'

@@ -10,7 +10,7 @@ class CitySeeder extends CsvSeeder
 {
     public function __construct()
     {
-        $this->file = '/database/csv/City.csv';
+        $this->file = '/database/csv/Masters/City.csv';
         $this->tablename = 'mst_city';
         $this->defaults = [
             'created_by'    => 'Migrasi'

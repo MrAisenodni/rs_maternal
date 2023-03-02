@@ -10,7 +10,7 @@ class MenuSeeder extends CsvSeeder
 {
     public function __construct()
     {
-        $this->file = '/database/csv/Menu.csv';
+        $this->file = '/database/csv/Settings/Menu.csv';
         $this->tablename = 'stg_menu';
         $this->defaults = [
             'created_by'    => 'Migrasi'

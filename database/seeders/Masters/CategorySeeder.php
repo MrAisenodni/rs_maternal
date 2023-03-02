@@ -10,7 +10,7 @@ class CategorySeeder extends CsvSeeder
 {
     public function __construct()
     {
-        $this->file = '/database/csv/Category.csv';
+        $this->file = '/database/csv/Masters/Category.csv';
         $this->tablename = 'mst_category';
         $this->defaults = [
             'created_by'    => 'Migrasi'

@@ -10,7 +10,7 @@ class CountrySeeder extends CsvSeeder
 {
     public function __construct()
     {
-        $this->file = '/database/csv/Country.csv';
+        $this->file = '/database/csv/Masters/Country.csv';
         $this->tablename = 'mst_country';
         $this->defaults = [
             'created_by'    => 'Migrasi'

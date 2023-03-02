@@ -10,7 +10,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             // Seeder untuk Tabel Master
-            Masters\ReligionSeeder::class,
             Masters\CountrySeeder::class,
             Masters\ProvinceSeeder::class,
             Masters\CitySeeder::class,
@@ -18,13 +17,19 @@ class DatabaseSeeder extends Seeder
             // Masters\WardSeeder::class, // Komentar sementara untuk mempercepat Migrasi
             Masters\CategorySeeder::class,
             Masters\LevelSeeder::class,
-
-            // Seeder untuk Tabel Setting
+            Masters\ReligionSeeder::class,
+            Masters\RoleSeeder::class,
+            
+            // // Seeder untuk Tabel Setting
             Settings\LoginSeeder::class,
             Settings\MainMenuSeeder::class,
             Settings\MenuSeeder::class,
             Settings\ProviderSeeder::class,
             Settings\UserSeeder::class,
+
+            // // Seeder untuk Tabel Transaksi
+            Transactions\CourseHeaderSeeder::class,
+            Transactions\CourseDetailSeeder::class,
         ]);
     }
 }

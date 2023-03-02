@@ -10,7 +10,7 @@ class WardSeeder extends CsvSeeder
 {
     public function __construct()
     {
-        $this->file = '/database/csv/Ward.csv';
+        $this->file = '/database/csv/Masters/Ward.csv';
         $this->tablename = 'mst_ward';
         $this->defaults = [
             'created_by'    => 'Migrasi'

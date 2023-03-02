@@ -10,7 +10,7 @@ class DistrictSeeder extends CsvSeeder
 {
     public function __construct()
     {
-        $this->file = '/database/csv/District.csv';
+        $this->file = '/database/csv/Masters/District.csv';
         $this->tablename = 'mst_district';
         $this->defaults = [
             'created_by'    => 'Migrasi'

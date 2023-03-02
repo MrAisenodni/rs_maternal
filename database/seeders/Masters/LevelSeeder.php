@@ -10,7 +10,7 @@ class LevelSeeder extends CsvSeeder
 {
     public function __construct()
     {
-        $this->file = '/database/csv/Level.csv';
+        $this->file = '/database/csv/Masters/Level.csv';
         $this->tablename = 'mst_level';
         $this->defaults = [
             'created_by'    => 'Migrasi'

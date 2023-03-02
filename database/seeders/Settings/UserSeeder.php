@@ -10,7 +10,7 @@ class UserSeeder extends CsvSeeder
 {
     public function __construct()
     {
-        $this->file = '/database/csv/User.csv';
+        $this->file = '/database/csv/Settings/User.csv';
         $this->tablename = 'mst_user';
         $this->defaults = [
             'created_by'    => 'Migrasi'

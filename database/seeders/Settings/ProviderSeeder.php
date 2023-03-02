@@ -10,7 +10,7 @@ class ProviderSeeder extends CsvSeeder
 {
     public function __construct()
     {
-        $this->file = '/database/csv/Provider.csv';
+        $this->file = '/database/csv/Settings/Provider.csv';
         $this->tablename = 'stg_provider';
         $this->defaults = [
             'created_by'    => 'Migrasi'

@@ -10,7 +10,7 @@ class ProvinceSeeder extends CsvSeeder
 {
     public function __construct()
     {
-        $this->file = '/database/csv/Province.csv';
+        $this->file = '/database/csv/Masters/Province.csv';
         $this->tablename = 'mst_province';
         $this->defaults = [
             'created_by'    => 'Migrasi'

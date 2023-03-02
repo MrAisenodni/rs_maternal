@@ -12,10 +12,12 @@ class CreateTrxCourseHeader extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->text('picture')->nullable();
-            $table->integer('rating')->nullable();
+            $table->float('rating', 3, 1)->nullable();
+            $table->float('duration')->nullable();
             $table->text('description')->nullable();
             $table->unsignedInteger('category_id')->nullable(); // Join ke mst_category
             $table->unsignedInteger('level_id')->nullable(); // Join ke mst_level
+            $table->unsignedInteger('course_detail_teacher_id')->nullable(); // Join ke trx_course_detail_teacher
             
             // Struktur Baku
             $table->string('access_code')->nullable();
