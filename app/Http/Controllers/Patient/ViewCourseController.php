@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Patient;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use getID3;
 
 class ViewCourseController extends Controller
 {
@@ -11,7 +12,7 @@ class ViewCourseController extends Controller
 
     public function index($id, $ids)
     {
-        $getID3 = new \getID3;
+        $getID3 = new getID3;
 
         $data = [
             'c_menu'    => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
