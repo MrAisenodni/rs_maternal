@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Masters\{
     Category,
+    City,
+    Country,
+    District,
     Level,
+    Province,
     Religion,
     Role,
+    Ward,
 };
 use App\Models\Settings\{
     Login,
     Menu,
+    Provider,
     User,
 };
 use App\Models\Transactions\{
@@ -31,13 +37,19 @@ class Controller extends BaseController
         // Global Variabel untuk Setting
         $this->login                    = new Login();
         $this->menu                     = new Menu();
+        $this->provider                 = new Provider();
         $this->user                     = new User();
 
         // Global Variabel untuk Master
         $this->category                 = new Category();
+        $this->city                     = new City();
+        $this->country                  = new Country();
+        $this->district                 = new District();
         $this->level                    = new Level();
+        $this->province                 = new Province();
         $this->religion                 = new Religion();
         $this->role                     = new Role();
+        $this->ward                     = new Ward();
 
         // Global Variabel untuk Transaction
         $this->course_detail            = new CourseDetail();

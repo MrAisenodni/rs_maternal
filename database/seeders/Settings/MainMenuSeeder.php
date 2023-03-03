@@ -15,7 +15,7 @@ class MainMenuSeeder extends CsvSeeder
         $this->defaults = [
             'created_by'    => 'Migrasi'
         ];
-        $this->mapping = ['id', 'title', 'icon', 'url', 'parent'];
+        $this->mapping = ['id', 'title', 'icon', 'url', 'parent', 'is_login'];
         $this->header = false;
     }
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\Patient\{
 };
 use App\Http\Controllers\Settings\{
     LoginController,
+    ProviderController,
 };
 use Illuminate\Support\Facades\Route;
 
@@ -40,8 +41,12 @@ Route::get('/view-course/{id}/{ids}', [ViewCourseController::class, 'index']);
 
 // Menu must be login first
 Route::middleware('authcheck')->group(function() {
+    // Master
     Route::resource('/master/category', CategoryController::class);
     Route::resource('/master/level', LevelController::class);
     Route::resource('/master/religion', ReligionController::class);
     Route::resource('/master/role', RoleController::class);
+
+    // Setting
+    Route::resource('/setting/provider', ProviderController::class);
 });

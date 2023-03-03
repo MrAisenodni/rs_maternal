@@ -5,10 +5,13 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>@yield('title') | E-Learning Maternal Neonatal</title>
+        <title>@yield('title') | {{ $provider->provider_name }}</title>
 
         <!-- Prevent the demo from appearing in search engines (REMOVE THIS) -->
         <meta name="robots" content="noindex">
+
+        <!-- Favicon -->
+        <link rel="icon" href="{{ asset($provider->provider_logo) }}" type="image/png" />
 
         <!-- Custom Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500%7CRoboto:400,500&display=swap" rel="stylesheet">
