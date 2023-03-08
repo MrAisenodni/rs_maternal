@@ -7,6 +7,9 @@ use App\Http\Controllers\Masters\{
     ReligionController,
     RoleController,
 };
+use App\Http\Controllers\Management\{
+    ListCoursesController as AdminListCoursesController,
+};
 use App\Http\Controllers\Patient\{
     ListCoursesController,
     ViewCourseController,
@@ -37,10 +40,15 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 // Patient Menu
 Route::resource('/list-courses', ListCoursesController::class);
-Route::get('/view-course/{id}/{ids}', [ViewCourseController::class, 'index']);
 
 // Menu must be login first
 Route::middleware('authcheck')->group(function() {
+    // Learning
+    Route::get('/view-course/{id}/{ids}', [ViewCourseController::class, 'index']);
+
+    // Management
+    Route::resource('/admin/list-courses', AdminListCoursesController::class);
+
     // Master
     Route::resource('/master/category', CategoryController::class);
     Route::resource('/master/level', LevelController::class);

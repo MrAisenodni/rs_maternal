@@ -21,9 +21,7 @@ class ViewCourseController extends Controller
             'getID3'    => $getID3,
         ];
 
-        // $file = $getID3->analyze(substr($data['detail']->video, 1));
-
-        // dd($file, gmdate('H:i:s', 1157.096767));
+        if (!session()->get('suser_id')) abort(403);
 
         return view('patient.view_course', $data);
     }

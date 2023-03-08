@@ -159,8 +159,13 @@ return [
     */
 
     'attributes' => [
-        'username'                      => 'Nama Pengguna',
+        'category'                      => 'Kategori',
+        'doctor'                        => 'Dokter',
+        'level'                         => 'Tingkatan',
         'password'                      => 'Kata Sandi',
+        'picture'                       => 'Foto/Gambar',
+        'username'                      => 'Nama Pengguna',
+        'title'                         => 'Judul',
     ],
 
 ];

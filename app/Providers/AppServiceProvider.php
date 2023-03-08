@@ -28,11 +28,11 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.navbar', function ($view) {
             if (session()->get('suser_id')) {
                 $view->with(
-                    'main_menus', MainMenu::select('id', 'title', 'icon', 'url', 'parent')->where('disabled', 0)->get()
+                    'main_menus', MainMenu::select('id', 'title', 'icon', 'url', 'parent', 'is_login')->where('disabled', 0)->get()
                 );
             } else {
                 $view->with(
-                    'main_menus', MainMenu::select('id', 'title', 'icon', 'url', 'parent')->where('disabled', 0)->where('is_login', 0)->get()
+                    'main_menus', MainMenu::select('id', 'title', 'icon', 'url', 'parent', 'is_login')->where('disabled', 0)->where('is_login', 0)->get()
                 );
             }
         });

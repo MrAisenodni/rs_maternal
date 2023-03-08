@@ -4,18 +4,39 @@
             <div class="sidebar-p-y">
                 @if ($main_menus)
                     @foreach ($main_menus as $main_menu)
-                        <div class="sidebar-heading">{{ $main_menu->title }}</div>
-                        @if ($main_menu->parent == 1)
-                            @if ($main_menu->menus)
-                                <ul class="sidebar-menu sm-active-button-bg">
-                                    @foreach ($main_menu->menus as $menu)
-                                        <li class="sidebar-menu-item @if($menu->id == $c_menu->id) active @endif">
-                                            <a class="sidebar-menu-button" href="{{ $menu->url }}">
-                                                <i class="sidebar-menu-icon sidebar-menu-icon--left {{ $menu->icon }}" style="font-size: 18px"></i>{{ $menu->title }} 
-                                            </a>
-                                        </li> 
-                                    @endforeach
-                                </ul>
+                        @if (session()->get('suser_id'))
+                            @if ($main_menu->menu_access->view == 1)
+                                <div class="sidebar-heading">{{ $main_menu->title }}</div>
+                                @if ($main_menu->parent == 1)
+                                    @if ($main_menu->menus)
+                                        <ul class="sidebar-menu sm-active-button-bg">
+                                            @foreach ($main_menu->menus as $menu)
+                                                @if ($menu->menu_access->view == 1)
+                                                    <li class="sidebar-menu-item @if($menu->id == $c_menu->id) active @endif">
+                                                        <a class="sidebar-menu-button" href="{{ $menu->url }}">
+                                                            <i class="sidebar-menu-icon sidebar-menu-icon--left {{ $menu->icon }}" style="font-size: 18px"></i>{{ $menu->title }} 
+                                                        </a>
+                                                    </li> 
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                @endif
+                            @endif
+                        @else
+                            <div class="sidebar-heading">{{ $main_menu->title }}</div>
+                            @if ($main_menu->parent == 1)
+                                @if ($main_menu->menus)
+                                    <ul class="sidebar-menu sm-active-button-bg">
+                                        @foreach ($main_menu->menus as $menu)
+                                            <li class="sidebar-menu-item @if($menu->id == $c_menu->id) active @endif">
+                                                <a class="sidebar-menu-button" href="{{ $menu->url }}">
+                                                    <i class="sidebar-menu-icon sidebar-menu-icon--left {{ $menu->icon }}" style="font-size: 18px"></i>{{ $menu->title }} 
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endif
                             @endif
                         @endif
                     @endforeach

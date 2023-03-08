@@ -10,3 +10,7 @@
 10;Detail Materi;fa fa-book-open;/view-course;0;1;1;0
 11;Daftar Materi;fa fa-book-reader;/admin/list-courses;0;2;1;1
 12;Sampah Materi;fa fa-trash;/admin/trash-courses;0;2;1;1
+13;Negara;fa fa-flag;/master/country;0;3;1;1
+14;Provinsi;fa fa-warchway;/master/province;0;3;1;1
+15;Kota;fa fa-city;/master/city;0;3;1;1
+16;Kecamatan;fa fa-warehouse;/master/district;0;3;1;1

@@ -33,6 +33,7 @@ class LoginController extends Controller
                 $request->session()->put('suser_id', $check->user_id);
                 $request->session()->put('susername', $check->username);
                 $request->session()->put('spassword', $check->password);
+                $request->session()->put('srole', $check->user->role);
                 $request->session()->put('sremember_token', $check->remember_token);
 
                 return redirect()->intended('/');

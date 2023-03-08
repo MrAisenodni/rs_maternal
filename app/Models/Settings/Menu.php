@@ -15,4 +15,9 @@ class Menu extends Model
     {
         return $this->hasMany(SubMenu::class)->select('id', 'title', 'url', 'icon')->where('disabled', 0);
     }
+
+    public function menu_access()
+    {
+        return $this->belongsTo(MenuAccess::class, 'id', 'menu_id')->select('id', 'role', 'view', 'add', 'edit', 'delete')->where('disabled', 0)->where('role', session()->get('srole'));
+    }
 }
