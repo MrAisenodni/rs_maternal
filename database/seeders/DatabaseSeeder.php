@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             // Masters\ReligionSeeder::class,
             // Masters\RoleSeeder::class,
             
-            // // // Seeder untuk Tabel Setting
+            // // Seeder untuk Tabel Setting
             // Settings\LoginSeeder::class,
             // Settings\MainMenuSeeder::class,
             Settings\MenuSeeder::class,
@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             // Settings\ProviderSeeder::class,
             // Settings\UserSeeder::class,
 
-            // // // Seeder untuk Tabel Transaksi
+            // // Seeder untuk Tabel Transaksi
             // Transactions\CourseHeaderSeeder::class,
             // Transactions\CourseDetailSeeder::class,
         ]);
