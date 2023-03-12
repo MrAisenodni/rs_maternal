@@ -6,6 +6,7 @@ use App\Models\Masters\{
     Category,
     Level,
 };
+use App\Models\Settings\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,11 @@ class CourseHeader extends Model
     public function level()
     {
         return $this->belongsTo(Level::class)->select('id', 'name')->where('disabled', 0);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'course_detail_teacher_id', 'id')->select('id', 'nik', 'full_name')->where('disabled', 0)->where('role', 'tec');
     }
 
     public function course_detail()

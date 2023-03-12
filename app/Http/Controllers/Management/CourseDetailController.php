@@ -23,7 +23,7 @@ class CourseDetailController extends Controller
         return view('admin.management.course_detail.create', $data);
     }
 
-    public function store($id, Request $request)
+    public function store(Request $request)
     {
         $validate = $request->validate([
             'title'             => 'required',
@@ -31,7 +31,7 @@ class CourseDetailController extends Controller
         ]);
         
         $data = [
-            'course_header_id'                  => $id,
+            'course_header_id'                  => $request->id,
             'title'                             => $request->title,
             'description'                       => $request->description,
             'created_at'                        => now(),
@@ -41,7 +41,7 @@ class CourseDetailController extends Controller
         if ($request->video) {
             $file = $request->file('video');
             $extension = $request->video->getClientOriginalExtension();  // Get Extension
-            $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$id.'-'.$request->title.'.'.$extension;  // Concatenate both to get FileName
+            $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->id.'-'.$request->title.'.'.$extension;  // Concatenate both to get FileName
             $filePath = $file->storeAs('/courses/videos', $fileName, 'public');  
             $file->move(public_path().'/courses/videos', $filePath);  
             $data += [
@@ -49,36 +49,29 @@ class CourseDetailController extends Controller
             ]; 
         }
 
-        $id = $this->course_detail->insert($data);
+        $this->course_detail->insert($data);
 
-        return redirect('/admin/course_header/'.$id.'/edit')->with('status', 'Data Berhasil Ditambahkan.');
+        return redirect('/admin/course_header/'.$request->id.'/edit')->with('status', 'Data Berhasil Ditambahkan.');
     }
 
     public function show($id)
     {
         $data = [
-            'menu'          => $this->submenu->select('id', 'title', 'menu_id', 'url')->where('url', $this->path)->first(),
-            'detail'        => $this->city->select('id', 'code', 'name', 'province_id')->where('id', $id)->where('disabled', 0)->first(),
-            'data'          => $this->city->select('id', 'code', 'name', 'province_id')->where('disabled', 0)->get(),
-            'provinces'     => $this->province->select('id', 'code', 'name')->where('disabled', 0)->get(),
+            'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
+            'detail'        => $this->course_detail->select('id', 'course_header_id', 'title', 'video', 'description')->where('id', $id)->where('disabled', 0)->first(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('login_id', session()->get('sid'))->where('submenu_id', $data['menu']->id)->first();
+            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
         
-        return view('admin.management.course_detail.index', $data);
+        return view('admin.management.course_detail.show', $data);
     }
 
     public function edit($id)
     {
         $data = [
             'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
-            'categories'    => $this->category->select('id', 'name')->where('disabled', 0)->get(),
-            'data'          => $this->course_detail->select('id', 'title', 'description')->where('disabled', 0)->where('course_detail_id', $id)->get(),
-            'levels'        => $this->level->select('id', 'name')->where('disabled', 0)->get(),
-            'detail'        => $this->course_detail->select('id', 'title', 'course_detail_teacher_id', 'category_id', 'level_id', 'description', 'duration', 'picture')->where('id', $id)->where('disabled', 0)->first(),
-            'doctors'       => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('role', 'tec')->get(),
-            'doctor'        => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('id', session()->get('suser_id'))->first(),
+            'detail'        => $this->course_detail->select('id', 'course_header_id', 'title', 'video', 'description')->where('id', $id)->where('disabled', 0)->first(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
@@ -91,36 +84,32 @@ class CourseDetailController extends Controller
     {
         $validate = $request->validate([
             'title'             => 'required',
-            'category'          => 'required',
-            'level'             => 'required',
-            'picture'           => 'required',
+            'video'             => 'required',
         ]);
         
         $data = [
+            'course_header_id'                  => $request->id,
             'title'                             => $request->title,
-            'course_detail_teacher_id'          => $request->doctor,
-            'category_id'                       => $request->category,
-            'level_id'                          => $request->level,
             'description'                       => $request->description,
             'created_at'                        => now(),
             'created_by'                        => session()->get('user_id'),
         ];
         
-        if ($request->picture) {
-            if ($request->old_picture) File::delete(public_path().$request->old_picture);
-            $file = $request->file('picture');
-            $extension = $request->picture->getClientOriginalExtension();  // Get Extension
-            $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
-            $filePath = $file->storeAs('/courses/pictures', $fileName, 'public');  
-            $file->move(public_path().'/courses/pictures', $filePath);  
+        if ($request->video) {
+            if ($request->old_video) File::delete(public_path().$request->old_video);
+            $file = $request->file('video');
+            $extension = $request->video->getClientOriginalExtension();  // Get Extension
+            $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->id.'-'.$request->title.'.'.$extension;  // Concatenate both to get FileName
+            $filePath = $file->storeAs('/courses/videos', $fileName, 'public');  
+            $file->move(public_path().'/courses/videos', $filePath);  
             $data += [
-                'picture'       => '/'.$filePath,
+                'video'       => '/'.$filePath,
             ]; 
         }
 
         $this->course_detail->where('id', $id)->update($data);
 
-        return redirect($this->path.'/'.$id.'/edit')->with('status', 'Data Berhasil Diubah.');
+        return redirect('/admin/course_header/'.$id.'/edit')->with('status', 'Data Berhasil Diubah.');
     }
 
     public function destroy($id)
@@ -133,6 +122,6 @@ class CourseDetailController extends Controller
 
         $this->course_detail->where('id', $id)->update($data);
 
-        return redirect($this->path)->with('status', 'Data Berhasil Dihapus.');
+        return redirect(url()->previous())->with('status', 'Data Berhasil Dihapus.');
     }
 }

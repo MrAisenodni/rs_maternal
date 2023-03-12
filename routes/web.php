@@ -49,7 +49,8 @@ Route::middleware('authcheck')->group(function() {
 
     // Management
     Route::resource('/admin/course_header', CourseHeaderController::class);
-    Route::resource('/admin/course_detail/{id}', CourseDetailController::class);
+    Route::get('/admin/course_detail/{id}/create', [CourseDetailController::class, 'create']);
+    Route::resource('/admin/course_detail', CourseDetailController::class);
 
     // Master
     Route::resource('/master/category', CategoryController::class);

@@ -77,16 +77,15 @@ class CourseHeaderController extends Controller
     public function show($id)
     {
         $data = [
-            'menu'          => $this->submenu->select('id', 'title', 'menu_id', 'url')->where('url', $this->path)->first(),
-            'detail'        => $this->city->select('id', 'code', 'name', 'province_id')->where('id', $id)->where('disabled', 0)->first(),
-            'data'          => $this->city->select('id', 'code', 'name', 'province_id')->where('disabled', 0)->get(),
-            'provinces'     => $this->province->select('id', 'code', 'name')->where('disabled', 0)->get(),
+            'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
+            'data'          => $this->course_detail->select('id', 'title', 'description')->where('disabled', 0)->where('course_header_id', $id)->get(),
+            'detail'        => $this->course_header->select('id', 'title', 'course_detail_teacher_id', 'category_id', 'level_id', 'description', 'duration', 'picture')->where('id', $id)->where('disabled', 0)->first(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('login_id', session()->get('sid'))->where('submenu_id', $data['menu']->id)->first();
+            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
         
-        return view('admin.management.course_header.index', $data);
+        return view('admin.management.course_header.show', $data);
     }
 
     public function edit($id)

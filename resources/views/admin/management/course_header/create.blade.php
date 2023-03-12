@@ -116,8 +116,8 @@
                                             <div class="col-3">
                                                 <label class="form-label" for="picture">Foto Materi <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
-                                                <img class="img-fluid" src="" alt="" style="max-width:100%;">
-                                                <input type="file" class="form-control @error('picture') is-invalid @enderror" id="image" name="picture" value="{{ old('picture') }}">
+                                                <img id="auto_preview" class="img-fluid" src="{{ old('picture') }}" alt="" style="max-width:100%;">
+                                                <input type="file" class="form-control @error('picture') is-invalid @enderror" id="image" name="picture" value="{{ old('picture') }}" onchange="readURL(this)">
                                                 @error('picture')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -160,4 +160,22 @@
     {{-- Quill Theme --}}
     <script src="{{ asset('/assets/vendor/quill.min.js') }}"></script>
     <script src="{{ asset('/assets/js/quill.js') }}"></script>
+
+    {{-- Auto Preview --}}
+    <script type="text/javascript">
+        function readURL(input) 
+        {
+            if (input.files && input.files[0])
+            {
+                var reader = new FileReader()
+
+                reader.onload = function (e) 
+                {
+                    $('#auto_preview').attr('src', e.target.result)
+                }
+
+                reader.readAsDataURL(input.files[0])
+            }
+        }
+    </script>
 @endsection

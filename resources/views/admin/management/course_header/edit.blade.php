@@ -124,9 +124,9 @@
                                                 <label class="form-label" for="picture">Foto Materi <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
                                                 {{-- <img class="" src="{{ asset($detail->picture) }}" alt="" style="max-width:100%;"> --}}
-                                                <img class="" src="{{ asset($detail->picture) }}" alt="" style="max-width:100%;">
+                                                <img id="auto_preview" class="" src="{{ asset($detail->picture) }}" alt="" style="max-width:100%;">
                                                 <input type="hidden" name="old_provider_logo" value="{{ $detail->picture }}">
-                                                <input type="file" class="form-control @error('picture') is-invalid @enderror" id="image" name="picture" value="{{ old('picture') }}">
+                                                <input type="file" class="form-control @error('picture') is-invalid @enderror" id="image" name="picture" value="{{ old('picture') }}" onchange="readURL(this)">
                                                 @error('picture')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -195,17 +195,17 @@
                                                     <td>{{ $item->description }}</td>
                                                     <td class="text-center" style="width: 20mm">
                                                         @if ($access->edit == 1)
-                                                            <a href="{{ $c_menu->url }}/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
+                                                            <a href="/admin/course_detail/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
                                                         @endif
                                                         @if ($access->delete == 1)
-                                                        <form action="{{ $c_menu->url }}/{{ $item->id }}" method="POST" class="d-inline">
+                                                        <form action="/admin/course_detail/{{ $item->id }}" method="POST" class="d-inline">
                                                             @method('delete')
                                                             @csrf
                                                             <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
                                                         </form>
                                                         @endif
                                                         @if ($access->detail == 1)
-                                                            <a href="{{ $c_menu->url }}/{{ $item->id }}"><i class="fa fa-eye"></i></a>
+                                                            <a href="/admin/course_detail/{{ $item->id }}"><i class="fa fa-eye"></i></a>
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -239,4 +239,22 @@
     {{-- Sweet Alert --}}
     <script src="{{ asset('/assets/plugins/sweet-alert/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('/assets/js/sweet-alert.init.js') }}"></script>
+
+    {{-- Auto Preview --}}
+    <script type="text/javascript">
+        function readURL(input) 
+        {
+            if (input.files && input.files[0])
+            {
+                var reader = new FileReader()
+
+                reader.onload = function (e) 
+                {
+                    $('#auto_preview').attr('src', e.target.result)
+                }
+
+                reader.readAsDataURL(input.files[0])
+            }
+        }
+    </script>
 @endsection

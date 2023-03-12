@@ -53,8 +53,9 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form class="g-3" action="{{ $c_menu->url }}/{{ $id }}" method="POST" enctype="multipart/form-data">
+                                    <form class="g-3" action="{{ $c_menu->url }}" method="POST" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" name="id" value="{{ $id }}">
                                         <div class="row mb-2">
                                             <div class="col-12">
                                                 <label class="form-label" for="title">Judul Materi Pembelajaran <small class="text-danger">*</small></label>
@@ -66,10 +67,14 @@
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-12">
+                                                <iframe id="auto_preview" class="embed-responsive-item" src="{{ old('video') }}" allowfullscreen="" style="width: 100%; height: 300px"></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-12">
                                                 <label class="form-label" for="video">Upload Video <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
-                                                <img class="img-fluid" src="{{ old('video') }}" alt="" style="max-width:100%;">
-                                                <input type="file" class="form-control @error('video') is-invalid @enderror" id="image" name="video" value="{{ old('video') }}">
+                                                <input type="file" class="form-control @error('video') is-invalid @enderror" id="image" name="video" value="{{ old('video') }}" onchange="readURL(this)">
                                                 @error('video')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -114,4 +119,22 @@
     {{-- Quill Theme --}}
     <script src="{{ asset('/assets/vendor/quill.min.js') }}"></script>
     <script src="{{ asset('/assets/js/quill.js') }}"></script>
+
+    {{-- Auto Preview --}}
+    <script type="text/javascript">
+        function readURL(input) 
+        {
+            if (input.files && input.files[0])
+            {
+                var reader = new FileReader()
+
+                reader.onload = function (e) 
+                {
+                    $('#auto_preview').attr('src', e.target.result)
+                }
+
+                reader.readAsDataURL(input.files[0])
+            }
+        }
+    </script>
 @endsection
