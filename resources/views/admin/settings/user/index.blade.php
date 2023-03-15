@@ -17,8 +17,21 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item active">{{ $c_menu->title }}</li>
-            </ol>
-            <h1 class="h2">{{ $c_menu->title }}</h1>
+            </ol>            
+            <div class="media align-items-center mb-headings">
+                <div class="media-body">
+                    <h1 class="h2">{{ $c_menu->title }}</h1>
+                </div>
+                <div class="media-right">
+                    @if ($access->add == 1)
+                        <div class="ms-auto">
+                            <div class="btn-group">
+                                <a href="{{ $c_menu->url }}/create" class="btn btn-primary">Tambah</a>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-lg-12">
@@ -33,7 +46,7 @@
                                 </div>
                             </div>
                         @endif 
-                        <div class="col-lg-8">
+                        <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -41,7 +54,14 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 5%">No</th>
-                                                    <th>Nama</th>
+                                                    <th>NIK</th>
+                                                    <th>Nama Lengkap</th>
+                                                    <th>Jenis Kelamin</th>
+                                                    <th>Tempat, Tgl Lahir</th>
+                                                    <th>Email</th>
+                                                    <th>No HP/Telp</th>
+                                                    <th>Agama</th>
+                                                    <th>Posisi</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -50,21 +70,69 @@
                                                     @foreach ($data as $item)
                                                         <tr data-id="{{ $item->id }}">
                                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                                            <td>{{ $item->name }}</td>
-                                                            <td class="text-center" style="width: 20%">
-                                                                {{-- @if ($access->edit == 1) --}}
+                                                            <td>{{ $item->nik }}</td>
+                                                            <td>{{ $item->full_name }}</td>
+                                                            <td>
+                                                                @if ($item->gender == 'l')
+                                                                    Laki-Laki
+                                                                @else
+                                                                    Perempuan
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if ($item->birth_place != null && $item->birth_date != null)
+                                                                    {{ $item->birth_place }}, {{ date('d M Y', strtotime($item->birth_date)) }}
+                                                                @else
+                                                                    -
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if ($item->email != null)
+                                                                    {{ $item->email != null }}
+                                                                @else
+                                                                    -
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if ($item->phone_number != null)
+                                                                    {{ $item->phone_number != null }}
+                                                                @else
+                                                                    -
+                                                                @endif /
+                                                                @if ($item->home_number != null)
+                                                                    {{ $item->home_number != null }}
+                                                                @else
+                                                                    -
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if ($item->religion != null)        
+                                                                    {{ $item->religion->name }}
+                                                                @else
+                                                                    -
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if ($item->position != null)        
+                                                                    {{ $item->position->name }}
+                                                                @else
+                                                                    -
+                                                                @endif
+                                                            </td>
+                                                            <td class="text-center" style="width: 20mm">
+                                                                @if ($access->edit == 1)
                                                                     <a href="{{ $c_menu->url }}/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
-                                                                {{-- @endif
-                                                                @if ($access->delete == 1) --}}
+                                                                @endif
+                                                                @if ($access->delete == 1)
                                                                 <form action="{{ $c_menu->url }}/{{ $item->id }}" method="POST" class="d-inline">
                                                                     @method('delete')
                                                                     @csrf
                                                                     <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
                                                                 </form>
-                                                                {{-- @endif
-                                                                @if ($access->detail == 1) --}}
+                                                                @endif
+                                                                @if ($access->detail == 1)
                                                                     <a href="{{ $c_menu->url }}/{{ $item->id }}"><i class="fa fa-eye"></i></a>
-                                                                {{-- @endif --}}
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -72,19 +140,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    @if (request()->path() == substr($c_menu->url, 1))
-                                        @include('admin.masters.religion.create')
-                                    @elseif (substr(request()->path(), -4) == 'edit')
-                                        @include('admin.masters.religion.edit')
-                                    @else
-                                        @include('admin.masters.religion.show')
-                                    @endif
                                 </div>
                             </div>
                         </div>

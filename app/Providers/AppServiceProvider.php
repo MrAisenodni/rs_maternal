@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Fungsi untuk menampilkan Menu
         view()->composer('layouts.navbar', function ($view) {
-            if (session()->get('suser_id')) {
+            if (session()->get('user_id')) {
                 $view->with(
                     'main_menus', MainMenu::select('id', 'title', 'icon', 'url', 'parent', 'is_login')->where('disabled', 0)->get()
                 );

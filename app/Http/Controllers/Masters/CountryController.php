@@ -16,7 +16,7 @@ class CountryController extends Controller
             'data'          => $this->country->select('id', 'code', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('login_id', session()->get('sid'))->where('submenu_id', $data['menu']->id)->first();
+            ->where('login_id', session()->get('id'))->where('submenu_id', $data['menu']->id)->first();
         if ($data['access']->view == 0) abort(403);
 
         return view('masters.country.index', $data);
@@ -51,7 +51,7 @@ class CountryController extends Controller
             'data'          => $this->country->select('id', 'code', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('login_id', session()->get('sid'))->where('submenu_id', $data['menu']->id)->first();
+            ->where('login_id', session()->get('id'))->where('submenu_id', $data['menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
         
         return view('masters.country.index', $data);
@@ -65,7 +65,7 @@ class CountryController extends Controller
             'data'          => $this->country->select('id', 'code', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('login_id', session()->get('sid'))->where('submenu_id', $data['menu']->id)->first();
+            ->where('login_id', session()->get('id'))->where('submenu_id', $data['menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->edit == 0) abort(403);
         
         return view('masters.country.index', $data);

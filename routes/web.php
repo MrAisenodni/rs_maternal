@@ -18,6 +18,7 @@ use App\Http\Controllers\Patient\{
 use App\Http\Controllers\Settings\{
     LoginController,
     ProviderController,
+    UserController,
 };
 use Illuminate\Support\Facades\Route;
 
@@ -60,4 +61,5 @@ Route::middleware('authcheck')->group(function() {
 
     // Setting
     Route::resource('/setting/provider', ProviderController::class);
+    Route::resource('/setting/user', UserController::class);
 });

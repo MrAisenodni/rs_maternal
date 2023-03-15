@@ -21,7 +21,7 @@ class ViewCourseController extends Controller
             'getID3'    => $getID3,
         ];
 
-        if (!session()->get('suser_id')) abort(403);
+        if (!session()->get('user_id')) abort(403);
 
         return view('patient.view_course', $data);
     }

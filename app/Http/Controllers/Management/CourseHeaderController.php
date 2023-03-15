@@ -30,7 +30,7 @@ class CourseHeaderController extends Controller
             'categories'    => $this->category->select('id', 'name')->where('disabled', 0)->get(),
             'levels'        => $this->level->select('id', 'name')->where('disabled', 0)->get(),
             'doctors'       => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('role', 'tec')->get(),
-            'doctor'        => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('id', session()->get('suser_id'))->first(),
+            'doctor'        => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('id', session()->get('user_id'))->first(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
@@ -97,7 +97,7 @@ class CourseHeaderController extends Controller
             'levels'        => $this->level->select('id', 'name')->where('disabled', 0)->get(),
             'detail'        => $this->course_header->select('id', 'title', 'course_detail_teacher_id', 'category_id', 'level_id', 'description', 'duration', 'picture')->where('id', $id)->where('disabled', 0)->first(),
             'doctors'       => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('role', 'tec')->get(),
-            'doctor'        => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('id', session()->get('suser_id'))->first(),
+            'doctor'        => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('id', session()->get('user_id'))->first(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();

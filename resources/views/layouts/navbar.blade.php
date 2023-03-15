@@ -4,7 +4,7 @@
             <div class="sidebar-p-y">
                 @if ($main_menus)
                     @foreach ($main_menus as $main_menu)
-                        @if (session()->get('suser_id'))
+                        @if (session()->get('user_id'))
                             @if ($main_menu->menu_access->view == 1)
                                 <div class="sidebar-heading">{{ $main_menu->title }}</div>
                                 @if ($main_menu->parent == 1)

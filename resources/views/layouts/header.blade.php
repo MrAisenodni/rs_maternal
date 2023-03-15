@@ -19,14 +19,14 @@
                 <ul class="nav navbar-nav flex-nowrap">
                     <!-- User dropdown -->
                     <li class="nav-item dropdown ml-1 ml-md-3">
-                        @if (!session()->get('suser_id'))
+                        @if (!session()->get('user_id'))
                             <a href="/login" class="text-white">Masuk</a><a href="#" class="text-white">&nbsp / &nbsp</a><a href="/registration" class="text-white">Daftar</a>
                         @else
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">
                                 <img src="{{ asset('/assets/images/people/50/guy-6.jpg') }}" alt="Avatar" class="rounded-circle" width="40">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="/profil/{{ session()->get('suser_id') }}">
+                                <a class="dropdown-item" href="/profil/{{ session()->get('user_id') }}">
                                     <i class="material-icons">person</i> Profil
                                 </a>
                                 <a class="dropdown-item" href="/logout">

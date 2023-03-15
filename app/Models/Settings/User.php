@@ -19,4 +19,9 @@ class User extends Model
     {
         return $this->belongsTo(Religion::class, 'religion_id', 'id')->select('id', 'name')->where('disabled', 0);
     }
+
+    public function login()
+    {
+        return $this->belongsTo(Login::class, 'id', 'user_id')->select('id', 'user_id', 'username', 'password')->where('disabled', 0);
+    }
 }
