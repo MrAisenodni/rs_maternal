@@ -18,6 +18,6 @@ class Menu extends Model
 
     public function menu_access()
     {
-        return $this->belongsTo(MenuAccess::class, 'id', 'menu_id')->select('id', 'role', 'view', 'add', 'edit', 'delete')->where('disabled', 0)->where('role', session()->get('role'));
+        return $this->belongsTo(MenuAccess::class, 'id', 'menu_id')->select('id', 'role', 'view', 'add', 'edit', 'delete')->where('disabled', 0)->where('role', session()->get('srole'));
     }
 }
