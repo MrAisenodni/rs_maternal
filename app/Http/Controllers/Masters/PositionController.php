@@ -35,7 +35,7 @@ class PositionController extends Controller
             'code'          => $input['code'],
             'name'          => $input['name'],
             'created_at'    => now(),
-            'created_by'    => session()->get('user_id'),
+            'created_by'    => session()->get('suser_id'),
         ];
 
         $this->position->insert($data);
@@ -84,7 +84,7 @@ class PositionController extends Controller
             'code'          => $input['code'],
             'name'          => $input['name'],
             'updated_at'    => now(),
-            'updated_by'    => session()->get('user_id'),
+            'updated_by'    => session()->get('suser_id'),
         ];
 
         $this->position->where('id', $id)->update($data);
@@ -97,7 +97,7 @@ class PositionController extends Controller
         $data = [
             'disabled'      => 1,
             'updated_at'    => now(),
-            'updated_by'    => session()->get('user_id'),
+            'updated_by'    => session()->get('suser_id'),
         ];
 
         $this->position->where('id', $id)->update($data);

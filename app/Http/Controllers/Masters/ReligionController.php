@@ -16,7 +16,7 @@ class ReligionController extends Controller
             'data'          => $this->religion->select('id', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('role', session()->get('role'))->where('menu_id', $data['c_menu']->id)->first();
+            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0) abort(403);
 
         return view('admin.masters.religion.index', $data);
@@ -29,7 +29,7 @@ class ReligionController extends Controller
         $data = [
             'name'          => $input['name'],
             'created_at'    => now(),
-            'created_by'    => session()->get('user_id'),
+            'created_by'    => session()->get('suser_id'),
         ];
 
         $this->religion->insert($data);
@@ -66,7 +66,7 @@ class ReligionController extends Controller
         $data = [
             'name'          => $input['name'],
             'updated_at'    => now(),
-            'updated_by'    => session()->get('user_id'),
+            'updated_by'    => session()->get('suser_id'),
         ];
 
         $this->religion->where('id', $id)->update($data);
@@ -79,7 +79,7 @@ class ReligionController extends Controller
         $data = [
             'disabled'      => 1,
             'updated_at'    => now(),
-            'updated_by'    => session()->get('user_id'),
+            'updated_by'    => session()->get('suser_id'),
         ];
 
         $this->religion->where('id', $id)->update($data);

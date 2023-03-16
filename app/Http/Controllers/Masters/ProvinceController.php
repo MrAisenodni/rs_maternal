@@ -38,7 +38,7 @@ class ProvinceController extends Controller
             'name'          => $input['name'],
             'country_id'    => $input['country'],
             'created_at'    => now(),
-            'created_by'    => session()->get('user_id'),
+            'created_by'    => session()->get('suser_id'),
         ];
 
         $this->province->insert($data);
@@ -91,7 +91,7 @@ class ProvinceController extends Controller
             'name'          => $input['name'],
             'country_id'    => $input['country'],
             'updated_at'    => now(),
-            'updated_by'    => session()->get('user_id'),
+            'updated_by'    => session()->get('suser_id'),
         ];
 
         $this->province->where('id', $id)->update($data);
@@ -104,7 +104,7 @@ class ProvinceController extends Controller
         $data = [
             'disabled'      => 1,
             'updated_at'    => now(),
-            'updated_by'    => session()->get('user_id'),
+            'updated_by'    => session()->get('suser_id'),
         ];
 
         $this->province->where('id', $id)->update($data);

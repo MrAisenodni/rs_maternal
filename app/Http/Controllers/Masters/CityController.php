@@ -38,7 +38,7 @@ class CityController extends Controller
             'name'          => $input['name'],
             'province_id'    => $input['province'],
             'created_at'    => now(),
-            'created_by'    => session()->get('user_id'),
+            'created_by'    => session()->get('suser_id'),
         ];
 
         $this->city->insert($data);
@@ -91,7 +91,7 @@ class CityController extends Controller
             'name'          => $input['name'],
             'province_id'    => $input['province'],
             'updated_at'    => now(),
-            'updated_by'    => session()->get('user_id'),
+            'updated_by'    => session()->get('suser_id'),
         ];
 
         $this->city->where('id', $id)->update($data);
@@ -104,7 +104,7 @@ class CityController extends Controller
         $data = [
             'disabled'      => 1,
             'updated_at'    => now(),
-            'updated_by'    => session()->get('user_id'),
+            'updated_by'    => session()->get('suser_id'),
         ];
 
         $this->city->where('id', $id)->update($data);

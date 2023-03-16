@@ -38,7 +38,7 @@ class DistrictController extends Controller
             'name'          => $input['name'],
             'city_id'    => $input['city'],
             'created_at'    => now(),
-            'created_by'    => session()->get('user_id'),
+            'created_by'    => session()->get('suser_id'),
         ];
 
         $this->district->insert($data);
@@ -91,7 +91,7 @@ class DistrictController extends Controller
             'name'          => $input['name'],
             'city_id'       => $input['city'],
             'updated_at'    => now(),
-            'updated_by'    => session()->get('user_id'),
+            'updated_by'    => session()->get('suser_id'),
         ];
 
         $this->district->where('id', $id)->update($data);
@@ -104,7 +104,7 @@ class DistrictController extends Controller
         $data = [
             'disabled'      => 1,
             'updated_at'    => now(),
-            'updated_by'    => session()->get('user_id'),
+            'updated_by'    => session()->get('suser_id'),
         ];
 
         $this->district->where('id', $id)->update($data);

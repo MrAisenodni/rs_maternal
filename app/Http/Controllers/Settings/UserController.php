@@ -17,7 +17,7 @@ class UserController extends Controller
             'data'          => $this->user->select('id', 'nik', 'full_name', 'gender', 'birth_place', 'birth_date', 'email', 'phone_number', 'home_number', 'address_1', 'address_2', 'address_3', 'religion_id', 'role')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('role', session()->get('role'))->where('menu_id', $data['c_menu']->id)->first();
+            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0) abort(403);
 
         return view('admin.settings.user.index', $data);
@@ -30,7 +30,7 @@ class UserController extends Controller
             'religions'     => $this->religion->select('id', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('role', session()->get('role'))->where('menu_id', $data['c_menu']->id)->first();
+            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->add == 0) abort(403);
 
         return view('admin.settings.user.create', $data);
@@ -69,7 +69,7 @@ class UserController extends Controller
             'religion_id'           => $request->religion,
             'role'                  => $request->role,
             'created_at'            => now(),
-            'created_by'            => session()->get('user_id'),
+            'created_by'            => session()->get('suser_id'),
         ];
 
         $id = $this->user->insertGetId($data);
@@ -92,7 +92,7 @@ class UserController extends Controller
             'detail'        => $this->user->select('id', 'nik', 'full_name', 'gender', 'birth_date', 'birth_place', 'email', 'phone_number', 'home_number', 'address_1', 'address_2', 'address_3', 'religion_id', 'role')->where('disabled', 0)->where('id', $id)->first(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('role', session()->get('role'))->where('menu_id', $data['c_menu']->id)->first();
+            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
         
         return view('admin.settings.user.show', $data);
@@ -106,7 +106,7 @@ class UserController extends Controller
             'religions'     => $this->religion->select('id', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('role', session()->get('role'))->where('menu_id', $data['c_menu']->id)->first();
+            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->edit == 0) abort(403);
         
         return view('admin.settings.user.edit', $data);
@@ -145,7 +145,7 @@ class UserController extends Controller
             'religion_id'               => $request->religion,
             'role'                      => $request->role,
             'updated_at'                => now(),
-            'updated_by'                => session()->get('user_id'),
+            'updated_by'                => session()->get('suser_id'),
         ];
 
         $this->user->where('id', $id)->update($data);
@@ -168,7 +168,7 @@ class UserController extends Controller
         $data = [
             'disabled'      => 1,
             'updated_at'    => now(),
-            'updated_by'    => session()->get('user_id'),
+            'updated_by'    => session()->get('suser_id'),
         ];
 
         $this->user->where('id', $id)->update($data);
