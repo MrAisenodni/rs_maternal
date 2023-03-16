@@ -97,9 +97,9 @@ $nick = $data->get('hosts.lewey.nick', 'Unknown');
 // DataInterface instance
 $dewey = $data->getData('hosts.dewey');
 // dman
-$username = $dewey->get('username');
+$username = $dewey->get('susername');
 // D---S
-$password = $dewey->get('password');
+$password = $dewey->get('spassword');
 // ['web', 'db']
 $roles = $dewey->get('roles');
 

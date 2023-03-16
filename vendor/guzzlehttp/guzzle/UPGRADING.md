@@ -967,7 +967,7 @@ class YourClient extends \Guzzle\Service\Client
 
         $client = new self(
             $config->get('base_url'),
-            $config->get('username'),
+            $config->get('susername'),
             $config->get('api_key')
         );
         $client->setConfig($config);
@@ -993,7 +993,7 @@ class YourClient extends \Guzzle\Service\Client
 
         $client = new self(
             $config->get('base_url'),
-            $config->get('username'),
+            $config->get('susername'),
             $config->get('api_key')
         );
         $client->setConfig($config);

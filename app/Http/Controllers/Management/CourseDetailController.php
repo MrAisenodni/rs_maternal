@@ -35,7 +35,7 @@ class CourseDetailController extends Controller
             'title'                             => $request->title,
             'description'                       => $request->description,
             'created_at'                        => now(),
-            'created_by'                        => session()->get('user_id'),
+            'created_by'                        => session()->get('suser_id'),
         ];
         
         if ($request->video) {
@@ -92,7 +92,7 @@ class CourseDetailController extends Controller
             'title'                             => $request->title,
             'description'                       => $request->description,
             'created_at'                        => now(),
-            'created_by'                        => session()->get('user_id'),
+            'created_by'                        => session()->get('suser_id'),
         ];
         
         if ($request->video) {
@@ -117,7 +117,7 @@ class CourseDetailController extends Controller
         $data = [
             'disabled'      => 1,
             'updated_at'    => now(),
-            'updated_by'    => session()->get('user_id'),
+            'updated_by'    => session()->get('suser_id'),
         ];
 
         $this->course_detail->where('id', $id)->update($data);
