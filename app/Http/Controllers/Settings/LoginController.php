@@ -38,11 +38,7 @@ class LoginController extends Controller
                 $request->session()->put('role', $check->user->role);
                 $request->session()->put('remember_token', $check->remember_token);
 
-                if (session()->get('url') != '/login') {
-                    return redirect()->intended(session()->get('url'));
-                } else {
-                    return redirect()->intended('/');
-                }
+                return redirect()->intended('/');
             } else {
                 return back()->with('error', 'Kata Sandi salah.')->withErrors([
                     'password'  => 'Kata sandi yang Anda masukkan salah.',
