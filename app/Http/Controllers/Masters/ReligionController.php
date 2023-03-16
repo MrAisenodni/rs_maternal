@@ -15,6 +15,9 @@ class ReligionController extends Controller
             'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
             'data'          => $this->religion->select('id', 'name')->where('disabled', 0)->get(),
         ];
+        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
+            ->where('role', session()->get('role'))->where('menu_id', $data['c_menu']->id)->first();
+        if ($data['access']->view == 0) abort(403);
 
         return view('admin.masters.religion.index', $data);
     }

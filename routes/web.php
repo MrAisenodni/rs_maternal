@@ -3,9 +3,14 @@
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Masters\{
     CategoryController,
+    CityController,
+    CountryController,
+    DistrictController,
     LevelController,
+    ProvinceController,
     ReligionController,
     RoleController,
+    WardController,
 };
 use App\Http\Controllers\Management\{
     CourseHeaderController,
@@ -55,9 +60,14 @@ Route::middleware('authcheck')->group(function() {
 
     // Master
     Route::resource('/master/category', CategoryController::class);
+    Route::resource('/master/city', CityController::class);
+    Route::resource('/master/country', CountryController::class);
+    Route::resource('/master/district', DistrictController::class);
     Route::resource('/master/level', LevelController::class);
+    Route::resource('/master/province', ProvinceController::class);
     Route::resource('/master/religion', ReligionController::class);
     Route::resource('/master/role', RoleController::class);
+    Route::resource('/master/ward', WardController::class);
 
     // Setting
     Route::resource('/setting/provider', ProviderController::class);

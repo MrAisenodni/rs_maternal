@@ -71,7 +71,7 @@
                                             </div>
                                             <div class="col-6">
                                                 <label class="form-label" for="doctor">Dokter <small class="text-danger">*</small></label>
-                                                @if (session()->get('srole') == 'tec')
+                                                @if (session()->get('role') == 'tec')
                                                     <input type="hidden" class="form-control" id="doctor" name="doctor" value="{{ $doctor->id }}">
                                                     <input type="text" class="form-control @error('doctor') is-invalid @enderror" id="doctor" value="[{{ $doctor->nik }}] {{ $doctor->full_name }}" disabled>
                                                 @else

@@ -53,7 +53,7 @@
                                     @endfor
                                 </div>
                             </div>
-                            <a href="/view-course/{{ $item->id }}/1">
+                            <a href="/view-course/{{ $item->id }}/{{ $item->min_course_detail[0]->id }}">
                                 <img src="{{ $item->picture }}" alt="{{ $item->title }}" style="width:100%;">
                             </a>
                             <div class="card-body">

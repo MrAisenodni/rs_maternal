@@ -10,8 +10,6 @@ class LoginController extends Controller
 {
     public function index()
     {
-        session()->put('surl', url()->previous());
-
         return view('login');
     }
 
@@ -31,12 +29,12 @@ class LoginController extends Controller
         } else {
             // Mengecek password
             if(Hash::check($request->password, $check->password)) {
-                $request->session()->put('id', $check->id);
-                $request->session()->put('user_id', $check->user_id);
-                $request->session()->put('username', $check->username);
-                $request->session()->put('password', $check->password);
-                $request->session()->put('role', $check->user->role);
-                $request->session()->put('remember_token', $check->remember_token);
+                $request->session()->put('sid', $check->id);
+                $request->session()->put('suser_id', $check->user_id);
+                $request->session()->put('susername', $check->username);
+                $request->session()->put('spassword', $check->password);
+                $request->session()->put('srole', $check->user->role);
+                $request->session()->put('sremember_token', $check->remember_token);
 
                 return redirect()->intended('/');
             } else {

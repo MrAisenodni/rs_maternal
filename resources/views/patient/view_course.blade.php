@@ -11,7 +11,7 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/list_courses">Daftar Materi</a></li>
+                <li class="breadcrumb-item"><a href="/list-courses">Daftar Materi</a></li>
                 <li class="breadcrumb-item active">{{ $detail->course_header->title }}</li>
             </ol>
             <h1 class="h2">{{ $detail->course_header->title }}</h1>
@@ -53,10 +53,12 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
-                            <a href="#"
-                               class="btn btn-primary btn-block flex-column">
-                                <i class="material-icons">get_app</i> Download Files
-                            </a>
+                            <h1 class="h5">Unduh Buku Saku</h1><hr>
+                            @if ($detail->course_detail_document)
+                                @foreach ($detail->course_detail_document as $item)
+                                    <a href="{{ $item->file }}"><i class="fa fa-file"></i> {{ $item->title }}</a><br>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <div class="card">

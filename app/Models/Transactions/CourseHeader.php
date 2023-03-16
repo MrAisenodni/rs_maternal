@@ -35,4 +35,9 @@ class CourseHeader extends Model
     {
         return $this->hasMany(CourseDetail::class, 'course_header_id', 'id')->select('id', 'course_header_id', 'title', 'video', 'description')->where('disabled', 0);
     }
+
+    public function min_course_detail()
+    {
+        return $this->hasMany(CourseDetail::class, 'course_header_id', 'id')->selectRaw('MIN(id) AS id')->where('disabled', 0);
+    }
 }

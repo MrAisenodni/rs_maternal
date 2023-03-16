@@ -20,8 +20,9 @@ class ViewCourseController extends Controller
             'detail'    => $this->course_detail->select('id', 'course_header_id', 'title', 'video', 'description')->where('course_header_id', $id)->where('id', $ids)->where('disabled', 0)->first(),
             'getID3'    => $getID3,
         ];
-
-        if (!session()->get('user_id')) abort(403);
+        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
+            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
+        if ($data['access']->view == 0) abort(403);
 
         return view('patient.view_course', $data);
     }

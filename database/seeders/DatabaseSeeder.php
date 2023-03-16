@@ -21,16 +21,17 @@ class DatabaseSeeder extends Seeder
             // Masters\RoleSeeder::class,
             
             // // Seeder untuk Tabel Setting
-            Settings\LoginSeeder::class,
+            // Settings\LoginSeeder::class,
             // Settings\MainMenuSeeder::class,
             // Settings\MenuSeeder::class,
             // Settings\MenuAccessSeeder::class,
             // Settings\ProviderSeeder::class,
-            Settings\UserSeeder::class,
+            // Settings\UserSeeder::class,
 
             // // Seeder untuk Tabel Transaksi
             // Transactions\CourseHeaderSeeder::class,
-            // Transactions\CourseDetailSeeder::class,
+            Transactions\CourseDetailSeeder::class,
+            Transactions\CourseDetailDocumentSeeder::class,
         ]);
     }
 }

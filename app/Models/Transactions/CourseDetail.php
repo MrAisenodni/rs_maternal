@@ -15,4 +15,9 @@ class CourseDetail extends Model
     {
         return $this->belongsTo(CourseHeader::class)->where('disabled', 0);
     }
+
+    public function course_detail_document()
+    {
+        return $this->hasMany(CourseDetailDocument::class, 'course_detail_id', 'id')->select('id', 'course_detail_id', 'title', 'file', 'description')->where('disabled', 0);
+    }
 }

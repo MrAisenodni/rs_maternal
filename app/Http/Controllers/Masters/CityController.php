@@ -12,13 +12,13 @@ class CityController extends Controller
     public function index()
     {
         $data = [
-            'menu'          => $this->submenu->select('id', 'title', 'menu_id', 'url')->where('url', $this->path)->first(),
+            'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
             'data'          => $this->city->select('id', 'code', 'name', 'province_id')->where('disabled', 0)->get(),
             'provinces'     => $this->province->select('id', 'code', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('login_id', session()->get('id'))->where('submenu_id', $data['menu']->id)->first();
-        if ($data['access']->view == 0) abort(403);
+            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
+        if ($data['access']->view == 0 || $data['access']->add == 0) abort(403);
 
         return view('masters.city.index', $data);
     }
@@ -30,7 +30,7 @@ class CityController extends Controller
         $validate = $request->validate([
             'code'              => 'required|unique:mst_city,code,1,disabled',
             'name'              => 'required',
-            'province'           => 'required',
+            'province'          => 'required',
         ]);
 
         $data = [
@@ -55,7 +55,7 @@ class CityController extends Controller
             'provinces'     => $this->province->select('id', 'code', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('login_id', session()->get('id'))->where('submenu_id', $data['menu']->id)->first();
+            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
         
         return view('masters.city.index', $data);
@@ -70,7 +70,7 @@ class CityController extends Controller
             'provinces'     => $this->province->select('id', 'code', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('login_id', session()->get('id'))->where('submenu_id', $data['menu']->id)->first();
+            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->edit == 0) abort(403);
         
         return view('masters.city.index', $data);
