@@ -72,7 +72,7 @@
                                                 <span class="desc"></span>
                                                 <input type="hidden" name="old_document" value="{{ $detail->file }}">
                                                 <input type="file" class="form-control @error('document') is-invalid @enderror" id="document" name="document" value="{{ old('document', $detail->file) }}" onchange="readURL(this)">
-                                                <a href="{{ asset($detail->file) }}">{{ $detail->file_name }}</a>
+                                                <a href="/download/?file={{ $detail->file }}">{{ $detail->file_name }}</a>
                                                 @error('document')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

@@ -66,7 +66,7 @@
                                                 <span class="desc"></span>
                                                 <input type="hidden" name="document" value="{{ $detail->document }}">
                                                 <input type="file" class="form-control @error('document') is-invalid @enderror" id="document" name="document" value="{{ old('document', $detail->document) }}" onchange="readURL(this)" disabled>
-                                                <a href="{{ asset($detail->file) }}">{{ $detail->file_name }}</a>
+                                                <a href="/download/?file={{ storage_path('public/', $detail->file) }}">{{ $detail->file_name }}</a>
                                             </div>
                                         </div>
                                         <div class="row mb-2">

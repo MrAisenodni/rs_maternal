@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
 {
@@ -15,5 +16,9 @@ class PageController extends Controller
         ];
 
         return view('patient.dashboard', $data);
+    }
+
+    public function download(Request $request) {
+        return Storage::download($request->file);
     }
 }
