@@ -15,3 +15,4 @@
 15;Kota;fa fa-city;/master/city;0;3;1;1
 16;Kecamatan;fa fa-warehouse;/master/district;0;3;1;1
 17;Daftar Materi Pembelajaran;fa fa-book-reader;/admin/course_detail;0;2;1;0
+18;Daftar Dokumen;fa fa-book-reader;/admin/course_detail_document;0;2;1;0

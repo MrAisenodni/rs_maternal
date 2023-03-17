@@ -166,8 +166,13 @@ return [
         'birth_place'                   => 'Tempat Lahir',
         'category'                      => 'Kategori',
         'current_password'              => 'Kata Sandi Lama',
+        'description'                   => 'Deskripsi',
+        'description_detail'            => 'Deskripsi',
+        'description_document'          => 'Deskripsi Dokumen',
+        'document'                      => 'Dokumen',
         'doctor'                        => 'Dokter',
         'email'                         => 'Email',
+        'file'                          => 'Dokumen',
         'full_name'                     => 'Nama Lengkap',
         'gender'                        => 'Jenis Kelamin',
         'home_number'                   => 'Nomor Telepon',
@@ -182,6 +187,9 @@ return [
         'role'                          => 'Peran',
         'username'                      => 'Nama Pengguna',
         'title'                         => 'Judul',
+        'title_detail'                  => 'Judul',
+        'title_document'                => 'Judul Dokumen',
+        'video'                         => 'Video',
     ],
 
 ];

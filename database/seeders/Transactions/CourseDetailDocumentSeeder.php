@@ -15,7 +15,7 @@ class CourseDetailDocumentSeeder extends CsvSeeder
         $this->defaults = [
             'created_by'    => 'Migrasi'
         ];
-        $this->mapping = ['id', 'course_detail_id', 'title', 'file', 'description'];
+        $this->mapping = ['id', 'course_detail_id', 'title', 'file', 'description', 'file_name'];
         $this->header = false;
     }
 

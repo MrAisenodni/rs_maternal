@@ -22,6 +22,7 @@ use App\Models\Settings\{
 };
 use App\Models\Transactions\{
     CourseDetail,
+    CourseDetailDocument,
     CourseHeader,
 };
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -36,25 +37,26 @@ class Controller extends BaseController
     public function __construct()
     {
         // Global Variabel untuk Setting
-        $this->login                    = new Login();
-        $this->menu                     = new Menu();
-        $this->menu_access              = new MenuAccess();
-        $this->provider                 = new Provider();
-        $this->user                     = new User();
+        $this->login                        = new Login();
+        $this->menu                         = new Menu();
+        $this->menu_access                  = new MenuAccess();
+        $this->provider                     = new Provider();
+        $this->user                         = new User();
 
         // Global Variabel untuk Master
-        $this->category                 = new Category();
-        $this->city                     = new City();
-        $this->country                  = new Country();
-        $this->district                 = new District();
-        $this->level                    = new Level();
-        $this->province                 = new Province();
-        $this->religion                 = new Religion();
-        $this->role                     = new Role();
-        $this->ward                     = new Ward();
+        $this->category                     = new Category();
+        $this->city                         = new City();
+        $this->country                      = new Country();
+        $this->district                     = new District();
+        $this->level                        = new Level();
+        $this->province                     = new Province();
+        $this->religion                     = new Religion();
+        $this->role                         = new Role();
+        $this->ward                         = new Ward();
 
         // Global Variabel untuk Transaction
-        $this->course_detail            = new CourseDetail();
-        $this->course_header            = new CourseHeader();
+        $this->course_detail                = new CourseDetail();
+        $this->course_detail_document       = new CourseDetailDocument();
+        $this->course_header                = new CourseHeader();
     }
 }

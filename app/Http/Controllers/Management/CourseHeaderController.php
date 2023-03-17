@@ -42,10 +42,14 @@ class CourseHeaderController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'title'             => 'required',
-            'category'          => 'required',
-            'level'             => 'required',
-            'picture'           => 'required',
+            'title'                             => 'required',
+            'category'                          => 'required',
+            'document'                          => 'required',
+            'level'                             => 'required',
+            'picture'                           => 'required',
+            'title_detail'                      => 'required',
+            'title_document'                    => 'required',
+            'video'                             => 'required',
         ]);
         
         $data = [
@@ -65,13 +69,56 @@ class CourseHeaderController extends Controller
             $filePath = $file->storeAs('/courses/pictures', $fileName, 'public');  
             $file->move(public_path().'/courses/pictures', $filePath);  
             $data += [
-                'picture'       => '/'.$filePath,
+                'picture'                       => '/'.$filePath,
             ]; 
         }
 
-        $id = $this->course_header->insertGetId($data);
+        $header_id = $this->course_header->insertGetId($data);
 
-        return redirect($this->path.'/'.$id.'/edit')->with('status', 'Data Berhasil Ditambahkan.');
+        $data = [
+            'title'                             => $request->title_detail,
+            'course_header_id'                  => $header_id,
+            'description'                       => $request->description_detail,
+            'created_at'                        => now(),
+            'created_by'                        => session()->get('suser_id'),
+        ];
+
+        if ($request->video) {
+            $file = $request->file('video');
+            $extension = $request->video->getClientOriginalExtension();  // Get Extension
+            $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->id.'-'.$request->title.'.'.$extension;  // Concatenate both to get FileName
+            $filePath = $file->storeAs('/courses/videos', $fileName, 'public');  
+            $file->move(public_path().'/courses/videos', $filePath);  
+            $data += [
+                'video'                         => '/'.$filePath,
+            ]; 
+        }
+
+        $detail_id = $this->course_detail->insertGetId($data);
+
+        $data = [
+            'title'                             => $request->title_document,
+            'course_detail_id'                  => $detail_id,
+            'description'                       => $request->description_document,
+            'created_at'                        => now(),
+            'created_by'                        => session()->get('suser_id'),
+        ];
+
+        if ($request->document) {
+            $file = $request->file('document');
+            $extension = $request->document->getClientOriginalExtension();  // Get Extension
+            $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->id.'-'.$request->title.'.'.$extension;  // Concatenate both to get FileName
+            $filePath = $file->storeAs('/courses/documents', $fileName, 'public');  
+            $file->move(public_path().'/courses/documents', $filePath);  
+            $data += [
+                'file'                          => '/'.$filePath,
+                'file_name'                     => $fileName,
+            ]; 
+        }
+
+        $this->course_detail_document->insert($data);
+
+        return redirect($this->path.'/'.$header_id.'/edit')->with('status', 'Data Berhasil Ditambahkan.');
     }
 
     public function show($id)

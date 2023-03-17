@@ -106,6 +106,67 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="media align-items-center mb-headings">
+                                        <div class="media-body">
+                                            <h1 class="h2">Daftar Dokumen</h1>
+                                        </div>
+                                        <div class="media-right">
+                                            @if ($access->add == 1)
+                                                <div class="ms-auto">
+                                                    <div class="btn-group">
+                                                        <a href="/admin/course_detail_document/{{ $detail->id }}/create" class="btn btn-primary">Tambah</a>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div><hr>
+                                    <div class="table-responsive">
+                                        <table id="default" class="table table-striped table-bordered" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%">No</th>
+                                                    <th>Judul</th>
+                                                    <th>Deskripsi</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if ($data)
+                                                    @foreach ($data as $item)
+                                                        <tr data-id="{{ $item->id }}">
+                                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                                            <td>{{ $item->title }}</td>
+                                                            <td>{{ $item->description }}</td>
+                                                            <td class="text-center" style="width: 30mm">
+                                                                @if ($access->edit == 1)
+                                                                    <a href="/admin/course_detail_document/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
+                                                                @endif
+                                                                @if ($access->delete == 1)
+                                                                <form action="/admin/course_detail_document/{{ $item->id }}" method="POST" class="d-inline">
+                                                                    @method('delete')
+                                                                    @csrf
+                                                                    <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
+                                                                </form>
+                                                                @endif
+                                                                @if ($access->detail == 1)
+                                                                    <a href="/admin/course_detail_document/{{ $item->id }}"><i class="fa fa-eye"></i></a>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

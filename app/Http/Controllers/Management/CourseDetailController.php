@@ -69,12 +69,16 @@ class CourseDetailController extends Controller
 
     public function edit($id)
     {
+
         $data = [
             'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
             'detail'        => $this->course_detail->select('id', 'course_header_id', 'title', 'video', 'description')->where('id', $id)->where('disabled', 0)->first(),
         ];
-        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
-            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
+        $data += [
+            'data'          => $this->course_detail_document->select('id', 'title', 'description')->where('disabled', 0)->where('course_detail_id', $data['detail']->id)->get(),
+            'access'        => $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
+                                    ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first(),
+        ];
         if ($data['access']->view == 0 || $data['access']->edit == 0) abort(403);
 
         return view('admin.management.course_detail.edit', $data);
@@ -84,7 +88,6 @@ class CourseDetailController extends Controller
     {
         $validate = $request->validate([
             'title'             => 'required',
-            'video'             => 'required',
         ]);
         
         $data = [
@@ -109,7 +112,8 @@ class CourseDetailController extends Controller
 
         $this->course_detail->where('id', $id)->update($data);
 
-        return redirect('/admin/course_header/'.$id.'/edit')->with('status', 'Data Berhasil Diubah.');
+        // return redirect('/admin/course_header/'.$id.'/edit')->with('status', 'Data Berhasil Diubah.');
+        return redirect(url()->previous())->with('status', 'Data Berhasil Diubah.');
     }
 
     public function destroy($id)

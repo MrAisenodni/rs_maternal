@@ -26,13 +26,6 @@
                     <h1 class="h2">Tambah Materi</h1>
                 </div>
                 <div class="media-right">
-                    {{-- @if ($access->add == 1)
-                        <div class="ms-auto">
-                            <div class="btn-group">
-                                <a href="{{ $c_menu->url }}/create" class="btn btn-primary">Tambah</a>
-                            </div>
-                        </div>
-                    @endif --}}
                 </div>
             </div>
 
@@ -50,10 +43,10 @@
                             </div>
                         @endif 
                         <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form class="g-3" action="{{ $c_menu->url }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
+                            <form class="g-3" action="{{ $c_menu->url }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                                <div class="card">
+                                    <div class="card-body">
                                         <div class="row mb-2">
                                             <div class="col-6">
                                                 <label class="form-label" for="title">Judul Materi <small class="text-danger">*</small></label>
@@ -130,20 +123,89 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h1 class="h4">Detail Materi Video</h1><hr>
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <label class="form-label" for="title_detail">Judul Materi Pembelajaran <small class="text-danger">*</small></label>
+                                                <input type="text" class="form-control @error('title_detail') is-invalid @enderror" id="title_detail" name="title_detail" value="{{ old('title_detail') }}">
+                                                @error('title_detail')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <iframe id="auto_preview" class="embed-responsive-item" src="{{ old('video') }}" allowfullscreen="" style="width: 100%; height: 300px"></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <label class="form-label" for="video">Upload Video <small class="text-danger">*</small></label>
+                                                <span class="desc"></span>
+                                                <input type="file" class="form-control @error('video') is-invalid @enderror" id="image" name="video" value="{{ old('video') }}" onchange="readURL(this)">
+                                                @error('video')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <label class="form-label" for="description_detail">Deskripsi</label>
+                                                <textarea name="description_detail" id="description_detail" class="form-control" cols="30" rows="10">{!! old('description_detail') !!}</textarea>
+                                                @error('description_detail')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h1 class="h4">Detail Materi Dokumen</h1><hr>
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <label class="form-label" for="title_document">Judul Dokumen <small class="text-danger">*</small></label>
+                                                <input type="text" class="form-control @error('title_document') is-invalid @enderror" id="title_document" name="title_document" value="{{ old('title_document') }}">
+                                                @error('title_document')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <label class="form-label" for="document">Upload Dokumen <small class="text-danger">*</small></label>
+                                                <span class="desc"></span>
+                                                <input type="file" class="form-control @error('document') is-invalid @enderror" id="image" name="document" value="{{ old('document') }}" onchange="readURL(this)">
+                                                @error('document')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <label class="form-label" for="description_document">Deskripsi</label>
+                                                <textarea name="description_document" id="description_document" class="form-control" cols="30" rows="10">{!! old('description_document') !!}</textarea>
+                                                @error('description_document')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
                                         <hr>
                                         <div class="row">
                                             <div class="col-12">
-                                                {{-- @if ($access->add == 1) --}}
-                                                    <div class="d-grid">
-                                                        <a href="{{ $c_menu->url }}" class="btn btn-warning">KEMBALI</a>
-                                                        <button type="submit" class="btn btn-success">SIMPAN</button>
-                                                    </div>
-                                                {{-- @endif --}}
+                                                <div class="d-grid">
+                                                    <a href="{{ $c_menu->url }}" class="btn btn-warning">KEMBALI</a>
+                                                    <button type="submit" class="btn btn-success">SIMPAN</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

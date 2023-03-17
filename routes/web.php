@@ -15,6 +15,7 @@ use App\Http\Controllers\Masters\{
 use App\Http\Controllers\Management\{
     CourseHeaderController,
     CourseDetailController,
+    CourseDetailDocumentController,
 };
 use App\Http\Controllers\Patient\{
     ListCoursesController,
@@ -57,6 +58,8 @@ Route::middleware('authcheck')->group(function() {
     Route::resource('/admin/course_header', CourseHeaderController::class);
     Route::get('/admin/course_detail/{id}/create', [CourseDetailController::class, 'create']);
     Route::resource('/admin/course_detail', CourseDetailController::class);
+    Route::get('/admin/course_detail_document/{id}/create', [CourseDetailDocumentController::class, 'create']);
+    Route::resource('/admin/course_detail_document', CourseDetailDocumentController::class);
 
     // Master
     Route::resource('/master/category', CategoryController::class);
