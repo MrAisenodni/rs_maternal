@@ -18,6 +18,6 @@ class CourseDetail extends Model
 
     public function course_detail_document()
     {
-        return $this->hasMany(CourseDetailDocument::class, 'course_detail_id', 'id')->select('id', 'course_detail_id', 'title', 'file', 'description')->where('disabled', 0);
+        return $this->hasMany(CourseDetailDocument::class, 'course_detail_id', 'id')->select('id', 'course_detail_id', 'title', 'file', 'file_name', 'description')->where('disabled', 0);
     }
 }

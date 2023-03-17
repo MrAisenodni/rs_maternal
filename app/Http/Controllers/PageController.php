@@ -19,6 +19,6 @@ class PageController extends Controller
     }
 
     public function download(Request $request) {
-        return Storage::download($request->file);
+        return Storage::download($request->file_name);
     }
 }

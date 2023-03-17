@@ -56,7 +56,7 @@
                             <h1 class="h5">Unduh Buku Saku</h1><hr>
                             @if ($detail->course_detail_document)
                                 @foreach ($detail->course_detail_document as $item)
-                                    <a href="{{ storage_path('public/'.$item->file) }}"><i class="fa fa-file"></i> {{ $item->title }}</a><br>
+                                    <a href="{{ asset($item->file) }}"><i class="fa fa-file"></i> {{ $item->title }}</a><br>
                                 @endforeach
                             @endif
                         </div>
