@@ -54,6 +54,23 @@
                         <form action="/registration" novalidate method="POST">
                             @csrf
                             <div class="form-group">
+                                <label class="form-label" for="role">Pilih Peran Anda:</label>
+                                <div class="input-group input-group-merge">
+                                    <select class="single-select form-control @error('role') is-invalid @enderror" id="role" name="role">
+                                        <option value="pat" @if (old('role') == 'pat') selected @endif>Member E-Learning</option>
+                                        <option value="tec" @if (old('role') == 'tec') selected @endif>Dokter Pengajar</option>
+                                    </select>
+                                    @error('role')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="fa fa-genderless"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="form-label" for="nik">Masukkan Nomor Induk Keluarga (NIK) Anda:</label>
                                 <div class="input-group input-group-merge">
                                     <input id="nik" type="text" name="nik" class="form-control form-control-prepended @error('nik') is-invalid @enderror" placeholder="Masukkan Nomor Induk Keluarga (NIK) Anda" value="{{ old('nik') }}">
@@ -82,7 +99,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="gender">Masukkan Jenis Kelamin Anda:</label>
+                                <label class="form-label" for="gender">Pilih Jenis Kelamin Anda:</label>
                                 <div class="input-group input-group-merge">
                                     <select class="single-select form-control @error('gender') is-invalid @enderror" id="gender" name="gender">
                                         <option value="l" @if (old('gender') == 'l') selected @endif>Pria</option>
