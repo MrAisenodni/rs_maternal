@@ -179,7 +179,7 @@ class CourseHeaderController extends Controller
             $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
             $filePath = $file->storeAs('/courses/pictures', $fileName, 'public');  
             dd(public_path());
-            $file->move(public_path().'/courses/pictures', $filePath);  
+            $file->move('/courses/pictures', $filePath);  
             $data += [
                 'picture'       => '/'.$filePath,
             ]; 
