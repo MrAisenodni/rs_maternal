@@ -125,7 +125,7 @@
                                                 <span class="desc"></span>
                                                 {{-- <img class="" src="{{ asset($detail->picture) }}" alt="" style="max-width:100%;"> --}}
                                                 <img id="auto_preview" class="" src="{{ asset($detail->picture) }}" alt="" style="max-width:100%;">
-                                                <input type="hidden" name="old_provider_logo" value="{{ $detail->picture }}">
+                                                <input type="hidden" name="old_picture" value="{{ $detail->picture }}">
                                                 <input type="file" class="form-control @error('picture') is-invalid @enderror" id="image" name="picture" value="{{ old('picture') }}" onchange="readURL(this)">
                                                 @error('picture')
                                                     <div class="invalid-feedback">{{ $message }}</div>

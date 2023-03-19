@@ -173,12 +173,13 @@ class CourseHeaderController extends Controller
         ];
         
         if ($request->picture) {
-            if ($request->old_picture) File::delete(public_path().$request->old_picture);
+            if ($request->old_picture) File::delete(storage_path($request->old_picture));
             $file = $request->file('picture');
             $extension = $request->picture->getClientOriginalExtension();  // Get Extension
             $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
-            $filePath = $file->storeAs('/courses/pictures', $fileName, 'public');  
-            $file->move('/courses/pictures', $filePath);  
+            $filePath = $file->storeAs('courses/pictures', $fileName, 'public');
+            dd(storage_path(), public_path($request->old_picture), $filePath, public_path().$filePath);
+            $file->move(storage_path('/courses/pictures'), $filePath);  
             $data += [
                 'picture'       => '/'.$filePath,
             ]; 
