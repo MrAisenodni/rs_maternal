@@ -43,6 +43,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PageController::class, 'index']);
 
 // Login or Logout or Registration
+Route::get('/registration', [PageController::class, 'registration']);
+Route::post('/registration', [PageController::class, 'store_registration']);
 Route::resource('/login', LoginController::class);
 Route::get('/logout', [LoginController::class, 'logout']);
 

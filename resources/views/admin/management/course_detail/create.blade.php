@@ -3,12 +3,7 @@
 @section('title', $c_menu->title)
 
 @section('styles')
-    {{-- Select2 --}}
-    <link href="{{ asset('/assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
-
     {{-- Quill Theme --}}
-    <!-- Quill Theme -->
     <link type="text/css" href="{{ asset('/assets/css/quill.css') }}" rel="stylesheet">
 @endsection
     
@@ -53,7 +48,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form class="g-3" action="{{ $c_menu->url }}" method="POST" enctype="multipart/form-data">
+                                    <form id="fileUploadForm" class="g-3" action="{{ $c_menu->url }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $id }}">
                                         <div class="row mb-2">
@@ -68,6 +63,11 @@
                                         <div class="row mb-2">
                                             <div class="col-12">
                                                 <iframe id="auto_preview" class="embed-responsive-item" src="{{ old('video') }}" allowfullscreen="" style="width: 100%; height: 300px"></iframe>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row mb-2">
@@ -112,13 +112,35 @@
 @endsection
 
 @section('scripts')
-    {{-- Select2 --}}
-    <script src="{{ asset('/assets/plugins/select2/js/select2.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/form-select2.js') }}"></script>
-
     {{-- Quill Theme --}}
     <script src="{{ asset('/assets/vendor/quill.min.js') }}"></script>
     <script src="{{ asset('/assets/js/quill.js') }}"></script>
+
+    {{-- Progress Bar --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+    <script>
+        $(function () {
+            $(document).ready(function () {
+                
+
+                // $('#fileUploadForm').ajaxForm({
+                //     beforeSend: function () {
+                //         var percentage = '0';
+                //     },
+                //     uploadProgress: function (event, position, total, percentComplete) {
+                //         var percentage = percentComplete;
+                //         $('.progress .progress-bar').css("width", percentage+'%', function() {
+                //           return $(this).attr("aria-valuenow", percentage) + "%";
+                //         })
+                //     },
+                //     complete: function (xhr) {
+                //         console.log('File has uploaded');
+                //     }
+                // });
+            });
+        });
+    </script>
 
     {{-- Auto Preview --}}
     <script type="text/javascript">

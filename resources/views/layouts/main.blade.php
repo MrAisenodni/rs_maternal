@@ -112,14 +112,6 @@
         <script src="{{ asset('/assets/vendor/moment.min.js') }}"></script>
         <script src="{{ asset('/assets/vendor/moment-range.js') }}"></script>
 
-        <!-- Chart.js -->
-        <script src="{{ asset('/assets/vendor/Chart.min.js') }}"></script>
-        <script src="{{ asset('/assets/js/chartjs.js') }}"></script>
-
-        <!-- Student Dashboard Page JS -->
-        <!-- <script src="assets/js/chartjs-rounded-bar.js"></script> -->
-        <script src="{{ asset('/assets/js/page.student-dashboard.js') }}"></script>
-
         @yield('scripts')
     </body>
 </html>

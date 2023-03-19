@@ -14,19 +14,19 @@
         <link href="https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500%7CRoboto:400,500&display=swap" rel="stylesheet">
 
         <!-- Perfect Scrollbar -->
-        <link type="text/css" href="{{ asset('assets/vendor/perfect-scrollbar.css') }}" rel="stylesheet">
+        <link type="text/css" href="{{ asset('/assets/vendor/perfect-scrollbar.css') }}" rel="stylesheet">
 
         <!-- Material Design Icons -->
-        <link type="text/css" href="{{ asset('assets/css/material-icons.css') }}" rel="stylesheet">
+        <link type="text/css" href="{{ asset('/assets/css/material-icons.css') }}" rel="stylesheet">
 
         <!-- Font Awesome Icons -->
-        <link type="text/css" href="{{ asset('assets/css/fontawesome.css') }}" rel="stylesheet">
+        <link type="text/css" href="{{ asset('/assets/css/fontawesome.css') }}" rel="stylesheet">
 
         <!-- Preloader -->
-        <link type="text/css" href="{{ asset('assets/vendor/spinkit.css') }}" rel="stylesheet">
+        <link type="text/css" href="{{ asset('/assets/vendor/spinkit.css') }}" rel="stylesheet">
 
         <!-- App CSS -->
-        <link type="text/css" href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
+        <link type="text/css" href="{{ asset('/assets/css/app.css') }}" rel="stylesheet">
 
     </head>
 
@@ -36,7 +36,7 @@
             <div class="col-sm-8 col-md-6 col-lg-4 mx-auto" style="min-width: 300px;">
                 <div class="text-center mt-5 mb-1">
                     <div class="avatar avatar-lg">
-                        <img src="{{ asset('assets/images/logo/primary.svg') }}" class="avatar-img rounded-circle" alt="E-Learning Maternal Neonatal" />
+                        <img src="{{ asset('/assets/images/logo/primary.svg') }}" class="avatar-img rounded-circle" alt="E-Learning Maternal Neonatal" />
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mb-5 navbar-light">
@@ -48,6 +48,20 @@
                         <h4 class="card-title">Masuk</h4>
                         <p class="card-subtitle">Silahkan masukkan Akun Anda</p>
                     </div>
+                    @if (session('status'))
+                        <div class="card-body mb-n5"> 
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="alert alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Sukses - </strong> {{ session('status') }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif 
                     <div class="card-body">
                         <form action="/login" novalidate method="POST">
                             @csrf

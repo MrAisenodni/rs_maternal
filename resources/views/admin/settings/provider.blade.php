@@ -142,7 +142,7 @@
                                                 <div class="row mb-2">
                                                     <div class="col-12">
                                                         <label class="form-label" for="provider_ward">Kelurahan</label>
-                                                        <select class="select-wards form-control @error('provider_ward') is-invalid @enderror" id="provider_ward" name="provider_ward">
+                                                        <select class="single-select form-control @error('provider_ward') is-invalid @enderror" id="provider_ward" name="provider_ward">
                                                             <option value="">=== SILAHKAN PILIH ===</option>
                                                             @if ($districts)
                                                                 @foreach ($districts as $district)
@@ -248,7 +248,7 @@
                                             </div>
                                             <div class="col-10">
                                                 <label class="form-label" for="owner_ward">Kelurahan</label>
-                                                <select class="select-wards form-control @error('owner_ward') is-invalid @enderror" id="owner_ward" name="owner_ward">
+                                                <select class="single-select form-control @error('owner_ward') is-invalid @enderror" id="owner_ward" name="owner_ward">
                                                     <option value="">=== SILAHKAN PILIH ===</option>
                                                     @if ($detail->owner_ward_id)
                                                         <option value="{{ $detail->owner_ward->id }}" selected>[{{ $detail->owner_ward->post_code }}] {{ $detail->owner_ward->name }}</option>

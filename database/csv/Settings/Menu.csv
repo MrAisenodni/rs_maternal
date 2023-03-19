@@ -1,6 +1,6 @@
 1;Home;fa fa-user-graduate;/;0;1;0;1
 2;Daftar Materi;fa fa-book-reader;/list-courses;0;1;0;1
-3;Materi Saya;fa fa-bookmark;/my-courses;0;1;1;1
+3;Materi Saya;fa fa-bookmark;/my-courses;0;1;1;0
 4;Agama;fa fa-star-and-crescent;/master/religion;0;3;1;1
 5;Kategori;fa fa-th-large;/master/category;0;3;1;1
 6;Level;fa fa-chart-line;/master/level;0;3;1;1
@@ -9,10 +9,11 @@
 9;Pemilik;fa fa-user-tie;/setting/provider;0;4;1;1
 10;Detail Materi;fa fa-book-open;/view-course;0;1;1;0
 11;Daftar Materi;fa fa-book-reader;/admin/course_header;0;2;1;1
-12;Sampah Materi;fa fa-trash;/admin/trash-courses;0;2;1;1
+12;Daftar Pending Approval;fa fa-check-circle;/admin/course_approval;0;2;1;1
 13;Negara;fa fa-flag;/master/country;0;3;1;1
 14;Provinsi;fa fa-archway;/master/province;0;3;1;1
 15;Kota;fa fa-city;/master/city;0;3;1;1
 16;Kecamatan;fa fa-warehouse;/master/district;0;3;1;1
 17;Daftar Materi Pembelajaran;fa fa-book-reader;/admin/course_detail;0;2;1;0
 18;Daftar Dokumen;fa fa-book-reader;/admin/course_detail_document;0;2;1;0
+19;Sampah Materi;fa fa-trash;/admin/trash-courses;0;2;1;1

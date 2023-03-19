@@ -61,7 +61,7 @@
                                                     <input type="hidden" class="form-control" id="doctor" name="doctor" value="{{ $doctor->id }}">
                                                     <input type="text" class="form-control @error('doctor') is-invalid @enderror" id="doctor" value="[{{ $doctor->nik }}] {{ $doctor->full_name }}" disabled>
                                                 @else
-                                                    <select class="select-wards form-control @error('doctor') is-invalid @enderror" id="doctor" name="doctor">
+                                                    <select class="single-select form-control @error('doctor') is-invalid @enderror" id="doctor" name="doctor">
                                                         <option value="">=== SILAHKAN PILIH ===</option>
                                                         @if ($doctors)
                                                             @foreach ($doctors as $item)
@@ -78,7 +78,7 @@
                                         <div class="row mb-2">
                                             <div class="col-6">
                                                 <label class="form-label" for="category">Kategori <small class="text-danger">*</small></label>
-                                                <select class="select-wards form-control @error('category') is-invalid @enderror" id="category" name="category">
+                                                <select class="single-select form-control @error('category') is-invalid @enderror" id="category" name="category">
                                                     <option value="">=== SILAHKAN PILIH ===</option>
                                                     @if ($categories)
                                                         @foreach ($categories as $item)
@@ -92,7 +92,7 @@
                                             </div>
                                             <div class="col-6">
                                                 <label class="form-label" for="level">Tingkatan <small class="text-danger">*</small></label>
-                                                <select class="select-wards form-control @error('level') is-invalid @enderror" id="level" name="level">
+                                                <select class="single-select form-control @error('level') is-invalid @enderror" id="level" name="level">
                                                     <option value="">=== SILAHKAN PILIH ===</option>
                                                     @if ($levels)
                                                         @foreach ($levels as $item)

@@ -23,15 +23,15 @@ class DatabaseSeeder extends Seeder
             // // Seeder untuk Tabel Setting
             // Settings\LoginSeeder::class,
             // Settings\MainMenuSeeder::class,
-            // Settings\MenuSeeder::class,
-            // Settings\MenuAccessSeeder::class,
+            Settings\MenuSeeder::class,
+            Settings\MenuAccessSeeder::class,
             // Settings\ProviderSeeder::class,
             // Settings\UserSeeder::class,
 
             // // Seeder untuk Tabel Transaksi
             // Transactions\CourseHeaderSeeder::class,
             // Transactions\CourseDetailSeeder::class,
-            Transactions\CourseDetailDocumentSeeder::class,
+            // Transactions\CourseDetailDocumentSeeder::class,
         ]);
     }
 }

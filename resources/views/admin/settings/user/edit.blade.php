@@ -82,7 +82,7 @@
                                             </div>
                                             <div class="col-2">
                                                 <label class="form-label" for="gender">Jenis Kelamin <small class="text-danger">*</small></label>
-                                                <select class="select-wards form-control @error('gender') is-invalid @enderror" id="gender" name="gender">
+                                                <select class="single-select form-control @error('gender') is-invalid @enderror" id="gender" name="gender">
                                                     <option value="l" @if (old('gender', $detail->gender) == 'l') selected @endif>Pria</option>
                                                     <option value="p" @if (old('gender', $detail->gender) == 'p') selected @endif>Wanita</option>
                                                 </select>
@@ -154,7 +154,7 @@
                                             </div>
                                             <div class="col-4">
                                                 <label class="form-label" for="religion">Agama <small class="text-danger">*</small></label>
-                                                <select class="select-wards form-control @error('religion') is-invalid @enderror" id="religion" name="religion">
+                                                <select class="single-select form-control @error('religion') is-invalid @enderror" id="religion" name="religion">
                                                     <option value="">=== SILAHKAN PILIH ===</option>
                                                     @if ($religions)
                                                         @foreach ($religions as $item)
@@ -168,7 +168,7 @@
                                             </div>
                                             <div class="col-4">
                                                 <label class="form-label" for="role">Peran <small class="text-danger">*</small></label>
-                                                <select class="select-wards form-control @error('role') is-invalid @enderror" id="role" name="role">
+                                                <select class="single-select form-control @error('role') is-invalid @enderror" id="role" name="role">
                                                     <option value="tec" @if (old('role', $detail->role) == 'tec') selected @endif>Dokter</option>
                                                     <option value="pat" @if (old('role', $detail->role) == 'pat') selected @endif>Pasien</option>
                                                 </select>
