@@ -23,6 +23,15 @@ class CreateMstUser extends Migration
             $table->string('address_3', 3)->nullable();
             $table->unsignedInteger('religion_id')->nullable(); // Join ke Tabel mst_religion
             $table->enum('role', ['adm', 'pat', 'tec']);
+
+            // Social Media
+            $table->text('biography')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('github')->nullable();
+            $table->text('picture')->nullable();
+            $table->string('picture_name')->nullable();
             
             // Struktur Baku
             $table->string('access_code')->nullable();

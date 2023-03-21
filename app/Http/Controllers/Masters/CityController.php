@@ -16,7 +16,7 @@ class CityController extends Controller
             'data'          => $this->city->select('id', 'code', 'name', 'province_id')->where('disabled', 0)->get(),
             'provinces'     => $this->province->select('id', 'code', 'name')->where('disabled', 0)->get(),
         ];
-        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
+        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->add == 0) abort(403);
 
@@ -54,7 +54,7 @@ class CityController extends Controller
             'data'          => $this->city->select('id', 'code', 'name', 'province_id')->where('disabled', 0)->get(),
             'provinces'     => $this->province->select('id', 'code', 'name')->where('disabled', 0)->get(),
         ];
-        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
+        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
         
@@ -69,7 +69,7 @@ class CityController extends Controller
             'data'          => $this->city->select('id', 'code', 'name', 'province_id')->where('disabled', 0)->get(),
             'provinces'     => $this->province->select('id', 'code', 'name')->where('disabled', 0)->get(),
         ];
-        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
+        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->edit == 0) abort(403);
         

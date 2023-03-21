@@ -15,7 +15,7 @@ class MenuAccessSeeder extends CsvSeeder
         $this->defaults = [
             'created_by'    => 'Migrasi'
         ];
-        $this->mapping = ['role', 'menu_id', 'main_menu_id', 'submenu_id', 'view', 'add', 'edit', 'delete', 'detail'];
+        $this->mapping = ['role', 'menu_id', 'main_menu_id', 'submenu_id', 'view', 'add', 'edit', 'delete', 'detail', 'approval'];
         $this->header = false;
     }
 

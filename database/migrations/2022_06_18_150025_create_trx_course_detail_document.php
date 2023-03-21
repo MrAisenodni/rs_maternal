@@ -14,7 +14,7 @@ class CreateTrxCourseDetailDocument extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->text('file')->nullable();
-            $table->text('file_name')->nullable();
+            $table->string('file_name')->nullable();
             
             // Struktur Baku
             $table->string('access_code')->nullable();

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', $c_menu->title)
+@section('title', 'Ubah Materi')
 
 @section('styles')
     {{-- Select2 --}}
@@ -24,7 +24,7 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ $c_menu->url }}">{{ $c_menu->title }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ $c_menu->url }}">{{ $c_menu->menu->title }}</a></li>
                 <li class="breadcrumb-item active">Ubah Materi</li>
             </ol>
             <div class="media align-items-center mb-headings">
@@ -79,7 +79,7 @@
                                                         <option value="">=== SILAHKAN PILIH ===</option>
                                                         @if ($doctors)
                                                             @foreach ($doctors as $item)
-                                                                <option value="{{ $item->id }}" @if ($item->id == old('doctor', $detail->course_detail_teacher_id)) selected @endif>[{{ $item->nik }}] {{ $item->full_name }}</option>
+                                                                <option value="{{ $item->id }}" @if ($item->id == old('doctor', $detail->course_teacher_id)) selected @endif>[{{ $item->nik }}] {{ $item->full_name }}</option>
                                                             @endforeach
                                                         @endif
                                                     </select>
@@ -124,9 +124,9 @@
                                                 <label class="form-label" for="picture">Foto Materi <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
                                                 {{-- <img class="" src="{{ asset($detail->picture) }}" alt="" style="max-width:100%;"> --}}
-                                                <img id="auto_preview" class="" src="{{ asset($detail->picture) }}" alt="" style="max-width:100%;">
+                                                <img id="show_picture" class="img-fluid" src="{{ asset('/storage/'.$detail->picture) }}" alt="" style="max-width:100%;">
                                                 <input type="hidden" name="old_picture" value="{{ $detail->picture }}">
-                                                <input type="file" class="form-control @error('picture') is-invalid @enderror" id="image" name="picture" value="{{ old('picture') }}" onchange="readURL(this)">
+                                                <input type="file" class="form-control @error('picture') is-invalid @enderror" id="image" name="picture" value="{{ old('picture') }}" onchange="readURLPicture(this)">
                                                 @error('picture')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -164,13 +164,13 @@
                         <div class="card-body">
                             <div class="media align-items-center mb-headings">
                                 <div class="media-body">
-                                    <h1 class="h2">{{ $c_menu->title }}</h1>
+                                    <h1 class="h2">Daftar Pembelajaran</h1>
                                 </div>
                                 <div class="media-right">
                                     @if ($access->add == 1)
                                         <div class="ms-auto">
                                             <div class="btn-group">
-                                                <a href="/admin/course_detail/{{ $detail->id }}/create" class="btn btn-primary">Tambah</a>
+                                                <a href="/admin/course-detail/{{ $detail->id }}/create" class="btn btn-primary">Tambah</a>
                                             </div>
                                         </div>
                                     @endif
@@ -195,17 +195,17 @@
                                                     <td>{{ $item->description }}</td>
                                                     <td class="text-center" style="width: 20mm">
                                                         @if ($access->edit == 1)
-                                                            <a href="/admin/course_detail/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
+                                                            <a href="/admin/course-detail/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
                                                         @endif
                                                         @if ($access->delete == 1)
-                                                        <form action="/admin/course_detail/{{ $item->id }}" method="POST" class="d-inline">
+                                                        <form action="/admin/course-detail/{{ $item->id }}" method="POST" class="d-inline">
                                                             @method('delete')
                                                             @csrf
                                                             <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
                                                         </form>
                                                         @endif
                                                         @if ($access->detail == 1)
-                                                            <a href="/admin/course_detail/{{ $item->id }}"><i class="fa fa-eye"></i></a>
+                                                            <a href="/admin/course-detail/{{ $item->id }}"><i class="fa fa-eye"></i></a>
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -242,7 +242,7 @@
 
     {{-- Auto Preview --}}
     <script type="text/javascript">
-        function readURL(input) 
+        function readURLPicture(input) 
         {
             if (input.files && input.files[0])
             {
@@ -250,7 +250,7 @@
 
                 reader.onload = function (e) 
                 {
-                    $('#auto_preview').attr('src', e.target.result)
+                    $('#show_picture').attr('src', e.target.result)
                 }
 
                 reader.readAsDataURL(input.files[0])

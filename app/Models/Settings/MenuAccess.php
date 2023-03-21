@@ -20,6 +20,10 @@ class MenuAccess extends Model
     {
         return $this->belongsTo(Menu::class, 'menu_id', 'id')->select('id', 'title', 'icon', 'url', 'parent');
     }
+    public function submenu()
+    {
+        return $this->belongsTo(SubMenu::class, 'submenu_id', 'id')->select('id', 'title', 'icon', 'url', 'parent');
+    }
     public function user()
     {
         return $this->belongsTo(User::class, 'role', 'role')->select('id', 'name', 'role');

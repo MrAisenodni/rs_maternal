@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', $c_menu->title)
+@section('title', 'Tambah Materi')
 
 @section('styles')
     {{-- Select2 --}}
@@ -18,7 +18,7 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ $c_menu->url }}">{{ $c_menu->title }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ $c_menu->url }}">{{ $c_menu->menu->title }}</a></li>
                 <li class="breadcrumb-item active">Tambah Materi</li>
             </ol>
             <div class="media align-items-center mb-headings">
@@ -109,8 +109,8 @@
                                             <div class="col-3">
                                                 <label class="form-label" for="picture">Foto Materi <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
-                                                <img id="auto_preview" class="img-fluid" src="{{ old('picture') }}" alt="" style="max-width:100%;">
-                                                <input type="file" class="form-control @error('picture') is-invalid @enderror" id="image" name="picture" value="{{ old('picture') }}" onchange="readURL(this)">
+                                                <img id="show_picture" class="img-fluid" src="{{ old('picture') }}" alt="" style="max-width:100%;">
+                                                <input type="file" class="form-control @error('picture') is-invalid @enderror" id="image" name="picture" value="{{ old('picture') }}" onchange="readURLPicture(this)">
                                                 @error('picture')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -139,14 +139,14 @@
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-12">
-                                                <iframe id="auto_preview" class="embed-responsive-item" src="{{ old('video') }}" allowfullscreen="" style="width: 100%; height: 300px"></iframe>
+                                                <iframe id="show_video" class="embed-responsive-item" src="{{ old('video') }}" allowfullscreen="" style="width: 100%; height: 300px"></iframe>
                                             </div>
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-12">
                                                 <label class="form-label" for="video">Upload Video <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
-                                                <input type="file" class="form-control @error('video') is-invalid @enderror" id="image" name="video" value="{{ old('video') }}" onchange="readURL(this)">
+                                                <input type="file" class="form-control @error('video') is-invalid @enderror" id="image" name="video" value="{{ old('video') }}" onchange="readURLVideo(this)">
                                                 @error('video')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -168,7 +168,7 @@
                                         <h1 class="h4">Detail Materi Dokumen</h1><hr>
                                         <div class="row mb-2">
                                             <div class="col-12">
-                                                <label class="form-label" for="title_document">Judul Dokumen <small class="text-danger">*</small></label>
+                                                <label class="form-label" for="title_document">Judul Dokumen</label>
                                                 <input type="text" class="form-control @error('title_document') is-invalid @enderror" id="title_document" name="title_document" value="{{ old('title_document') }}">
                                                 @error('title_document')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -177,9 +177,9 @@
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-12">
-                                                <label class="form-label" for="document">Upload Dokumen <small class="text-danger">*</small></label>
+                                                <label class="form-label" for="document">Upload Dokumen</label>
                                                 <span class="desc"></span>
-                                                <input type="file" class="form-control @error('document') is-invalid @enderror" id="image" name="document" value="{{ old('document') }}" onchange="readURL(this)">
+                                                <input type="file" class="form-control @error('document') is-invalid @enderror" id="image" name="document" value="{{ old('document') }}">
                                                 @error('document')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -225,7 +225,7 @@
 
     {{-- Auto Preview --}}
     <script type="text/javascript">
-        function readURL(input) 
+        function readURLPicture(input) 
         {
             if (input.files && input.files[0])
             {
@@ -233,7 +233,21 @@
 
                 reader.onload = function (e) 
                 {
-                    $('#auto_preview').attr('src', e.target.result)
+                    $('#show_picture').attr('src', e.target.result)
+                }
+
+                reader.readAsDataURL(input.files[0])
+            }
+        }
+        function readURLVideo(input) 
+        {
+            if (input.files && input.files[0])
+            {
+                var reader = new FileReader()
+
+                reader.onload = function (e) 
+                {
+                    $('#show_video').attr('src', e.target.result)
                 }
 
                 reader.readAsDataURL(input.files[0])

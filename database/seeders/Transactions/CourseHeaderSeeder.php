@@ -15,7 +15,7 @@ class CourseHeaderSeeder extends CsvSeeder
         $this->defaults = [
             'created_by'    => 'Migrasi'
         ];
-        $this->mapping = ['id', 'title', 'picture', 'rating', 'description', 'category_id', 'level_id', 'duration'];
+        $this->mapping = ['id', 'title', 'picture', 'rating', 'description', 'category_id', 'level_id', 'duration', 'course_teacher_id'];
         $this->header = false;
     }
 

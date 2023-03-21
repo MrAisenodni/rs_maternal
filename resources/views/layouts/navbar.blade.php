@@ -11,12 +11,36 @@
                                     @if ($main_menu->menus)
                                         <ul class="sidebar-menu sm-active-button-bg">
                                             @foreach ($main_menu->menus as $menu)
-                                                @if ($menu->menu_access->view == 1)
-                                                    <li class="sidebar-menu-item @if($menu->id == $c_menu->id) active @endif">
-                                                        <a class="sidebar-menu-button" href="{{ $menu->url }}">
-                                                            <i class="sidebar-menu-icon sidebar-menu-icon--left {{ $menu->icon }}" style="font-size: 18px"></i>{{ $menu->title }} 
-                                                        </a>
-                                                    </li> 
+                                                @if ($menu->parent == 1)
+                                                    @if ($menu->menu_access->view == 1)
+                                                        <li class="sidebar-menu-item @if ($menu->id == $c_menu->menu_access->menu_id) active open @endif">
+                                                            <a class="sidebar-menu-button sidebar-js-collapse" data-toggle="collapse" href="#{{ strtolower(str_replace(' ', '_', $menu->title)) }}_menu">
+                                                                <i class="sidebar-menu-icon sidebar-menu-icon--left {{ $menu->icon }}" style="font-size: 18px"></i> {{ $menu->title }}
+                                                                <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                                            </a>
+                                                            <ul class="sidebar-submenu sm-indent collapse @if ($menu->id == $c_menu->menu_access->menu_id) show @endif" id="{{ strtolower(str_replace(' ', '_', $menu->title)) }}_menu">
+                                                                @if ($menu->submenus)
+                                                                    @foreach ($menu->submenus as $submenu)
+                                                                        @if ($submenu->menu_access->view == 1)
+                                                                            <li class="sidebar-menu-item @if($submenu->id == $c_menu->menu_access->submenu_id) active @endif">
+                                                                                <a class="sidebar-menu-button" href="{{ $submenu->url }}">
+                                                                                    <span class="sidebar-menu-text">{{ $submenu->title }}</span>
+                                                                                </a>
+                                                                            </li>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                            </ul>
+                                                        </li>
+                                                    @endif
+                                                @else
+                                                    @if ($menu->menu_access->view == 1)
+                                                        <li class="sidebar-menu-item @if($menu->id == $c_menu->menu_access->menu_id) active @endif">
+                                                            <a class="sidebar-menu-button" href="{{ $menu->url }}">
+                                                                <i class="sidebar-menu-icon sidebar-menu-icon--left {{ $menu->icon }}" style="font-size: 18px"></i>{{ $menu->title }} 
+                                                            </a>
+                                                        </li> 
+                                                    @endif
                                                 @endif
                                             @endforeach
                                         </ul>

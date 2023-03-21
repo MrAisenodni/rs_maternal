@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\File;
 
 class CourseDetailDocumentController extends Controller
 {
-    protected $path = '/admin/course_detail_document';
+    protected $path = '/admin/course-detail_document';
 
     public function create($id)
     {
@@ -16,7 +16,7 @@ class CourseDetailDocumentController extends Controller
             'id'            => $id,
             'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
         ];
-        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
+        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->add == 0) abort(403);
 
@@ -52,7 +52,7 @@ class CourseDetailDocumentController extends Controller
 
         $this->course_detail_document->insert($data);
 
-        return redirect('/admin/course_detail/'.$request->id.'/edit')->with('status', 'Data Berhasil Ditambahkan.');
+        return redirect('/admin/course-detail/'.$request->id.'/edit')->with('status', 'Data Berhasil Ditambahkan.');
     }
 
     public function show($id)
@@ -61,7 +61,7 @@ class CourseDetailDocumentController extends Controller
             'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
             'detail'        => $this->course_detail_document->select('id', 'course_detail_id', 'title', 'file', 'file_name', 'description')->where('id', $id)->where('disabled', 0)->first(),
         ];
-        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
+        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
         
@@ -74,7 +74,7 @@ class CourseDetailDocumentController extends Controller
             'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
             'detail'        => $this->course_detail_document->select('id', 'course_detail_id', 'title', 'file', 'file_name', 'description')->where('id', $id)->where('disabled', 0)->first(),
         ];
-        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail')->where('disabled', 0)
+        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->edit == 0) abort(403);
 
@@ -110,7 +110,7 @@ class CourseDetailDocumentController extends Controller
 
         $this->course_detail_document->where('id', $id)->update($data);
 
-        return redirect('/admin/course_detail/'.$request->id.'/edit')->with('status', 'Data Berhasil Diubah.');
+        return redirect('/admin/course-detail/'.$request->id.'/edit')->with('status', 'Data Berhasil Diubah.');
         // return redirect(url()->previous())->with('status', 'Data Berhasil Diubah.');
     }
 

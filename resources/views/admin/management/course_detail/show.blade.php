@@ -11,8 +11,8 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course_header">{{ $c_menu->title }}</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course_header/{{ $detail->course_header_id }}/edit">Detail Materi</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-header">{{ $c_menu->title }}</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-header/{{ $detail->course_header_id }}/edit">Detail Materi</a></li>
                 <li class="breadcrumb-item active">Detail Materi Pembelajaran</li>
             </ol>
             <div class="media align-items-center mb-headings">
@@ -89,7 +89,7 @@
                                             <div class="col-12">
                                                 {{-- @if ($access->add == 1) --}}
                                                     <div class="d-grid">
-                                                        <a href="/admin/course_header/{{ $detail->course_header_id }}/edit" class="btn btn-warning">KEMBALI</a>
+                                                        <a href="/admin/course-header/{{ $detail->course_header_id }}/edit" class="btn btn-warning">KEMBALI</a>
                                                         <a href="{{ $c_menu->url }}/{{ $detail->id }}/edit" class="btn btn-primary">UBAH</a>
                                                     </div>
                                                 {{-- @endif --}}

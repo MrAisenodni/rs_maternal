@@ -20,6 +20,7 @@ class CreateStgMenuAccess extends Migration
             $table->boolean('delete')->default(0);
             $table->boolean('detail')->default(0);
             $table->boolean('view')->default(0);
+            $table->boolean('approval')->default(0);
             
             // Struktur Baku
             $table->string('access_code')->nullable();

@@ -28,7 +28,7 @@ class CourseHeader extends Model
 
     public function teacher()
     {
-        return $this->belongsTo(User::class, 'course_detail_teacher_id', 'id')->select('id', 'nik', 'full_name')->where('disabled', 0)->where('role', 'tec');
+        return $this->belongsTo(User::class, 'course_teacher_id', 'id')->select('id', 'nik', 'full_name', 'biography', 'facebook', 'twitter', 'instagram', 'github', 'picture', 'picture_name')->where('disabled', 0)->where('role', 'tec');
     }
 
     public function course_detail()

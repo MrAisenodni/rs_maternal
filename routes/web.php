@@ -58,11 +58,11 @@ Route::middleware('authcheck')->group(function() {
     Route::get('/view-course/{id}/{ids}', [ViewCourseController::class, 'index']);
 
     // Management
-    Route::resource('/admin/course_header', CourseHeaderController::class);
-    Route::get('/admin/course_detail/{id}/create', [CourseDetailController::class, 'create']);
-    Route::resource('/admin/course_detail', CourseDetailController::class);
-    Route::get('/admin/course_detail_document/{id}/create', [CourseDetailDocumentController::class, 'create']);
-    Route::resource('/admin/course_detail_document', CourseDetailDocumentController::class);
+    Route::resource('/admin/course-header', CourseHeaderController::class);
+    Route::get('/admin/course-detail/{id}/create', [CourseDetailController::class, 'create']);
+    Route::resource('/admin/course-detail', CourseDetailController::class);
+    Route::get('/admin/course-detail-document/{id}/create', [CourseDetailDocumentController::class, 'create']);
+    Route::resource('/admin/course-detail-document', CourseDetailDocumentController::class);
 
     // Master
     Route::resource('/master/category', CategoryController::class);

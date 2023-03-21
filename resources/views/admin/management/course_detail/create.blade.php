@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', $c_menu->title)
+@section('title', 'Tambah Materi Pembelajaran')
 
 @section('styles')
     {{-- Quill Theme --}}
@@ -13,8 +13,8 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course_header">{{ $c_menu->title }}</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course_header/{{ $id }}/edit">Detail Materi</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-header">{{ $c_menu->title }}</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-header/{{ $id }}/edit">Detail Materi</a></li>
                 <li class="breadcrumb-item active">Tambah Materi Pembelajaran</li>
             </ol>
             <div class="media align-items-center mb-headings">
@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-12">
-                                                <iframe id="auto_preview" class="embed-responsive-item" src="{{ old('video') }}" allowfullscreen="" style="width: 100%; height: 300px"></iframe>
+                                                <iframe id="show_video" class="embed-responsive-item" src="{{ old('video') }}" allowfullscreen="" style="width: 100%; height: 300px"></iframe>
                                             </div>
                                             <div class="col-12">
                                                 <div class="progress">
@@ -74,7 +74,7 @@
                                             <div class="col-12">
                                                 <label class="form-label" for="video">Upload Video <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
-                                                <input type="file" class="form-control @error('video') is-invalid @enderror" id="image" name="video" value="{{ old('video') }}" onchange="readURL(this)">
+                                                <input type="file" class="form-control @error('video') is-invalid @enderror" id="image" name="video" value="{{ old('video') }}" onchange="readURLVideo(this)">
                                                 @error('video')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -122,8 +122,6 @@
     <script>
         $(function () {
             $(document).ready(function () {
-                
-
                 // $('#fileUploadForm').ajaxForm({
                 //     beforeSend: function () {
                 //         var percentage = '0';
@@ -144,7 +142,7 @@
 
     {{-- Auto Preview --}}
     <script type="text/javascript">
-        function readURL(input) 
+        function readURLVideo(input) 
         {
             if (input.files && input.files[0])
             {
@@ -152,7 +150,7 @@
 
                 reader.onload = function (e) 
                 {
-                    $('#auto_preview').attr('src', e.target.result)
+                    $('#show_video').attr('src', e.target.result)
                 }
 
                 reader.readAsDataURL(input.files[0])

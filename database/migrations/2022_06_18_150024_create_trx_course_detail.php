@@ -14,6 +14,7 @@ class CreateTrxCourseDetail extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->text('video')->nullable();
+            $table->string('video_name')->nullable();
             
             // Struktur Baku
             $table->string('access_code')->nullable();

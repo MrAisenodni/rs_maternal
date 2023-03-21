@@ -18,9 +18,9 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course_header">{{ $c_menu->title }}</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course_header">Detail Materi</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course_detail/{{ $detail->course_detail_id }}/edit">Detail Materi Pembelajaran</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-header">{{ $c_menu->title }}</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-header">Detail Materi</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-detail/{{ $detail->course_detail_id }}/edit">Detail Materi Pembelajaran</a></li>
                 <li class="breadcrumb-item active">Tambah Dokumen</li>
             </ol>
             <div class="media align-items-center mb-headings">

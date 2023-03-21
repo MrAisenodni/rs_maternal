@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', $c_menu->title)
+@section('title', $c_menu->menu->title)
 
 @section('styles')
     {{-- Data Table --}}
@@ -16,11 +16,12 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item">{{ $c_menu->menu->title }}</li>
                 <li class="breadcrumb-item active">{{ $c_menu->title }}</li>
             </ol>
             <div class="media align-items-center mb-headings">
                 <div class="media-body">
-                    <h1 class="h2">{{ $c_menu->title }}</h1>
+                    <h1 class="h2">{{ $c_menu->menu->title }}</h1>
                 </div>
                 <div class="media-right">
                     @if ($access->add == 1)
