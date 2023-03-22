@@ -83,8 +83,8 @@ return [
     ],
     'mac_address' => ':attribute harus berisi MAC address yang valid.',
     'max' => [
-        'numeric' => ':attribute must not be greater than :max.',
-        'file' => ':attribute must not be greater than :max kilobytes.',
+        'numeric' => ':attribute tidak boleh lebih besar dari :max.',
+        'file' => ':attribute tidak boleh lebih besar dari :max kilobytes.',
         'string' => ':attribute tidak boleh lebih besar dari :max karakter.',
         'array' => ':attribute tidak boleh lebih dari :max item.',
     ],

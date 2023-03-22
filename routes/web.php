@@ -52,6 +52,11 @@ Route::get('/logout', [LoginController::class, 'logout']);
 Route::resource('/list-courses', ListCoursesController::class);
 Route::get('/download', [PageController::class, 'download']);
 
+// Storage Link for Production
+Route::get('/foo', function () {
+    Artisan::call('storage:link');
+});
+
 // Menu must be login first
 Route::middleware('authcheck')->group(function() {
     // Learning
