@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\{ File, Hash };
 
 class CourseHeaderController extends Controller
 {
@@ -64,11 +64,22 @@ class CourseHeaderController extends Controller
         ];
         
         if (session()->get('srole') == 'adm') {
+            // if ($request->picture) {
+            //     $file = $request->file('picture');
+            //     $extension = $request->picture->getClientOriginalExtension();  // Get Extension
+            //     $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
+            //     $filePath = $file->storeAs('pictures/'.session()->get('srole').'_'.session()->get('suser_id'), $fileName, 'public');
+            //     // $file->move(storage_path().'/', $filePath);  
+            //     $data += [
+            //         'picture'                       => $filePath,
+            //         'picture_name'                  => $fileName,
+            //     ]; 
+            // }
             if ($request->picture) {
                 $file = $request->file('picture');
                 $extension = $request->picture->getClientOriginalExtension();  // Get Extension
                 $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
-                $filePath = $file->storeAs('pictures', $fileName, 'public');
+                $filePath = $file->storeAs('pictures/'.Hash::make(session()->get('srole').session()->get('suser_id')), $fileName, 'public');
                 // $file->move(storage_path().'/', $filePath);  
                 $data += [
                     'picture'                       => $filePath,
@@ -86,11 +97,22 @@ class CourseHeaderController extends Controller
                 'created_by'                        => session()->get('suser_id'),
             ];
     
+            // if ($request->video) {
+            //     $file = $request->file('video');
+            //     $extension = $request->video->getClientOriginalExtension();  // Get Extension
+            //     $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
+            //     $filePath = $file->storeAs('videos/'.session()->get('srole').'_'.session()->get('suser_id'), $fileName, 'public');
+            //     // $file->move(storage_path().'/videos', $filePath);  
+            //     $data += [
+            //         'video'                         => $filePath,
+            //         'video_name'                    => $fileName,
+            //     ]; 
+            // }
             if ($request->video) {
                 $file = $request->file('video');
                 $extension = $request->video->getClientOriginalExtension();  // Get Extension
                 $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
-                $filePath = $file->storeAs('videos', $fileName, 'public');
+                $filePath = $file->storeAs('videos/'.Hash::make(session()->get('srole').session()->get('suser_id')), $fileName, 'public');
                 // $file->move(storage_path().'/videos', $filePath);  
                 $data += [
                     'video'                         => $filePath,
@@ -114,7 +136,7 @@ class CourseHeaderController extends Controller
                     $file = $request->file('document');
                     $extension = $request->document->getClientOriginalExtension();  // Get Extension
                     $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
-                    $filePath = $file->storeAs('documents', $fileName, 'public');
+                    $filePath = $file->storeAs('documents/'.session()->get('srole').'_'.session()->get('suser_id'), $fileName, 'public');
                     // $file->move(storage_path().'/documents', $filePath);  
                     $data += [
                         'file'                          => $filePath,
@@ -188,7 +210,7 @@ class CourseHeaderController extends Controller
                 $file = $request->file('picture');
                 $extension = $request->picture->getClientOriginalExtension();  // Get Extension
                 $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
-                $filePath = $file->storeAs('pictures', $fileName, 'public');
+                $filePath = $file->storeAs('pictures/'.session()->get('srole').'_'.session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/pictures', $filePath);  
                 $data += [
                     'picture'                       => $filePath,
@@ -208,7 +230,7 @@ class CourseHeaderController extends Controller
                 $file = $request->file('picture');
                 $extension = $request->picture->getClientOriginalExtension();  // Get Extension
                 $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
-                $filePath = $file->storeAs('pictures', $fileName, 'public');
+                $filePath = $file->storeAs('pictures/'.session()->get('srole').'_'.session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/pictures', $filePath);  
                 $data += [
                     'picture'                       => $filePath,

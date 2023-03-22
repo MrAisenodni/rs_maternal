@@ -144,9 +144,12 @@
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-12">
+                                                <div class="progress" style="height: 20px;">
+                                                    <div id="video-progress" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                                </div>
                                                 <label class="form-label" for="video">Upload Video <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
-                                                <input type="file" class="form-control @error('video') is-invalid @enderror" id="image" name="video" value="{{ old('video') }}" onchange="readURLVideo(this)">
+                                                <input type="file" class="form-control @error('video') is-invalid @enderror" id="video" name="video" value="{{ old('video') }}" onchange="readURLVideo(this)">
                                                 @error('video')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -225,6 +228,7 @@
 
     {{-- Auto Preview --}}
     <script type="text/javascript">
+        // For Upload Picture
         function readURLPicture(input) 
         {
             if (input.files && input.files[0])
@@ -239,11 +243,21 @@
                 reader.readAsDataURL(input.files[0])
             }
         }
+
+        // For Upload Video
         function readURLVideo(input) 
         {
             if (input.files && input.files[0])
             {
                 var reader = new FileReader()
+
+                reader.onprogress = function (e)
+                {
+                    var percent = (event.loaded / event.total) * 100
+                    $("#video-progress").attr('aria-valuenow', Math.round(percent))
+                    $("#video-progress").attr('style', "width: " + Math.round(percent) + "%")
+                    $("#video-progress").text(Math.round(percent) + "%")
+                }
 
                 reader.onload = function (e) 
                 {
