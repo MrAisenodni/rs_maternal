@@ -56,11 +56,6 @@ Route::get('/download', [PageController::class, 'download']);
 Route::get('/foo', function () {
     Artisan::call('storage:link');
 });
-Route::get('/linkstorage', function () {
-    $targetFolder = base_path().'/storage/app/public';
-    $linkFolder = base_path().'/public_html/smartmatneo/storage';
-    symlink($targetFolder, $linkFolder);
- });
 Route::get('/migrate-seed', function () { 
     Artisan::call('migrate:fresh --seed');
  });
