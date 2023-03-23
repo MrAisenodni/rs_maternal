@@ -124,7 +124,7 @@
                                                 <label class="form-label" for="picture">Foto Materi <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
                                                 {{-- <img class="" src="{{ asset($detail->picture) }}" alt="" style="max-width:100%;"> --}}
-                                                <img id="show_picture" class="img-fluid" src="{{ asset('/storage/'.$detail->picture) }}" alt="" style="max-width:100%;">
+                                                <img id="show_picture" class="img-fluid" src="{{ (env('APP_ENV') == 'local') ? asset('/storage/'.$detail->picture) : base_path().$detail->picture }}" alt="" style="max-width:100%;">
                                                 <input type="hidden" name="old_picture" value="{{ $detail->picture }}">
                                                 <input type="file" class="form-control @error('picture') is-invalid @enderror" id="image" name="picture" value="{{ old('picture') }}" onchange="readURLPicture(this)">
                                                 @error('picture')

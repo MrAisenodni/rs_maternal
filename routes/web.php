@@ -53,7 +53,7 @@ Route::resource('/list-courses', ListCoursesController::class);
 Route::get('/download', [PageController::class, 'download']);
 
 // Storage Link for Production
-Route::get('/foo', function () {
+Route::get('/storage-link', function () {
     Artisan::call('storage:link');
 });
 Route::get('/migrate-seed', function () { 
