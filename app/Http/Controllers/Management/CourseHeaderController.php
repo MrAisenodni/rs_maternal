@@ -194,7 +194,7 @@ class CourseHeaderController extends Controller
                 if (env('APP_ENV') == 'local') {
                     $filePath = $file->storeAs('pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 } else {
-                    $filePath = $file->storeAs('production/pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                    $filePath = $file->storeAs('storage/production/pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 }
                 // $file->move(storage_path().'/pictures', $filePath);  
                 $data += [
