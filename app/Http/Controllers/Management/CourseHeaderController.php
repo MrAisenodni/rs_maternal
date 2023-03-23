@@ -64,22 +64,11 @@ class CourseHeaderController extends Controller
         ];
         
         if (session()->get('srole') == 'adm') {
-            // if ($request->picture) {
-            //     $file = $request->file('picture');
-            //     $extension = $request->picture->getClientOriginalExtension();  // Get Extension
-            //     $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
-            //     $filePath = $file->storeAs('pictures/'.session()->get('srole').'_'.session()->get('suser_id'), $fileName, 'public');
-            //     // $file->move(storage_path().'/', $filePath);  
-            //     $data += [
-            //         'picture'                       => $filePath,
-            //         'picture_name'                  => $fileName,
-            //     ]; 
-            // }
             if ($request->picture) {
                 $file = $request->file('picture');
                 $extension = $request->picture->getClientOriginalExtension();  // Get Extension
                 $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
-                $filePath = $file->storeAs('pictures/'.Hash::make(session()->get('srole').session()->get('suser_id')), $fileName, 'public');
+                $filePath = $file->storeAs('pictures/'.substr(Hash::make(session()->get('srole').session()->get('suser_id')), 0, 100), $fileName, 'public');
                 // $file->move(storage_path().'/', $filePath);  
                 $data += [
                     'picture'                       => $filePath,
@@ -97,22 +86,11 @@ class CourseHeaderController extends Controller
                 'created_by'                        => session()->get('suser_id'),
             ];
     
-            // if ($request->video) {
-            //     $file = $request->file('video');
-            //     $extension = $request->video->getClientOriginalExtension();  // Get Extension
-            //     $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
-            //     $filePath = $file->storeAs('videos/'.session()->get('srole').'_'.session()->get('suser_id'), $fileName, 'public');
-            //     // $file->move(storage_path().'/videos', $filePath);  
-            //     $data += [
-            //         'video'                         => $filePath,
-            //         'video_name'                    => $fileName,
-            //     ]; 
-            // }
             if ($request->video) {
                 $file = $request->file('video');
                 $extension = $request->video->getClientOriginalExtension();  // Get Extension
                 $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
-                $filePath = $file->storeAs('videos/'.Hash::make(session()->get('srole').session()->get('suser_id')), $fileName, 'public');
+                $filePath = $file->storeAs('videos/'.substr(Hash::make(session()->get('srole').session()->get('suser_id')), 0, 100), $fileName, 'public');
                 // $file->move(storage_path().'/videos', $filePath);  
                 $data += [
                     'video'                         => $filePath,
@@ -204,13 +182,20 @@ class CourseHeaderController extends Controller
             'updated_by'                        => session()->get('suser_id'),
         ];
 
+        // dd(env('APP_ENV'));
+
         if (session()->get('srole') == 'adm') {
             if ($request->picture) {
-                if ($request->old_picture) File::delete(storage_path('app/public/'.$request->old_picture));
+                if ($request->old_picture) (env('APP_ENV') == 'local') ? File::delete(storage_path('app/public/'.$request->old_picture)) 
+                    : File::delete(base_path().'public_html/smartmatneo/pictures/'.$request->old_picture);
                 $file = $request->file('picture');
                 $extension = $request->picture->getClientOriginalExtension();  // Get Extension
-                $fileName =  date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.'_'.$request->doctor.'.'.$extension;  // Concatenate both to get FileName
-                $filePath = $file->storeAs('pictures/'.session()->get('srole').'_'.session()->get('suser_id'), $fileName, 'public');
+                $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
+                if (env('APP_ENV') == 'local') {
+                    $filePath = $file->storeAs('pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                } else {
+                    $filePath = $file->storeAs(base_path().'public_html/smartmatneo/pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                }
                 // $file->move(storage_path().'/pictures', $filePath);  
                 $data += [
                     'picture'                       => $filePath,
