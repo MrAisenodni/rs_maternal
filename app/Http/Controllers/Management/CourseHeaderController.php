@@ -187,7 +187,7 @@ class CourseHeaderController extends Controller
         if (session()->get('srole') == 'adm') {
             if ($request->picture) {
                 if ($request->old_picture) (env('APP_ENV') == 'local') ? File::delete(storage_path('app/public/'.$request->old_picture)) 
-                    : File::delete(storage_path('app/public/production'.$request->old_picture));
+                    : File::delete(storage_path('app/public/storage/production'.$request->old_picture));
                 $file = $request->file('picture');
                 $extension = $request->picture->getClientOriginalExtension();  // Get Extension
                 $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
