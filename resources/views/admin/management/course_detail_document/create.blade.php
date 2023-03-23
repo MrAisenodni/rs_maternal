@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', $c_menu->title)
+@section('title', 'Tambah Dokumen')
 
 @section('styles')
     {{-- Select2 --}}
@@ -18,9 +18,9 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course-header">{{ $c_menu->title }}</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course-header">Detail Materi</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course-detail/{{ $detail->course_detail_id }}/edit">Detail Materi Pembelajaran</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-header">Daftar Materi</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-header/{{ $course_detail->course_header_id }}/edit">Detail Materi</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-detail/{{ $course_detail->id }}/edit">Detail Pembelajaran</a></li>
                 <li class="breadcrumb-item active">Tambah Dokumen</li>
             </ol>
             <div class="media align-items-center mb-headings">
@@ -56,7 +56,7 @@
                                 <div class="card-body">
                                     <form class="g-3" action="{{ $c_menu->url }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                        <input type="hidden" name="id" value="{{ $id }}">
+                                        <input type="hidden" name="id" value="{{ $course_detail->id }}">
                                         <div class="row mb-2">
                                             <div class="col-12">
                                                 <label class="form-label" for="title">Judul Dokumen <small class="text-danger">*</small></label>
@@ -88,12 +88,12 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-12">
-                                                {{-- @if ($access->add == 1) --}}
-                                                    <div class="d-grid">
-                                                        <a href="{{ $c_menu->url }}/{{ $id }}/edit" class="btn btn-warning">KEMBALI</a>
+                                                <div class="d-grid">
+                                                    <a href="/admin/course-detail/{{ $course_detail->id }}/edit" class="btn btn-warning">KEMBALI</a>
+                                                    @if ($access->add == 1)
                                                         <button type="submit" class="btn btn-success">SIMPAN</button>
-                                                    </div>
-                                                {{-- @endif --}}
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </form>

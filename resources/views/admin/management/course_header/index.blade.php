@@ -71,14 +71,17 @@
                                                             <td>{{ $item->level->name }}</td>
                                                             <td class="text-center" style="width: 20mm">
                                                                 @if ($access->edit == 1)
+                                                                    @if ($item->course_header_approval->id)
+                                                                        
+                                                                    @endif
                                                                     <a href="{{ $c_menu->url }}/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
                                                                 @endif
                                                                 @if ($access->delete == 1)
-                                                                <form action="{{ $c_menu->url }}/{{ $item->id }}" method="POST" class="d-inline">
-                                                                    @method('delete')
-                                                                    @csrf
-                                                                    <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
-                                                                </form>
+                                                                    <form action="{{ $c_menu->url }}/{{ $item->id }}" method="POST" class="d-inline">
+                                                                        @method('delete')
+                                                                        @csrf
+                                                                        <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
+                                                                    </form>
                                                                 @endif
                                                                 @if ($access->detail == 1)
                                                                     <a href="{{ $c_menu->url }}/{{ $item->id }}"><i class="fa fa-eye"></i></a>

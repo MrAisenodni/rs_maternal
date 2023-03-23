@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', $c_menu->title)
+@section('title', 'Detail Dokumen')
 
 @section('styles')
 @endsection
@@ -11,10 +11,10 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course-header">{{ $c_menu->title }}</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course-header">Detail Materi</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course-detail/{{ $detail->course_detail_id }}/edit">Detail Materi Pembelajaran</a></li>
-                <li class="breadcrumb-item active">Ubah Dokumen</li>
+                <li class="breadcrumb-item"><a href="/admin/course-header">Daftar Materi</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-header/{{ $detail->course_detail->course_header_id }}/edit">Detail Materi</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-detail/{{ $detail->course_detail->id }}/edit">Detail Pembelajaran</a></li>
+                <li class="breadcrumb-item active">Detail Dokumen</li>
             </ol>
             <div class="media align-items-center mb-headings">
                 <div class="media-body">
@@ -53,7 +53,7 @@
                                         <input type="hidden" name="id" value="{{ $detail->course_header_id }}">
                                         <div class="row mb-2">
                                             <div class="col-12">
-                                                <label class="form-label" for="title">Judul Dokumen <small class="text-danger">*</small></label>
+                                                <label class="form-label" for="title">Judul Dokumen </label>
                                                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $detail->title) }}" disabled>
                                                 @error('title')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -62,11 +62,9 @@
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-12">
-                                                <label class="form-label" for="document">Upload Dokumen <small class="text-danger">*</small></label>
-                                                <span class="desc"></span>
-                                                <input type="hidden" name="document" value="{{ $detail->document }}">
-                                                <input type="file" class="form-control @error('document') is-invalid @enderror" id="document" name="document" value="{{ old('document', $detail->document) }}" onchange="readURL(this)" disabled>
-                                                <a href="{{ asset($detail->file) }}">{{ $detail->file_name }}</a>
+                                                <label class="form-label" for="document">Dokumen </label>
+                                                <span class="desc"></span><br>
+                                                <a href="{{ asset('/storage/'.$detail->file) }}">{{ $detail->file_name }}</a>
                                             </div>
                                         </div>
                                         <div class="row mb-2">

@@ -17,7 +17,7 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course-header">{{ $c_menu->title }}</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-header">Daftar Materi</a></li>
                 <li class="breadcrumb-item"><a href="/admin/course-header/{{ $detail->course_header_id }}/edit">Detail Materi</a></li>
                 <li class="breadcrumb-item active">Ubah Materi Pembelajaran</li>
             </ol>
@@ -72,6 +72,9 @@
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-12">
+                                                <div class="progress" style="height: 20px;">
+                                                    <div id="video-progress" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                                </div>
                                                 <label class="form-label" for="video">Upload Video <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
                                                 <input type="hidden" name="old_video" value="{{ $detail->video }}">
@@ -119,7 +122,7 @@
                                             @if ($access->add == 1)
                                                 <div class="ms-auto">
                                                     <div class="btn-group">
-                                                        <a href="/admin/course-detail_document/{{ $detail->id }}/create" class="btn btn-primary">Tambah</a>
+                                                        <a href="/admin/course-detail-document/{{ $detail->id }}/create" class="btn btn-primary">Tambah</a>
                                                     </div>
                                                 </div>
                                             @endif
@@ -144,17 +147,17 @@
                                                             <td>{{ $item->description }}</td>
                                                             <td class="text-center" style="width: 30mm">
                                                                 @if ($access->edit == 1)
-                                                                    <a href="/admin/course-detail_document/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
+                                                                    <a href="/admin/course-detail-document/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
                                                                 @endif
                                                                 @if ($access->delete == 1)
-                                                                <form action="/admin/course-detail_document/{{ $item->id }}" method="POST" class="d-inline">
+                                                                <form action="/admin/course-detail-document/{{ $item->id }}" method="POST" class="d-inline">
                                                                     @method('delete')
                                                                     @csrf
                                                                     <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
                                                                 </form>
                                                                 @endif
                                                                 @if ($access->detail == 1)
-                                                                    <a href="/admin/course-detail_document/{{ $item->id }}"><i class="fa fa-eye"></i></a>
+                                                                    <a href="/admin/course-detail-document/{{ $item->id }}"><i class="fa fa-eye"></i></a>
                                                                 @endif
                                                             </td>
                                                         </tr>
@@ -189,6 +192,14 @@
             if (input.files && input.files[0])
             {
                 var reader = new FileReader()
+
+                reader.onprogress = function (e)
+                {
+                    var percent = (event.loaded / event.total) * 100
+                    $("#video-progress").attr('aria-valuenow', Math.round(percent))
+                    $("#video-progress").attr('style', "width: " + Math.round(percent) + "%")
+                    $("#video-progress").text(Math.round(percent) + "%")
+                }
 
                 reader.onload = function (e) 
                 {

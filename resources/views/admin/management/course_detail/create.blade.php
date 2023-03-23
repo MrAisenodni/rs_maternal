@@ -13,7 +13,7 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course-header">{{ $c_menu->title }}</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-header">Daftar Materi</a></li>
                 <li class="breadcrumb-item"><a href="/admin/course-header/{{ $id }}/edit">Detail Materi</a></li>
                 <li class="breadcrumb-item active">Tambah Materi Pembelajaran</li>
             </ol>
@@ -64,14 +64,12 @@
                                             <div class="col-12">
                                                 <iframe id="show_video" class="embed-responsive-item" src="{{ old('video') }}" allowfullscreen="" style="width: 100%; height: 300px"></iframe>
                                             </div>
-                                            <div class="col-12">
-                                                <div class="progress">
-                                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-12">
+                                                <div class="progress" style="height: 20px;">
+                                                    <div id="video-progress" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                                </div>
                                                 <label class="form-label" for="video">Upload Video <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
                                                 <input type="file" class="form-control @error('video') is-invalid @enderror" id="image" name="video" value="{{ old('video') }}" onchange="readURLVideo(this)">
@@ -94,7 +92,7 @@
                                             <div class="col-12">
                                                 {{-- @if ($access->add == 1) --}}
                                                     <div class="d-grid">
-                                                        <a href="{{ $c_menu->url }}/{{ $id }}/edit" class="btn btn-warning">KEMBALI</a>
+                                                        <a href="/admin/course-header/{{ $id }}/edit" class="btn btn-warning">KEMBALI</a>
                                                         <button type="submit" class="btn btn-success">SIMPAN</button>
                                                     </div>
                                                 {{-- @endif --}}
@@ -116,30 +114,6 @@
     <script src="{{ asset('/assets/vendor/quill.min.js') }}"></script>
     <script src="{{ asset('/assets/js/quill.js') }}"></script>
 
-    {{-- Progress Bar --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
-    <script>
-        $(function () {
-            $(document).ready(function () {
-                // $('#fileUploadForm').ajaxForm({
-                //     beforeSend: function () {
-                //         var percentage = '0';
-                //     },
-                //     uploadProgress: function (event, position, total, percentComplete) {
-                //         var percentage = percentComplete;
-                //         $('.progress .progress-bar').css("width", percentage+'%', function() {
-                //           return $(this).attr("aria-valuenow", percentage) + "%";
-                //         })
-                //     },
-                //     complete: function (xhr) {
-                //         console.log('File has uploaded');
-                //     }
-                // });
-            });
-        });
-    </script>
-
     {{-- Auto Preview --}}
     <script type="text/javascript">
         function readURLVideo(input) 
@@ -147,6 +121,14 @@
             if (input.files && input.files[0])
             {
                 var reader = new FileReader()
+
+                reader.onprogress = function (e)
+                {
+                    var percent = (event.loaded / event.total) * 100
+                    $("#video-progress").attr('aria-valuenow', Math.round(percent))
+                    $("#video-progress").attr('style', "width: " + Math.round(percent) + "%")
+                    $("#video-progress").text(Math.round(percent) + "%")
+                }
 
                 reader.onload = function (e) 
                 {

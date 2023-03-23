@@ -11,7 +11,7 @@ class CourseDetailDocument extends Model
 
     protected $table = 'trx_course_detail_document';
 
-    public function course_header()
+    public function course_detail()
     {
         return $this->belongsTo(CourseDetail::class)->where('disabled', 0);
     }

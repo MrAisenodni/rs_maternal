@@ -142,12 +142,14 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-12">
-                                                {{-- @if ($access->add == 1) --}}
-                                                    <div class="d-grid">
-                                                        <a href="{{ $c_menu->url }}" class="btn btn-warning">KEMBALI</a>
+                                                <div class="d-grid">
+                                                    <a href="{{ $c_menu->url }}" class="btn btn-warning">KEMBALI</a>
+                                                    @if ($detail->id == $course_header_approval->course_header_id)
+                                                        <button type="submit" class="btn btn-success" disabled>SIMPAN</button>
+                                                    @else
                                                         <button type="submit" class="btn btn-success">SIMPAN</button>
-                                                    </div>
-                                                {{-- @endif --}}
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </form>

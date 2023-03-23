@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                             <a href="/view-course/{{ $item->id }}/{{ $item->min_course_detail[0]->id }}">
-                                <img src="{{ $item->picture }}" alt="{{ $item->title }}" style="width:100%;">
+                                <img src="{{ asset('/storage/'.$item->picture) }}" alt="{{ $item->title }}" style="width:100%;">
                             </a>
                             <div class="card-body">
                                 <small class="text-muted">{{ $item->level->name }}</small><br>

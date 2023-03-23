@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', $c_menu->title)
+@section('title', 'Ubah Dokumen')
 
 @section('styles')
     {{-- Select2 --}}
@@ -17,9 +17,9 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course-header">{{ $c_menu->title }}</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course-header">Detail Materi</a></li>
-                <li class="breadcrumb-item"><a href="/admin/course-detail/{{ $detail->course_detail_id }}/edit">Detail Materi Pembelajaran</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-header">Daftar Materi</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-header/{{ $detail->course_detail->course_header_id }}/edit">Detail Materi</a></li>
+                <li class="breadcrumb-item"><a href="/admin/course-detail/{{ $detail->course_detail->id }}/edit">Detail Pembelajaran</a></li>
                 <li class="breadcrumb-item active">Ubah Dokumen</li>
             </ol>
             <div class="media align-items-center mb-headings">
@@ -30,7 +30,7 @@
                     @if ($access->add == 1)
                         <div class="ms-auto">
                             <div class="btn-group">
-                                <a href="{{ $c_menu->url }}/{{ $detail->course_header_id }}/create" class="btn btn-primary">TAMBAH</a>
+                                <a href="{{ $c_menu->url }}/{{ $detail->course_detail->id }}/create" class="btn btn-primary">TAMBAH</a>
                             </div>
                         </div>
                     @endif
@@ -72,7 +72,7 @@
                                                 <span class="desc"></span>
                                                 <input type="hidden" name="old_document" value="{{ $detail->file }}">
                                                 <input type="file" class="form-control @error('document') is-invalid @enderror" id="document" name="document" value="{{ old('document', $detail->file) }}" onchange="readURL(this)">
-                                                <a href="{{ asset($detail->file) }}">{{ $detail->file_name }}</a>
+                                                <a href="{{ asset('/storage/'.$detail->file) }}">{{ $detail->file_name }}</a>
                                                 @error('document')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -92,7 +92,7 @@
                                             <div class="col-12">
                                                 {{-- @if ($access->add == 1) --}}
                                                     <div class="d-grid">
-                                                        <a href="/admin/course-detail/{{ $detail->course_detail_id }}/edit" class="btn btn-warning">KEMBALI</a>
+                                                        <a href="/admin/course-detail/{{ $detail->course_detail->id }}/edit" class="btn btn-warning">KEMBALI</a>
                                                         <button type="submit" class="btn btn-success">SIMPAN</button>
                                                     </div>
                                                 {{-- @endif --}}
