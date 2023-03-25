@@ -144,8 +144,10 @@
                                             <div class="col-12">
                                                 <div class="d-grid">
                                                     <a href="{{ $c_menu->url }}" class="btn btn-warning">KEMBALI</a>
-                                                    @if ($detail->id == $course_header_approval->course_header_id)
+                                                    @if ($detail->approval_id)
                                                         <button type="submit" class="btn btn-success" disabled>SIMPAN</button>
+                                                        <small class="text-danger text-right">* Detail Materi menunggu approval dari Admin.</small>
+                                                        {{-- <p><small class="text-danger">*</small> Detail Materi menunggu approval dari Admin.</p> --}}
                                                     @else
                                                         <button type="submit" class="btn btn-success">SIMPAN</button>
                                                     @endif

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', $c_menu->title)
+@section('title', $c_menu->menu->title)
 
 @section('styles')
     {{-- Select2 --}}
@@ -8,7 +8,6 @@
     <link href="{{ asset('/assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
 
     {{-- Quill Theme --}}
-    <!-- Quill Theme -->
     <link type="text/css" href="{{ asset('/assets/css/quill.css') }}" rel="stylesheet">
     
     {{-- Data Table --}}
@@ -24,7 +23,7 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ $c_menu->url }}">{{ $c_menu->title }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ $c_menu->url }}">{{ $c_menu->menu->title }}</a></li>
                 <li class="breadcrumb-item active">Detail Materi</li>
             </ol>
             <div class="media align-items-center mb-headings">
@@ -99,29 +98,21 @@
                                                 <span class="desc"></span>
                                                 {{-- <img class="" src="{{ asset($detail->picture) }}" alt="" style="max-width:100%;"> --}}
                                                 <img id="auto_preview" class="" src="{{ asset($detail->picture) }}" alt="" style="max-width:100%;">
-                                                <input type="hidden" name="old_provider_logo" value="{{ $detail->picture }}">
-                                                <input type="file" class="form-control @error('picture') is-invalid @enderror" id="image" name="picture" value="{{ old('picture') }}" onchange="readURL(this)" disabled>
-                                                @error('picture')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
                                             </div>
                                             <div class="col-9">
                                                 <label class="form-label" for="description">Deskripsi</label>
                                                 <textarea name="description" id="description" class="form-control" cols="30" rows="10" disabled>{!! old('description', $detail->description) !!}</textarea>
-                                                @error('description')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="row">
                                             <div class="col-12">
-                                                {{-- @if ($access->add == 1) --}}
-                                                    <div class="d-grid">
-                                                        <a href="{{ $c_menu->url }}" class="btn btn-warning">KEMBALI</a>
+                                                <div class="d-grid">
+                                                    <a href="{{ $c_menu->url }}" class="btn btn-warning">KEMBALI</a>
+                                                    @if ($access->edit == 1)
                                                         <a href="{{ $c_menu->url }}/{{ $detail->id }}/edit" class="btn btn-primary">UBAH</a>
-                                                    </div>
-                                                {{-- @endif --}}
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -158,21 +149,11 @@
                                                     <td class="text-center">{{ $loop->iteration }}</td>
                                                     <td>{{ $item->title }}</td>
                                                     <td>{{ $item->description }}</td>
-                                                    {{-- <td class="text-center" style="width: 20mm">
-                                                        @if ($access->edit == 1)
-                                                            <a href="/admin/course-detail/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
-                                                        @endif
-                                                        @if ($access->delete == 1)
-                                                        <form action="/admin/course-detail/{{ $item->id }}" method="POST" class="d-inline">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
-                                                        </form>
-                                                        @endif
+                                                    <td class="text-center" style="width: 20mm">
                                                         @if ($access->detail == 1)
                                                             <a href="/admin/course-detail/{{ $item->id }}"><i class="fa fa-eye"></i></a>
                                                         @endif
-                                                    </td> --}}
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endif

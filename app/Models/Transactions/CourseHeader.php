@@ -40,9 +40,4 @@ class CourseHeader extends Model
     {
         return $this->hasMany(CourseDetail::class, 'course_header_id', 'id')->selectRaw('MIN(id) AS id')->where('disabled', 0);
     }
-
-    public function course_header_approval()
-    {
-        return $this->belongsTo(CourseHeaderApproval::class, 'course_header_id', 'id')->select('id', 'course_header_id')->where('disabled', 0);
-    }
 }

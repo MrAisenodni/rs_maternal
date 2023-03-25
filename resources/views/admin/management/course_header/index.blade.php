@@ -58,6 +58,7 @@
                                                     <th>Judul</th>
                                                     <th>Kategori</th>
                                                     <th>Level</th>
+                                                    <th>Terakhir Diubah</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -66,22 +67,32 @@
                                                     @foreach ($data as $item)
                                                         <tr data-id="{{ $item->id }}">
                                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                                            <td>{{ $item->title }}</td>
+                                                            <td>{{ $item->title }} @if ($item->approval_id) <small class="text-danger">* Menunggu Approval</small> @endif</td>
                                                             <td>{{ $item->category->name }}</td>
                                                             <td>{{ $item->level->name }}</td>
+                                                            @if ($item->updated_at && $item->updated_by)
+                                                                <td><small>{{ $item->updated_by }}, {{ date('d M Y', strtotime($item->updated_at)) }}</small></td>
+                                                            @else
+                                                                <td><small>{{ $item->created_by }}, {{ date('d M Y', strtotime($item->created_at)) }}</small></td>
+                                                            @endif
                                                             <td class="text-center" style="width: 20mm">
                                                                 @if ($access->edit == 1)
-                                                                    @if ($item->course_header_approval->id)
-                                                                        
-                                                                    @endif
                                                                     <a href="{{ $c_menu->url }}/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
                                                                 @endif
-                                                                @if ($access->delete == 1)
-                                                                    <form action="{{ $c_menu->url }}/{{ $item->id }}" method="POST" class="d-inline">
-                                                                        @method('delete')
-                                                                        @csrf
-                                                                        <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
-                                                                    </form>
+                                                                @if ($item->approval_id)
+                                                                    @if ($access->delete == 1)
+                                                                        <form action="#" method="POST" class="d-inline">
+                                                                            <button type="button" class="fa fa-trash text-secondary sa-warning" style="border: 0px; background: 0%" disabled></button>
+                                                                        </form>
+                                                                    @endif
+                                                                @else
+                                                                    @if ($access->delete == 1)
+                                                                        <form action="{{ $c_menu->url }}/{{ $item->id }}" method="POST" class="d-inline">
+                                                                            @method('delete')
+                                                                            @csrf
+                                                                            <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
+                                                                        </form>
+                                                                    @endif
                                                                 @endif
                                                                 @if ($access->detail == 1)
                                                                     <a href="{{ $c_menu->url }}/{{ $item->id }}"><i class="fa fa-eye"></i></a>

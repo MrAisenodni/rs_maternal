@@ -35,7 +35,7 @@ class CourseDetailDocumentController extends Controller
             'title'                             => $request->title,
             'description'                       => $request->description,
             'created_at'                        => now(),
-            'created_by'                        => session()->get('suser_id'),
+            'created_by'                        => session()->get('sname').' ('.session()->get('srole').')',
         ];
         
         if ($request->document) {
@@ -95,7 +95,7 @@ class CourseDetailDocumentController extends Controller
             'title'                             => $request->title,
             'description'                       => $request->description,
             'created_at'                        => now(),
-            'created_by'                        => session()->get('suser_id'),
+            'created_by'                        => session()->get('sname').' ('.session()->get('srole').')',
         ];
         
         if ($request->document) {

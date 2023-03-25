@@ -14,12 +14,17 @@ class CourseHeaderController extends Controller
     {
         $data = [
             'c_menu'                            => $this->submenu->select('id', 'title', 'url', 'menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
-            'data'                              => $this->course_header->select('id', 'title', 'picture', 'picture_name', 'rating', 'category_id', 'level_id', 'description')->where('disabled', 0)->get(),
+            'data'                              => $this->course_header->select(
+                                                        'trx_course_header.id', 'trx_course_header_approval.id AS approval_id', 'trx_course_header.title', 'trx_course_header.picture', 'trx_course_header.picture_name', 
+                                                        'trx_course_header.rating', 'trx_course_header.category_id', 'trx_course_header.level_id', 'trx_course_header.description', 'trx_course_header.created_at', 
+                                                        'trx_course_header.created_by', 'trx_course_header.updated_at', 'trx_course_header.updated_by'
+                                                    )->leftJoin('trx_course_header_approval', 'trx_course_header_approval.course_header_id', '=', 'trx_course_header.id', 'AND', 'trx_course_header_approval.disabled', '0')
+                                                    ->where('trx_course_header.disabled', 0)
+                                                    ->orderBy('trx_course_header.id')->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0) abort(403);
-        dd($data['data'][3]->course_header_approval);
 
         return view('admin.management.course_header.index', $data);
     }
@@ -61,7 +66,7 @@ class CourseHeaderController extends Controller
             'level_id'                          => $request->level,
             'description'                       => $request->description,
             'created_at'                        => now(),
-            'created_by'                        => session()->get('suser_id'),
+            'created_by'                        => session()->get('sname').' ('.session()->get('srole').')',
         ];
         
         if (session()->get('srole') == 'adm') {
@@ -137,7 +142,7 @@ class CourseHeaderController extends Controller
     public function show($id)
     {
         $data = [
-            'c_menu'                            => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
+            'c_menu'                            => $this->submenu->select('id', 'title', 'url', 'menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
             'data'                              => $this->course_detail->select('id', 'title', 'description')->where('disabled', 0)->where('course_header_id', $id)->get(),
             'detail'                            => $this->course_header->select('id', 'title', 'course_teacher_id', 'category_id', 'level_id', 'description', 'duration', 'picture', 'picture_name')->where('id', $id)->where('disabled', 0)->first(),
         ];
@@ -156,7 +161,13 @@ class CourseHeaderController extends Controller
             'course_header_approval'            => $this->course_header_approval->select('id', 'course_header_id')->where('course_header_id', $id)->where('disabled', 0)->first(),
             'data'                              => $this->course_detail->select('id', 'title', 'description')->where('disabled', 0)->where('course_header_id', $id)->get(),
             'levels'                            => $this->level->select('id', 'name')->where('disabled', 0)->get(),
-            'detail'                            => $this->course_header->select('id', 'title', 'course_teacher_id', 'category_id', 'level_id', 'description', 'duration', 'picture', 'picture_name')->where('id', $id)->where('disabled', 0)->first(),
+            // 'detail'                            => $this->course_header->select('id', 'title', 'course_teacher_id', 'category_id', 'level_id', 'description', 'duration', 'picture', 'picture_name')->where('id', $id)->where('disabled', 0)->first(),
+            'detail'                            => $this->course_header->select(
+                                                        'trx_course_header.id', 'trx_course_header_approval.id AS approval_id', 'trx_course_header.title', 'trx_course_header.course_teacher_id', 
+                                                        'trx_course_header.category_id', 'trx_course_header.level_id', 'trx_course_header.description', 'trx_course_header.duration', 
+                                                        'trx_course_header.picture', 'trx_course_header.picture_name'
+                                                    )->leftJoin('trx_course_header_approval', 'trx_course_header_approval.course_header_id', '=', 'trx_course_header.id', 'AND', 'trx_course_header_approval.disabled', '0')
+                                                    ->where('trx_course_header.disabled', 0)->where('trx_course_header.id', $id)->first(),
             'doctors'                           => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('role', 'tec')->get(),
             'doctor'                            => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('id', session()->get('suser_id'))->first(),
         ];
@@ -183,7 +194,7 @@ class CourseHeaderController extends Controller
             'level_id'                          => $request->level,
             'description'                       => $request->description,
             'updated_at'                        => now(),
-            'updated_by'                        => session()->get('suser_id'),
+            'updated_by'                        => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         if (session()->get('srole') == 'adm') {
@@ -234,7 +245,7 @@ class CourseHeaderController extends Controller
         $data = [
             'disabled'                          => 1,
             'updated_at'                        => now(),
-            'updated_by'                        => session()->get('suser_id'),
+            'updated_by'                        => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         if (session()->get('srole') == 'adm') {
