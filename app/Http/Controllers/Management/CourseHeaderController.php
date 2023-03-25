@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\{ File, Hash };
 
 class CourseHeaderController extends Controller
 {
-    protected $path = '/admin/course-header';
+    protected $path         = '/admin/course-header';
+    protected $path_detail  = '/admin/course-detail';
 
     public function index()
     {
@@ -75,9 +76,10 @@ class CourseHeaderController extends Controller
                 $extension = $request->picture->getClientOriginalExtension();  // Get Extension
                 $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
                 (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
-                    : $filePath = $file->storeAs('storage/production/pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                    : $filePath = $file->storeAs('storage/pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/', $filePath);  
                 $data += [
+                    'duration'                  => $this->getID3->analyze($request->video)['playtime_seconds'],
                     'picture'                   => $filePath,
                     'picture_name'              => $fileName,
                 ]; 
@@ -90,7 +92,7 @@ class CourseHeaderController extends Controller
                 'course_header_id'              => $header_id,
                 'description'                   => $request->description_detail,
                 'created_at'                    => now(),
-                'created_by'                    => session()->get('suser_id'),
+                'created_by'                    => session()->get('sname').' ('.session()->get('srole').')',
             ];
     
             if ($request->video) {
@@ -98,9 +100,11 @@ class CourseHeaderController extends Controller
                 $extension = $request->video->getClientOriginalExtension();  // Get Extension
                 $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
                 (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
-                    : $filePath = $file->storeAs('storage/production/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                    : $filePath = $file->storeAs('storage/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/videos', $filePath);  
                 $data += [
+                    'duration'                  => $this->getID3->analyze($request->video)['playtime_seconds'],
+                    'playtime'                  => $this->getID3->analyze($request->video)['playtime_string'],
                     'video'                     => $filePath,
                     'video_name'                => $fileName,
                 ]; 
@@ -113,7 +117,7 @@ class CourseHeaderController extends Controller
                 'course_detail_id'              => $detail_id,
                 'description'                   => $request->description_document,
                 'created_at'                    => now(),
-                'created_by'                    => session()->get('suser_id'),
+                'created_by'                    => session()->get('sname').' ('.session()->get('srole').')',
             ];
     
             if ($request->title_document && $request->document) {
@@ -122,7 +126,7 @@ class CourseHeaderController extends Controller
                     $extension = $request->document->getClientOriginalExtension();  // Get Extension
                     $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
                     (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
-                        : $filePath = $file->storeAs('storage/production/documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                        : $filePath = $file->storeAs('storage/documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                     // $file->move(storage_path().'/documents', $filePath);  
                     $data += [
                         'file'                  => $filePath,
@@ -132,11 +136,79 @@ class CourseHeaderController extends Controller
         
                 $this->course_detail_document->insert($data);
             }
+
+            return redirect($this->path.'/'.$header_id.'/edit')->with('status', 'Data Berhasil Ditambahkan.');
+
         } else {
 
-        }
+            if ($request->picture) {
+                $file = $request->file('picture');
+                $extension = $request->picture->getClientOriginalExtension();  // Get Extension
+                $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
+                (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
+                    : $filePath = $file->storeAs('storage/pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                // $file->move(storage_path().'/', $filePath);  
+                $data += [
+                    'duration'                  => $this->getID3->analyze($request->video)['playtime_seconds'],
+                    'picture'                   => $filePath,
+                    'picture_name'              => $fileName,
+                ]; 
+            }
+    
+            $header_id = $this->course_header_approval->insertGetId($data);
+    
+            $data = [
+                'title'                         => $request->title_detail,
+                'course_header_id'              => $header_id,
+                'description'                   => $request->description_detail,
+                'created_at'                    => now(),
+                'created_by'                    => session()->get('sname').' ('.session()->get('srole').')',
+            ];
+    
+            if ($request->video) {
+                $file = $request->file('video');
+                $extension = $request->video->getClientOriginalExtension();  // Get Extension
+                $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
+                (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
+                    : $filePath = $file->storeAs('storage/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                // $file->move(storage_path().'/videos', $filePath);  
+                $data += [
+                    'duration'                  => $this->getID3->analyze($request->video)['playtime_seconds'],
+                    'playtime'                  => $this->getID3->analyze($request->video)['playtime_string'],
+                    'video'                     => $filePath,
+                    'video_name'                => $fileName,
+                ]; 
+            }
+    
+            $detail_id = $this->course_detail_approval->insertGetId($data);
+    
+            $data = [
+                'title'                         => $request->title_document,
+                'course_detail_id'              => $detail_id,
+                'description'                   => $request->description_document,
+                'created_at'                    => now(),
+                'created_by'                    => session()->get('sname').' ('.session()->get('srole').')',
+            ];
+    
+            if ($request->title_document && $request->document) {
+                if ($request->document) {
+                    $file = $request->file('document');
+                    $extension = $request->document->getClientOriginalExtension();  // Get Extension
+                    $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
+                    (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
+                        : $filePath = $file->storeAs('storage/documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                    // $file->move(storage_path().'/documents', $filePath);  
+                    $data += [
+                        'file'                  => $filePath,
+                        'file_name'             => $fileName,
+                    ]; 
+                }
+        
+                $this->course_detail_document_approval->insert($data);
+            }
 
-        return redirect($this->path.'/'.$header_id.'/edit')->with('status', 'Data Berhasil Ditambahkan.');
+            return redirect($this->path)->with('status', 'Data yang Ditambahkan Menunggu Approval.');
+        }
     }
 
     public function show($id)
@@ -157,6 +229,7 @@ class CourseHeaderController extends Controller
     {
         $data = [
             'c_menu'                            => $this->submenu->select('id', 'title', 'url', 'menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
+            'd_menu'                            => $this->submenu->select('id', 'title', 'url', 'menu_id')->where('disabled', 0)->where('url', $this->path_detail)->first(),
             'categories'                        => $this->category->select('id', 'name')->where('disabled', 0)->get(),
             'course_header_approval'            => $this->course_header_approval->select('id', 'course_header_id')->where('course_header_id', $id)->where('disabled', 0)->first(),
             'data'                              => $this->course_detail->select('id', 'title', 'description')->where('disabled', 0)->where('course_header_id', $id)->get(),
@@ -171,8 +244,12 @@ class CourseHeaderController extends Controller
             'doctors'                           => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('role', 'tec')->get(),
             'doctor'                            => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('id', session()->get('suser_id'))->first(),
         ];
-        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
-            ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first();
+        $data += [
+            'access'                            => $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
+                                                    ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first(),
+            'detail_access'                     => $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
+                                                    ->where('role', session()->get('srole'))->where('submenu_id', $data['d_menu']->id)->first(),
+        ];
         if ($data['access']->view == 0 || $data['access']->edit == 0) abort(403);
 
         return view('admin.management.course_header.edit', $data);
@@ -204,7 +281,7 @@ class CourseHeaderController extends Controller
                 $extension = $request->picture->getClientOriginalExtension();  // Get Extension
                 $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
                 (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
-                    : $filePath = $file->storeAs('storage/production/pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                    : $filePath = $file->storeAs('storage/pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/pictures', $filePath);  
                 $data += [
                     'picture'                   => $filePath,
@@ -226,7 +303,7 @@ class CourseHeaderController extends Controller
                 $extension = $request->picture->getClientOriginalExtension();  // Get Extension
                 $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
                 (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('approval/pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
-                    : $filePath = $file->storeAs('storage/production/approval/pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                    : $filePath = $file->storeAs('storage/approval/pictures/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/pictures', $filePath);  
                 $data += [
                     'picture'                   => $filePath,

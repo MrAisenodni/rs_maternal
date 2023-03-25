@@ -1,20 +1,10 @@
 @extends('layouts.main')
 
-@section('title', $c_menu->menu->title)
+@section('title', 'Detail Materi')
 
 @section('styles')
-    {{-- Select2 --}}
-    <link href="{{ asset('/assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
-
-    {{-- Quill Theme --}}
-    <link type="text/css" href="{{ asset('/assets/css/quill.css') }}" rel="stylesheet">
-    
     {{-- Data Table --}}
     <link href="{{ asset('/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
-
-    {{-- Sweet Alert --}}
-    <link href="{{ asset('/assets/plugins/sweet-alert/sweetalert2.min.css') }}" rel="stylesheet" />
 @endsection
     
 @section('content')
@@ -96,8 +86,7 @@
                                             <div class="col-3">
                                                 <label class="form-label" for="picture">Foto Materi <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
-                                                {{-- <img class="" src="{{ asset($detail->picture) }}" alt="" style="max-width:100%;"> --}}
-                                                <img id="auto_preview" class="" src="{{ asset($detail->picture) }}" alt="" style="max-width:100%;">
+                                                <img id="show_picture" class="img-fluid" src="{{ asset('/storage/'.$detail->picture) }}" alt="" style="max-width:100%;">
                                             </div>
                                             <div class="col-9">
                                                 <label class="form-label" for="description">Deskripsi</label>
@@ -129,7 +118,7 @@
                         <div class="card-body">
                             <div class="media align-items-center mb-headings">
                                 <div class="media-body">
-                                    <h1 class="h2">{{ $c_menu->title }}</h1>
+                                    <h1 class="h2">Daftar Pembelajaran</h1>
                                 </div>
                             </div><hr>
                             <div class="table-responsive">
@@ -169,20 +158,8 @@
 @endsection
 
 @section('scripts')
-    {{-- Select2 --}}
-    <script src="{{ asset('/assets/plugins/select2/js/select2.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/form-select2.js') }}"></script>
-
-    {{-- Quill Theme --}}
-    <script src="{{ asset('/assets/vendor/quill.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/quill.js') }}"></script>
-
     {{-- Data Table --}}
     <script src="{{ asset('/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ asset('/assets/js/table-datatable.js') }}"></script>
-    
-    {{-- Sweet Alert --}}
-    <script src="{{ asset('/assets/plugins/sweet-alert/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/sweet-alert.init.js') }}"></script>
 @endsection

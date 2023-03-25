@@ -15,6 +15,8 @@ class CreateTrxCourseDetailApproval extends Migration
             $table->text('description')->nullable();
             $table->text('video')->nullable();
             $table->string('video_name')->nullable();
+            $table->string('playtime')->nullable();
+            $table->decimal('duration')->nullable(); 
             
             // Struktur Baku Approval
             $table->unsignedInteger('course_detail_id')->nullable();

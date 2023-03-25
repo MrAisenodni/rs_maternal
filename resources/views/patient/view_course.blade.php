@@ -19,10 +19,7 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="embed-responsive embed-responsive-16by9">
-                            {{-- <video class="embed-responsive-item" allow="fullscreen" frameBorder="0" width="100%" height="700" controls controlsList="nodownload">
-                                <source :src="{{ $detail->video }}" />
-                            </video> --}}
-                            <iframe class="embed-responsive-item" src="{{ $detail->video }}" allowfullscreen=""></iframe>
+                            <iframe class="embed-responsive-item" src="{{ asset('/storage/'.$detail->video) }}" allowfullscreen=""></iframe>
                         </div>
                         <div class="card-body">
                             {!! $detail->description !!}
@@ -42,7 +39,7 @@
                                             <a @if ($item->id == $detail->id) class="text-white" @endif href="{{ $c_menu->url }}/{{ $item->course_header_id }}/{{ $item->id }}">{{ $item->title }}</a>
                                         </div>
                                         <div class="media-right">
-                                            <small class="text-muted-light">{{ $getID3->analyze(substr($item->video, 1))['playtime_string'] }}</small>
+                                            <small class="text-muted-light">{{ $item->playtime }}</small>
                                         </div>
                                     </div>
                                 </li>
@@ -65,7 +62,7 @@
                         <div class="card-header">
                             <div class="media align-items-center">
                                 <div class="media-left">
-                                    <img src="assets/images/people/110/guy-6.jpg"
+                                    <img src="{{ asset('assets/images/people/110/guy-6.jpg') }}"
                                          alt="About Adrian"
                                          width="50"
                                          class="rounded-circle">

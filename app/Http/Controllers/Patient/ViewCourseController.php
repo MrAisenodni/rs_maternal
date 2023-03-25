@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Patient;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use getID3;
 
 class ViewCourseController extends Controller
 {
@@ -12,13 +11,10 @@ class ViewCourseController extends Controller
 
     public function index($id, $ids)
     {
-        $getID3 = new getID3;
-
         $data = [
             'c_menu'    => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
-            'data'      => $this->course_header->select('id', 'title', 'picture', 'rating', 'category_id', 'level_id', 'description', 'duration')->where('id', $id)->where('disabled', 0)->first(),
-            'detail'    => $this->course_detail->select('id', 'course_header_id', 'title', 'video', 'description')->where('course_header_id', $id)->where('id', $ids)->where('disabled', 0)->first(),
-            'getID3'    => $getID3,
+            'data'      => $this->course_header->select('id', 'title', 'picture', 'picture_name', 'rating', 'category_id', 'level_id', 'description', 'duration')->where('id', $id)->where('disabled', 0)->first(),
+            'detail'    => $this->course_detail->select('id', 'course_header_id', 'title', 'video', 'video_name', 'description', 'playtime', 'duration')->where('course_header_id', $id)->where('id', $ids)->where('disabled', 0)->first(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();

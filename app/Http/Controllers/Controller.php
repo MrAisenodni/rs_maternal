@@ -34,6 +34,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use getID3;
 
 class Controller extends BaseController
 {
@@ -68,5 +69,8 @@ class Controller extends BaseController
         $this->course_detail_document_approval  = new CourseDetailDocumentApproval();
         $this->course_header                    = new CourseHeader();
         $this->course_header_approval           = new CourseHeaderApproval();
+
+        // Additional plugins
+        $this->getID3                           = new getID3;
     }
 }

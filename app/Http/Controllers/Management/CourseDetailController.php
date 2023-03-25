@@ -47,14 +47,23 @@ class CourseDetailController extends Controller
                     : $filePath = $file->storeAs('storage/production/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/videos', $filePath);  
                 $data += [
+                    'duration'                  => $this->getID3->analyze($request->video)['playtime_seconds'],
+                    'playtime'                  => $this->getID3->analyze($request->video)['playtime_string'],
                     'video'                     => $filePath,
                     'video_name'                => $fileName,
-                ]; 
+                ];
             }
+
+            $this->course_detail->insert($data);
+            $sum = $this->course_detail->selectRaw('SUM(duration) AS duration')->where('course_header_id', $request->id)->where('disabled', 0)->first();
+            $data = [
+                'duration'                      => $sum->duration,
+                'updated_at'                    => now(),
+                'updated_by'                    => session()->get('sname').' ('.session()->get('srole').')',
+            ];
+            $this->course_header->where('id', $request->id)->update($data);
         } else {
         }
-
-        $this->course_detail->insert($data);
 
         return redirect('/admin/course-header/'.$request->id.'/edit')->with('status', 'Data Berhasil Ditambahkan.');
     }
@@ -115,12 +124,21 @@ class CourseDetailController extends Controller
                     : $filePath = $file->storeAs('storage/production/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/videos', $filePath);  
                 $data += [
+                    'duration'                  => $this->getID3->analyze($request->video)['playtime_seconds'],
+                    'playtime'                  => $this->getID3->analyze($request->video)['playtime_string'],
                     'video'                     => $filePath,
                     'video_name'                => $fileName,
                 ]; 
             }
     
             $this->course_detail->where('id', $id)->update($data);
+            $sum = $this->course_detail->selectRaw('SUM(duration) AS duration')->where('course_header_id', $request->id)->where('disabled', 0)->first();
+            $data = [
+                'duration'                      => $sum->duration,
+                'updated_at'                    => now(),
+                'updated_by'                    => session()->get('sname').' ('.session()->get('srole').')',
+            ];
+            $this->course_header->where('id', $request->id)->update($data);
         } else {
 
         }
@@ -128,15 +146,26 @@ class CourseDetailController extends Controller
         return redirect(url()->previous())->with('status', 'Data Berhasil Diubah.');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $data = [
-            'disabled'                          => 1,
-            'updated_at'                        => now(),
-            'updated_by'                        => session()->get('sname').' ('.session()->get('srole').')',
-        ];
+        if (session()->get('srole') == 'adm') {
+            $data = [
+                'disabled'                          => 1,
+                'updated_at'                        => now(),
+                'updated_by'                        => session()->get('sname').' ('.session()->get('srole').')',
+            ];
+    
+            $this->course_detail->where('id', $id)->update($data);
+            $sum = $this->course_detail->selectRaw('SUM(duration) AS duration')->where('course_header_id', $request->id)->where('disabled', 0)->first();
+            $data = [
+                'duration'                      => $sum->duration,
+                'updated_at'                    => now(),
+                'updated_by'                    => session()->get('sname').' ('.session()->get('srole').')',
+            ];
+            $this->course_header->where('id', $request->id)->update($data);
+        } else {
 
-        $this->course_detail->where('id', $id)->update($data);
+        }
 
         return redirect(url()->previous())->with('status', 'Data Berhasil Dihapus.');
     }

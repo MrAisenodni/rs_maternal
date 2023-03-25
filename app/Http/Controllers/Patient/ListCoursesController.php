@@ -14,7 +14,7 @@ class ListCoursesController extends Controller
         $search = $request->search;
 
         $data = [
-            'c_menu'    => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
+            'c_menu'    => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
             'data'      => $this->course_header->select('id', 'title', 'picture', 'rating', 'category_id', 'level_id', 'description')->where('disabled', 0)->where('title', 'LIKE', '%'.$search.'%')->paginate(4),
             'search'    => $search,
         ];

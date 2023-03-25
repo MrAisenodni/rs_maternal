@@ -15,7 +15,7 @@ class CourseDetailSeeder extends CsvSeeder
         $this->defaults = [
             'created_by'    => 'Migrasi'
         ];
-        $this->mapping = ['id', 'course_header_id', 'title', 'video', 'description'];
+        $this->mapping = ['id', 'course_header_id', 'title', 'video', 'video_name', 'description', 'playtime', 'duration'];
         $this->header = false;
     }
 
