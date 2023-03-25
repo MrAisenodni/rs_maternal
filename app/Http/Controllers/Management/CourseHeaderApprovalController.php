@@ -14,29 +14,13 @@ class CourseHeaderApprovalController extends Controller
     {
         $data = [
             'c_menu'                            => $this->submenu->select('id', 'title', 'url', 'menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
-            'data'                              => $this->course_header_approval->select('id', 'title', 'course_header_id', 'category_id', 'level_id', 'action', 'created_at', 'created_by', 'updated_at', 'updated_by')->where('disabled', 0)->get(),
+            'data'                              => $this->course_header_approval->select('id', 'title', 'course_header_id', 'category_id', 'level_id', 'action', 'created_at', 'created_by', 'updated_at', 'updated_by')->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0) abort(403);
 
         return view('admin.management.course_header_approval.index', $data);
-    }
-
-    public function create()
-    {
-        $data = [
-            'c_menu'                            => $this->submenu->select('id', 'title', 'url', 'menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
-            'categories'                        => $this->category->select('id', 'name')->where('disabled', 0)->get(),
-            'levels'                            => $this->level->select('id', 'name')->where('disabled', 0)->get(),
-            'doctors'                           => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('role', 'tec')->get(),
-            'doctor'                            => $this->user->select('id', 'nik', 'full_name')->where('disabled', 0)->where('id', session()->get('suser_id'))->first(),
-        ];
-        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
-            ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first();
-        if ($data['access']->view == 0 || $data['access']->add == 0) abort(403);
-
-        return view('admin.management.course_header.create', $data);
     }
 
     public function store(Request $request)
@@ -206,16 +190,45 @@ class CourseHeaderApprovalController extends Controller
 
     public function show($id)
     {
-        $data = [
-            'c_menu'                            => $this->submenu->select('id', 'title', 'url', 'menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
-            'data'                              => $this->course_detail->select('id', 'title', 'description')->where('disabled', 0)->where('course_header_id', $id)->get(),
-            'detail'                            => $this->course_header->select('id', 'title', 'course_teacher_id', 'category_id', 'level_id', 'description', 'duration', 'picture', 'picture_name')->where('id', $id)->where('disabled', 0)->first(),
-        ];
+        $data['c_menu'] = $this->submenu->select('id', 'title', 'url', 'menu_id')->where('disabled', 0)->where('url', $this->path)->first();
+        $check = $this->course_header_approval->select('action')->where('id', $id)->first();
+
+        ($check->action == 'add') 
+            ? $data['detail'] = $this->course_header_approval->select(
+                    // Course Header Approval
+                    'trx_course_header_approval.id', 'trx_course_header_approval.title', 'trx_course_header_approval.course_teacher_id', 
+                    'trx_course_header_approval.category_id', 'trx_course_header_approval.level_id', 'trx_course_header_approval.description',
+                    'trx_course_header_approval.duration', 'trx_course_header_approval.picture', 'trx_course_header_approval.picture_name',
+                    'trx_course_header_approval.action', 'trx_course_header_approval.course_header_id', 
+                    'trx_course_header_approval.created_by', 'trx_course_header_approval.created_at',
+                    // Course Detail Approval
+                    'trx_course_detail_approval.id AS course_detail_approval_id', 'trx_course_detail_approval.title AS course_detail_title', 
+                    'trx_course_detail_approval.description AS course_detail_description', 'trx_course_detail_approval.video', 
+                    'trx_course_detail_approval.video_name', 'trx_course_detail_approval.playtime', 
+                    'trx_course_detail_approval.duration AS course_detail_duration', 'trx_course_detail_approval.action',
+                    'trx_course_detail_approval.course_detail_id',
+                    'trx_course_detail_approval.created_by', 'trx_course_detail_approval.created_at',
+                    // Course Detail Document Approval
+                    'trx_course_detail_document_approval.id AS course_detail_document_approval_id', 
+                    'trx_course_detail_document_approval.title AS course_detail_document_title', 
+                    'trx_course_detail_document_approval.description AS course_detail_document_description', 
+                    'trx_course_detail_document_approval.action',
+                    'trx_course_detail_document_approval.course_detail_document_id',
+                    'trx_course_detail_document_approval.created_by', 'trx_course_detail_document_approval.created_at'
+                )->join('trx_course_detail_approval', 'trx_course_detail_approval.course_header_id', '=', 'trx_course_header_approval.id')
+                ->join('trx_course_detail_document_approval', 'trx_course_detail_document_approval.course_detail_id', '=', 'trx_course_detail_approval.id')
+                ->where('trx_course_header_approval.id', $id)->first()
+            : $data['detail'] = $this->course_header_approval->select(
+                    'id', 'title', 'course_teacher_id', 'category_id', 'level_id', 'description', 'duration', 'picture', 
+                    'picture_name', 'action', 'course_header_id', 'created_at', 'created_by', 'updated_at', 'updated_by',
+                    'disabled'
+                )->where('id', $id)->first();
+
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
         
-        return view('admin.management.course_header.show', $data);
+        return view('admin.management.course_header_approval.show', $data);
     }
 
     public function edit($id)

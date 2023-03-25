@@ -21,6 +21,8 @@ class CreateMstDistrict extends Migration
             $table->dateTime('created_at')->default(now());
             $table->string('updated_by')->nullable();
             $table->dateTime('updated_at')->nullable();
+            $table->string('approved_by')->nullable();
+            $table->dateTime('approved_at')->nullable();
         });
     }
 

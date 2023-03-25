@@ -31,6 +31,11 @@ class CourseHeaderApproval extends Model
         return $this->belongsTo(User::class, 'course_teacher_id', 'id')->select('id', 'nik', 'full_name', 'biography', 'facebook', 'twitter', 'instagram', 'github', 'picture', 'picture_name')->where('disabled', 0)->where('role', 'tec');
     }
 
+    public function course_header()
+    {
+        return $this->belongsTo(CourseHeader::class, 'course_header_id', 'id')->where('disabled', 0);
+    }
+
     public function course_detail()
     {
         return $this->hasMany(CourseDetail::class, 'course_header_id', 'id')->select('id', 'course_header_id', 'title', 'video', 'description')->where('disabled', 0);

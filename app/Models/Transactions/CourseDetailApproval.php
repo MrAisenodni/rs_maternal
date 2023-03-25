@@ -15,6 +15,10 @@ class CourseDetailApproval extends Model
     {
         return $this->belongsTo(CourseHeader::class)->where('disabled', 0);
     }
+    public function course_header_approval()
+    {
+        return $this->belongsTo(CourseHeader::class, 'course_header_id', 'id')->where('disabled', 0);
+    }
 
     public function course_detail_document()
     {

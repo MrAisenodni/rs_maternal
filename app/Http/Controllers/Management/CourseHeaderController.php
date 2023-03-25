@@ -327,15 +327,26 @@ class CourseHeaderController extends Controller
 
         if (session()->get('srole') == 'adm') {
             $this->course_header->where('id', $id)->update($data);
+
+            return redirect($this->path)->with('status', 'Data Berhasil Dihapus.');
         } else {
+            $check = $this->course_header->where('id', $id)->where('disabled', 0)->first();
+
             $data += [
+                'title'                         => $check->title,
+                'course_teacher_id'             => $check->course_teacher_id,
+                'category_id'                   => $check->category_id,
+                'level_id'                      => $check->level_id,
+                'description'                   => $check->description,
+                'picture'                       => $check->picture,
+                'picture_name'                  => $check->picture_name,
                 'action'                        => 'delete',
                 'course_header_id'              => $id,
             ];
 
             $this->course_header_approval->insert($data);
-        }
 
-        return redirect($this->path)->with('status', 'Data Berhasil Dihapus.');
+            return redirect($this->path)->with('status', 'Data yang Dihapus Menunggu Approval.');
+        }
     }
 }

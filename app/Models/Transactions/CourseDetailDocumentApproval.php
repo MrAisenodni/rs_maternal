@@ -11,8 +11,12 @@ class CourseDetailDocumentApproval extends Model
 
     protected $table = 'trx_course_detail_document_approval';
 
-    public function course_header()
+    public function course_detail()
     {
         return $this->belongsTo(CourseDetail::class)->where('disabled', 0);
+    }
+    public function course_detail_approval()
+    {
+        return $this->belongsTo(CourseDetail::class, 'course_detail_id', 'id')->where('disabled', 0);
     }
 }
