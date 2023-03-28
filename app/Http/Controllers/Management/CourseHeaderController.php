@@ -57,7 +57,7 @@ class CourseHeaderController extends Controller
             'picture'                           => 'required|max:5140|file|mimes:png,jpg,jpeg',
             'title_detail'                      => 'required',
             'title_document'                    => 'required_with:document',
-            'video'                             => 'required|max:257000|file|mimes:mp4,mkv',
+            'video'                             => 'required|max:514000|file|mimes:mp4,mkv',
         ]);
         
         $data = [

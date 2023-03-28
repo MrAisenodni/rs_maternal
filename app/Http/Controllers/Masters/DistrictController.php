@@ -7,20 +7,20 @@ use Illuminate\Http\Request;
 
 class DistrictController extends Controller
 {
-    protected $path = '/master/kecamatan';
+    protected $path = '/master/district';
 
     public function index()
     {
         $data = [
-            'menu'          => $this->submenu->select('id', 'title', 'menu_id', 'url')->where('url', $this->path)->first(),
-            'data'          => $this->district->select('id', 'code', 'name', 'city_id')->where('disabled', 0)->get(),
-            'cities'     => $this->city->select('id', 'code', 'name')->where('disabled', 0)->get(),
+            'c_menu'            => $this->menu->select('id', 'title', 'main_menu_id', 'url')->where('url', $this->path)->first(),
+            'data'              => $this->district->select('id', 'code', 'name', 'city_id')->where('disabled', 0)->get(),
+            'cities'            => $this->city->select('id', 'code', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0) abort(403);
 
-        return view('masters.district.index', $data);
+        return view('admin.masters.district.index', $data);
     }
 
     public function store(Request $request)
@@ -30,15 +30,15 @@ class DistrictController extends Controller
         $validate = $request->validate([
             'code'              => 'required|unique:mst_district,code,1,disabled',
             'name'              => 'required',
-            'city'           => 'required',
+            'city'              => 'required',
         ]);
 
         $data = [
-            'code'          => $input['code'],
-            'name'          => $input['name'],
-            'city_id'    => $input['city'],
-            'created_at'    => now(),
-            'created_by'    => session()->get('suser_id'),
+            'code'              => $input['code'],
+            'name'              => $input['name'],
+            'city_id'           => $input['city'],
+            'created_at'        => now(),
+            'created_by'        => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         $this->district->insert($data);
@@ -49,31 +49,31 @@ class DistrictController extends Controller
     public function show($id)
     {
         $data = [
-            'menu'          => $this->submenu->select('id', 'title', 'menu_id', 'url')->where('url', $this->path)->first(),
-            'detail'        => $this->district->select('id', 'code', 'name', 'city_id')->where('id', $id)->where('disabled', 0)->first(),
-            'data'          => $this->district->select('id', 'code', 'name', 'city_id')->where('disabled', 0)->get(),
-            'cities'     => $this->city->select('id', 'code', 'name')->where('disabled', 0)->get(),
+            'c_menu'            => $this->menu->select('id', 'title', 'main_menu_id', 'url')->where('url', $this->path)->first(),
+            'detail'            => $this->district->select('id', 'code', 'name', 'city_id')->where('id', $id)->where('disabled', 0)->first(),
+            'data'              => $this->district->select('id', 'code', 'name', 'city_id')->where('disabled', 0)->get(),
+            'cities'            => $this->city->select('id', 'code', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
         
-        return view('masters.district.index', $data);
+        return view('admin.masters.district.index', $data);
     }
 
     public function edit($id)
     {
         $data = [
-            'menu'          => $this->submenu->select('id', 'title', 'menu_id', 'url')->where('url', $this->path)->first(),
-            'detail'        => $this->district->select('id', 'code', 'name', 'city_id')->where('id', $id)->where('disabled', 0)->first(),
-            'data'          => $this->district->select('id', 'code', 'name', 'city_id')->where('disabled', 0)->get(),
-            'cities'     => $this->city->select('id', 'code', 'name')->where('disabled', 0)->get(),
+            'c_menu'            => $this->menu->select('id', 'title', 'main_menu_id', 'url')->where('url', $this->path)->first(),
+            'detail'            => $this->district->select('id', 'code', 'name', 'city_id')->where('id', $id)->where('disabled', 0)->first(),
+            'data'              => $this->district->select('id', 'code', 'name', 'city_id')->where('disabled', 0)->get(),
+            'cities'            => $this->city->select('id', 'code', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->edit == 0) abort(403);
         
-        return view('masters.district.index', $data);
+        return view('admin.masters.district.index', $data);
     }
 
     public function update(Request $request, $id)
@@ -91,7 +91,7 @@ class DistrictController extends Controller
             'name'          => $input['name'],
             'city_id'       => $input['city'],
             'updated_at'    => now(),
-            'updated_by'    => session()->get('suser_id'),
+            'updated_by'    => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         $this->district->where('id', $id)->update($data);
@@ -104,7 +104,7 @@ class DistrictController extends Controller
         $data = [
             'disabled'      => 1,
             'updated_at'    => now(),
-            'updated_by'    => session()->get('suser_id'),
+            'updated_by'    => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         $this->district->where('id', $id)->update($data);

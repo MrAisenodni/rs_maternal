@@ -13,6 +13,6 @@ class District extends Model
 
     public function city() 
     {
-        return $this->belongsTo(City::class)->select('id', 'name')->where('disabled', 0);
+        return $this->belongsTo(City::class)->select('id', 'code', 'name')->where('disabled', 0);
     }
 }

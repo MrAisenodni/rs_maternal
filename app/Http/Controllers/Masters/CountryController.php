@@ -35,7 +35,7 @@ class CountryController extends Controller
             'code'              => $input['code'],
             'name'              => $input['name'],
             'created_at'        => now(),
-            'created_by'        => session()->get('suser_id'),
+            'created_by'        => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         $this->country->insert($data);
@@ -84,7 +84,7 @@ class CountryController extends Controller
             'code'          => $input['code'],
             'name'          => $input['name'],
             'updated_at'    => now(),
-            'updated_by'    => session()->get('suser_id'),
+            'updated_by'    => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         $this->country->where('id', $id)->update($data);
@@ -97,7 +97,7 @@ class CountryController extends Controller
         $data = [
             'disabled'      => 1,
             'updated_at'    => now(),
-            'updated_by'    => session()->get('suser_id'),
+            'updated_by'    => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         $this->country->where('id', $id)->update($data);

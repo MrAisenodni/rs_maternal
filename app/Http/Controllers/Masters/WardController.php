@@ -38,7 +38,7 @@ class WardController extends Controller
             'name'          => $input['name'],
             'district_id'   => $input['district'],
             'created_at'    => now(),
-            'created_by'    => session()->get('suser_id'),
+            'created_by'    => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         $this->ward->insert($data);
@@ -91,7 +91,7 @@ class WardController extends Controller
             'name'          => $input['name'],
             'district_id'   => $input['district'],
             'updated_at'    => now(),
-            'updated_by'    => session()->get('suser_id'),
+            'updated_by'    => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         $this->ward->where('id', $id)->update($data);
@@ -104,7 +104,7 @@ class WardController extends Controller
         $data = [
             'disabled'      => 1,
             'updated_at'    => now(),
-            'updated_by'    => session()->get('suser_id'),
+            'updated_by'    => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         $this->ward->where('id', $id)->update($data);

@@ -41,6 +41,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 5%">No</th>
+                                                    <th>Kode</th>
                                                     <th>Nama</th>
                                                     <th>Aksi</th>
                                                 </tr>
@@ -50,6 +51,7 @@
                                                     @foreach ($data as $item)
                                                         <tr data-id="{{ $item->id }}">
                                                             <td class="text-center">{{ $loop->iteration }}</td>
+                                                            <td>{{ $item->code }}</td>
                                                             <td>{{ $item->name }}</td>
                                                             <td class="text-center" style="width: 20%">
                                                                 @if ($access->edit == 1)

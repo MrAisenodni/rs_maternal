@@ -55,7 +55,7 @@ class ProviderController extends Controller
             'owner_address_3'       => $input['owner_address_3'],
             'owner_ward_id'         => $input['owner_ward'],
             'created_at'            => now(),
-            'created_by'            => session()->get('suser_id'),
+            'created_by'            => session()->get('sname').' ('.session()->get('srole').')',
         ];
         // dd($data);
 

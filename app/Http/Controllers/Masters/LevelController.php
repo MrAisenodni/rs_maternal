@@ -26,7 +26,7 @@ class LevelController extends Controller
         $data = [
             'name'          => $input['name'],
             'created_at'    => now(),
-            'created_by'    => session()->get('suser_id'),
+            'created_by'    => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         $this->level->insert($data);
@@ -63,7 +63,7 @@ class LevelController extends Controller
         $data = [
             'name'          => $input['name'],
             'updated_at'    => now(),
-            'updated_by'    => session()->get('suser_id'),
+            'updated_by'    => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         $this->level->where('id', $id)->update($data);
@@ -76,7 +76,7 @@ class LevelController extends Controller
         $data = [
             'disabled'      => 1,
             'updated_at'    => now(),
-            'updated_by'    => session()->get('suser_id'),
+            'updated_by'    => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
         $this->level->where('id', $id)->update($data);

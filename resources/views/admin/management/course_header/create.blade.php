@@ -8,7 +8,6 @@
     <link href="{{ asset('/assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
 
     {{-- Quill Theme --}}
-    <!-- Quill Theme -->
     <link type="text/css" href="{{ asset('/assets/css/quill.css') }}" rel="stylesheet">
 @endsection
     
@@ -111,6 +110,7 @@
                                                 <span class="desc"></span>
                                                 <img id="show_picture" class="img-fluid" src="{{ old('picture') }}" alt="" style="max-width:100%;">
                                                 <input type="file" class="form-control @error('picture') is-invalid @enderror" id="image" name="picture" value="{{ old('picture') }}" onchange="readURLPicture(this)">
+                                                <small class="text-danger">* Maksimal ukuran foto 5 MB</small>
                                                 @error('picture')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -150,6 +150,7 @@
                                                 <label class="form-label" for="video">Upload Video <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
                                                 <input type="file" class="form-control @error('video') is-invalid @enderror" id="video" name="video" value="{{ old('video') }}" onchange="readURLVideo(this)">
+                                                <small class="text-danger">* Maksimal ukuran video 500 MB</small>
                                                 @error('video')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -183,6 +184,7 @@
                                                 <label class="form-label" for="document">Upload Dokumen</label>
                                                 <span class="desc"></span>
                                                 <input type="file" class="form-control @error('document') is-invalid @enderror" id="image" name="document" value="{{ old('document') }}">
+                                                <small class="text-danger">* Maksimal ukuran dokumen 5 MB</small>
                                                 @error('document')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

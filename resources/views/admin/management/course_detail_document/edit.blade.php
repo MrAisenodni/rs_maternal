@@ -74,7 +74,7 @@
                                                 <input type="file" class="form-control @error('document') is-invalid @enderror" id="document" name="document" value="{{ old('document', $detail->file) }}" onchange="readURL(this)">
                                                 <a href="{{ asset('/storage/'.$detail->file) }}">{{ $detail->file_name }}</a>
                                                 @error('document')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
