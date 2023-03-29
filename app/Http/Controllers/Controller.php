@@ -23,12 +23,14 @@ use App\Models\Settings\{
     UserApproval,
 };
 use App\Models\Transactions\{
+    Companion,
     CourseDetail,
     CourseDetailApproval,
     CourseDetailDocument,
     CourseDetailDocumentApproval,
     CourseHeader,
     CourseHeaderApproval,
+    StandardProcess,
 };
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -63,12 +65,14 @@ class Controller extends BaseController
         $this->ward                             = new Ward();
 
         // Global Variabel untuk Transaction
+        $this->companion                        = new Companion();
         $this->course_detail                    = new CourseDetail();
         $this->course_detail_approval           = new CourseDetailApproval();
         $this->course_detail_document           = new CourseDetailDocument();
         $this->course_detail_document_approval  = new CourseDetailDocumentApproval();
         $this->course_header                    = new CourseHeader();
         $this->course_header_approval           = new CourseHeaderApproval();
+        $this->standard_process                 = new StandardProcess();
 
         // Additional plugins
         $this->getID3                           = new getID3;

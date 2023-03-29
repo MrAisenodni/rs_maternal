@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
             Transactions\CourseHeaderSeeder::class,
             Transactions\CourseDetailSeeder::class,
             Transactions\CourseDetailDocumentSeeder::class,
+            Transactions\CompanionSeeder::class,
+            Transactions\StandardProcessSeeder::class,
         ]);
     }
 }

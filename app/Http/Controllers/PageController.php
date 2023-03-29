@@ -13,7 +13,10 @@ class PageController extends Controller
     public function index()
     {
         $data = [
-            'c_menu'    => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
+            'c_menu'                => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
+            'companion'             => $this->companion->select('trx_companion.id', 'trx_companion.title', 'trx_standard_process.description', 'trx_standard_process.standard', 'trx_standard_process.process')
+                                        ->join('trx_standard_process', 'trx_standard_process.companion_id', '=', 'trx_companion.id')
+                                        ->where('trx_companion.disabled', 0)->get(),
         ];
 
         return view('patient.dashboard', $data);
