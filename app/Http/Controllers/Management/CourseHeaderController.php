@@ -52,7 +52,7 @@ class CourseHeaderController extends Controller
             'title'                             => 'required',
             'category'                          => 'required',
             'doctor'                            => 'required',
-            'document'                          => 'required_with:title_document|max:5140|file',
+            'document'                          => 'required_with:title_document|max:51400|file',
             'level'                             => 'required',
             'picture'                           => 'required|max:5140|file|mimes:png,jpg,jpeg',
             'title_detail'                      => 'required',

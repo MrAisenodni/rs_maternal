@@ -21,6 +21,7 @@ use App\Models\Settings\{
     SubMenu,
     User,
     UserApproval,
+    LoginApproval,
 };
 use App\Models\Transactions\{
     Companion,
@@ -46,6 +47,7 @@ class Controller extends BaseController
     {
         // Global Variabel untuk Setting
         $this->login                            = new Login();
+        $this->login_approval                   = new LoginApproval();
         $this->menu                             = new Menu();
         $this->menu_access                      = new MenuAccess();
         $this->provider                         = new Provider();

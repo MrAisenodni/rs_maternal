@@ -4,3 +4,5 @@
 4;Approval;;/admin/course-detail-approval;0;16;1;1
 5;View;;/admin/course-detail-document;0;17;1;1
 6;Approval;;/admin/course-detail-document-approval;0;17;1;1
+7;View;;/setting/user;0;8;1;1
+8;Approval;;/setting/user-approval;0;8;1;1

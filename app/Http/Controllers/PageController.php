@@ -17,14 +17,21 @@ class PageController extends Controller
             'companion'             => $this->companion->select('trx_companion.id', 'trx_companion.title', 'trx_standard_process.description', 'trx_standard_process.standard', 'trx_standard_process.process')
                                         ->join('trx_standard_process', 'trx_standard_process.companion_id', '=', 'trx_companion.id')
                                         ->where('trx_companion.disabled', 0)->get(),
+            'count_user'            => $this->user->selectRaw('COUNT(role) AS count, role')->where('disabled', 0)->where('role', '!=', 'adm')->groupBy('role')->orderBy('role')->get(),
+            'count_video'           => $this->course_detail->select('id')->where('disabled', 0)->count(),
+            'count_document'        => $this->course_detail_document->select('id')->where('disabled', 0)->count(),
         ];
-
+        
         return view('patient.dashboard', $data);
     }
 
     public function registration()
     {
-        return view('registration');
+        $data = [
+            'religions'             => $this->religion->select('id', 'name')->where('disabled', 0)->get(),
+        ];
+
+        return view('registration', $data);
     }
 
     public function store_registration(Request $request)

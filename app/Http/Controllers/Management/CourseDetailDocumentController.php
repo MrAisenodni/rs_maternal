@@ -27,7 +27,7 @@ class CourseDetailDocumentController extends Controller
     {
         $validate = $request->validate([
             'title'                             => 'required',
-            'document'                          => 'required_with:title_document|max:5140|file',
+            'document'                          => 'required_with:title_document|max:51400|file',
         ]);
         
         $data = [
@@ -87,7 +87,7 @@ class CourseDetailDocumentController extends Controller
     {
         $validate = $request->validate([
             'title'                             => 'required',
-            'document'                          => 'required_with:title_document|max:5140|file',
+            'document'                          => 'required_with:title_document|max:51400|file',
         ]);
         
         $data = [

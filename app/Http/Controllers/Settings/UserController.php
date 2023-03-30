@@ -13,11 +13,11 @@ class UserController extends Controller
     public function index()
     {
         $data = [
-            'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
+            'c_menu'        => $this->submenu->select('id', 'title', 'url', 'menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
             'data'          => $this->user->select('id', 'nik', 'full_name', 'gender', 'birth_place', 'birth_date', 'email', 'phone_number', 'home_number', 'address_1', 'address_2', 'address_3', 'religion_id', 'role')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
-            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
+            ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0) abort(403);
 
         return view('admin.settings.user.index', $data);
@@ -26,11 +26,11 @@ class UserController extends Controller
     public function create()
     {
         $data = [
-            'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
+            'c_menu'        => $this->submenu->select('id', 'title', 'url', 'menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
             'religions'     => $this->religion->select('id', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
-            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
+            ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->add == 0) abort(403);
 
         return view('admin.settings.user.create', $data);
@@ -88,11 +88,11 @@ class UserController extends Controller
     public function show($id)
     {
         $data = [
-            'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
+            'c_menu'        => $this->submenu->select('id', 'title', 'url', 'menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
             'detail'        => $this->user->select('id', 'nik', 'full_name', 'gender', 'birth_date', 'birth_place', 'email', 'phone_number', 'home_number', 'address_1', 'address_2', 'address_3', 'religion_id', 'role')->where('disabled', 0)->where('id', $id)->first(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
-            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
+            ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
         
         return view('admin.settings.user.show', $data);
@@ -101,12 +101,12 @@ class UserController extends Controller
     public function edit($id)
     {
         $data = [
-            'c_menu'        => $this->menu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
+            'c_menu'        => $this->submenu->select('id', 'title', 'url', 'menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
             'detail'        => $this->user->select('id', 'nik', 'full_name', 'gender', 'birth_date', 'birth_place', 'email', 'phone_number', 'home_number', 'address_1', 'address_2', 'address_3', 'religion_id', 'role')->where('disabled', 0)->where('id', $id)->first(),
             'religions'     => $this->religion->select('id', 'name')->where('disabled', 0)->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
-            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
+            ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first();
         if ($data['access']->view == 0 || $data['access']->edit == 0) abort(403);
         
         return view('admin.settings.user.edit', $data);

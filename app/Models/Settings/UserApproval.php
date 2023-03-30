@@ -22,6 +22,10 @@ class UserApproval extends Model
 
     public function login()
     {
+        return $this->belongsTo(LoginApproval::class, 'id', 'user_id')->select('id', 'user_id', 'username', 'password')->where('disabled', 0);
+    }
+    public function login_approval()
+    {
         return $this->belongsTo(Login::class, 'id', 'user_id')->select('id', 'user_id', 'username', 'password')->where('disabled', 0);
     }
 }

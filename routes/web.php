@@ -28,6 +28,7 @@ use App\Http\Controllers\Settings\{
     LoginController,
     ProviderController,
     UserController,
+    UserApprovalController,
 };
 use Illuminate\Support\Facades\Route;
 
@@ -92,4 +93,5 @@ Route::middleware('authcheck')->group(function() {
     // Setting
     Route::resource('/setting/provider', ProviderController::class);
     Route::resource('/setting/user', UserController::class);
+    Route::resource('/setting/user-approval', UserApprovalController::class);
 });

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', $c_menu->menu->title)
+@section('title', 'Daftar Approval '.$c_menu->menu->title)
 
 @section('styles')
     {{-- Data Table --}}
@@ -16,20 +16,11 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active">{{ $c_menu->menu->title }}</li>
+                <li class="breadcrumb-item active">Daftar Approval {{ $c_menu->menu->title }}</li>
             </ol>            
             <div class="media align-items-center mb-headings">
                 <div class="media-body">
-                    <h1 class="h2">{{ $c_menu->menu->title }}</h1>
-                </div>
-                <div class="media-right">
-                    @if ($access->add == 1)
-                        <div class="ms-auto">
-                            <div class="btn-group">
-                                <a href="{{ $c_menu->url }}/create" class="btn btn-primary">Tambah</a>
-                            </div>
-                        </div>
-                    @endif
+                    <h1 class="h2">Daftar Approval {{ $c_menu->menu->title }}</h1>
                 </div>
             </div>
 

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', $c_menu->title)
+@section('title', $c_menu->menu->title)
 
 @section('styles')
     {{-- Select2 --}}
@@ -18,12 +18,12 @@
         <div class="container-fluid page__container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ $c_menu->url }}">{{ $c_menu->title }}</a></li>
-                <li class="breadcrumb-item active">Tambah Pengguna</li>
+                <li class="breadcrumb-item"><a href="{{ $c_menu->url }}">{{ $c_menu->menu->title }}</a></li>
+                <li class="breadcrumb-item active">Ubah Pengguna</li>
             </ol>
             <div class="media align-items-center mb-headings">
                 <div class="media-body">
-                    <h1 class="h2">Tambah Pengguna</h1>
+                    <h1 class="h2">Ubah Pengguna</h1>
                 </div>
                 <div class="media-right">
                     @if ($access->add == 1)
@@ -169,8 +169,8 @@
                                             <div class="col-4">
                                                 <label class="form-label" for="role">Peran <small class="text-danger">*</small></label>
                                                 <select class="single-select form-control @error('role') is-invalid @enderror" id="role" name="role">
-                                                    <option value="tec" @if (old('role', $detail->role) == 'tec') selected @endif>Dokter</option>
-                                                    <option value="pat" @if (old('role', $detail->role) == 'pat') selected @endif>Pasien</option>
+                                                    <option value="tec" @if (old('role', $detail->role) == 'tec') selected @endif>Pengajar</option>
+                                                    <option value="pat" @if (old('role', $detail->role) == 'pat') selected @endif>Member</option>
                                                 </select>
                                                 @error('role')
                                                     <div class="invalid-feedback">{{ $message }}</div>

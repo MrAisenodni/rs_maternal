@@ -5,7 +5,7 @@
 5;Kategori;fa fa-th-large;/master/category;0;3;1;1
 6;Level;fa fa-chart-line;/master/level;0;3;1;1
 7;Peran;fa fa-key;/master/role;0;3;1;1
-8;Pengguna;fa fa-user-circle;/setting/user;0;4;1;1
+8;Pengguna;fa fa-user-circle;;1;4;1;1
 9;Pemilik;fa fa-user-tie;/setting/provider;0;4;1;1
 10;Detail Materi;fa fa-book-open;/view-course;0;1;1;0
 11;Daftar Materi;fa fa-book-reader;;1;2;1;1

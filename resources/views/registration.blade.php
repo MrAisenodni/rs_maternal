@@ -116,6 +116,27 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="form-label" for="religion">Pilih Agama Anda:</label>
+                                <div class="input-group input-group-merge">
+                                    <select class="single-select form-control @error('religion') is-invalid @enderror" id="religion" name="religion">
+                                        <option value="">=== SILAHKAN PILIH ===</option>
+                                        @if ($religions)
+                                            @foreach ($religions as $item)
+                                                <option value="{{ $item->id }}" @if ($item->id == old('religion')) selected @endif>{{ $item->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @error('religion')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="fa fa-genderless"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="form-label" for="birth_place">Masukkan Tempat Lahir Anda:</label>
                                 <div class="input-group input-group-merge">
                                     <input id="birth_place" type="text" name="birth_place" class="form-control form-control-prepended @error('birth_place') is-invalid @enderror" placeholder="Masukkan Tempat Lahir Anda" value="{{ old('birth_place') }}">
