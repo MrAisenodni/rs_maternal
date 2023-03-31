@@ -71,6 +71,7 @@
                                                 <label class="form-label" for="document">Upload Dokumen <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
                                                 <input type="file" class="form-control @error('document') is-invalid @enderror" id="image" name="document" value="{{ old('document') }}" onchange="readURL(this)">
+                                                <small class="text-danger">* Maksimal ukuran dokumen 50 MB</small>
                                                 @error('document')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

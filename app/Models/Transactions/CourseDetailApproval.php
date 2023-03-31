@@ -20,6 +20,11 @@ class CourseDetailApproval extends Model
         return $this->belongsTo(CourseHeader::class, 'course_header_id', 'id')->where('disabled', 0);
     }
 
+    public function course_detail()
+    {
+        return $this->belongsTo(CourseDetail::class, 'course_detail_id', 'id')->where('disabled', 0);
+    }
+
     public function course_detail_document()
     {
         return $this->hasMany(CourseDetailDocument::class, 'course_detail_id', 'id')->select('id', 'course_detail_id', 'title', 'file', 'file_name', 'description')->where('disabled', 0);

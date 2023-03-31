@@ -62,25 +62,19 @@
                         <div class="card-header">
                             <div class="media align-items-center">
                                 <div class="media-left">
-                                    <img src="{{ asset('assets/images/people/110/guy-6.jpg') }}"
-                                         alt="About Adrian"
-                                         width="50"
-                                         class="rounded-circle">
+                                    <img src="{{ asset($data->teacher->picture) }}" alt="About Adrian" width="50" class="rounded-circle">
                                 </div>
                                 <div class="media-body">
-                                    <h4 class="card-title"><a href="instructor-profile.html">Adrian Demian</a></h4>
-                                    <p class="card-subtitle">Instructor</p>
+                                    <h4 class="card-title"><a href="#">{{ $data->teacher->full_name }}</a></h4>
+                                    <p class="card-subtitle">Pengajar (Dokter)</p>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <p>Having over 12 years exp. Adrian is one of the lead UI designers in the industry Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, aut.</p>
-                            <a href=""
-                               class="btn btn-light"><i class="fab fa-facebook"></i></a>
-                            <a href=""
-                               class="btn btn-light"><i class="fab fa-twitter"></i></a>
-                            <a href=""
-                               class="btn btn-light"><i class="fab fa-github"></i></a>
+                            <p>E: {{ $data->teacher->email }}<br>P: {{ $data->teacher->phone_number }}<br>H: {{ $data->teacher->home_number }}</p>
+                            <a href="{{ $data->teacher->facebook }}" class="btn btn-light"><i class="fab fa-facebook"></i></a>
+                            <a href="{{ $data->teacher->twitter }}" class="btn btn-light"><i class="fab fa-twitter"></i></a>
+                            <a href="{{ $data->teacher->github }}" class="btn btn-light"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
 

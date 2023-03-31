@@ -73,6 +73,7 @@
                                                 <label class="form-label" for="video">Upload Video <small class="text-danger">*</small></label>
                                                 <span class="desc"></span>
                                                 <input type="file" class="form-control @error('video') is-invalid @enderror" id="image" name="video" value="{{ old('video') }}" onchange="readURLVideo(this)">
+                                                <small class="text-danger">* Maksimal ukuran video 500 MB</small>
                                                 @error('video')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

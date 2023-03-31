@@ -193,26 +193,19 @@
                                             @foreach ($data as $item)
                                                 <tr data-id="{{ $item->id }}">
                                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                                    <td>{{ $item->title }} @if ($item->approval_id) <small class="text-danger">* Menunggu Approval</small> @endif</td>
+                                                    <td>{{ $item->title }}</td>
                                                     <td>{{ $item->description }}</td>
                                                     <td class="text-center" style="width: 20mm">
                                                         @if ($detail_access->edit == 1)
                                                             <a href="/admin/course-detail/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
                                                         @endif
-                                                        @if ($item->approval_id)
-                                                            @if ($detail_access->delete == 1)
-                                                                <form action="#" method="POST" class="d-inline">
-                                                                    <button type="button" class="fa fa-trash text-secondary sa-warning" style="border: 0px; background: 0%" disabled></button>
-                                                                </form>
-                                                            @endif
-                                                        @else
-                                                            @if ($detail_access->delete == 1)
-                                                                <form action="/admin/course-detail/{{ $item->id }}" method="POST" class="d-inline">
-                                                                    @method('delete')
-                                                                    @csrf
-                                                                    <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
-                                                                </form>
-                                                            @endif
+                                                        @if ($detail_access->delete == 1)
+                                                            <form action="/admin/course-detail/{{ $item->id }}" method="POST" class="d-inline">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <input type="hidden" name="id" value="{{ $detail->id }}">
+                                                                <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
+                                                            </form>
                                                         @endif
                                                         @if ($detail_access->detail == 1)
                                                             <a href="/admin/course-detail/{{ $item->id }}"><i class="fa fa-eye"></i></a>

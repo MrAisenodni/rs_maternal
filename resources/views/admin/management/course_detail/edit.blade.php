@@ -79,6 +79,7 @@
                                                 <span class="desc"></span>
                                                 <input type="hidden" name="old_video" value="{{ $detail->video }}">
                                                 <input type="file" class="form-control @error('video') is-invalid @enderror" id="video" name="video" value="{{ old('video', $detail->video) }}" onchange="readURLVideo(this)">
+                                                <small class="text-danger">* Maksimal ukuran video 500 MB</small>
                                                 @error('video')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -96,12 +97,15 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-12">
-                                                {{-- @if ($access->add == 1) --}}
-                                                    <div class="d-grid">
-                                                        <a href="/admin/course-header/{{ $detail->course_header_id }}/edit" class="btn btn-warning">KEMBALI</a>
+                                                <div class="d-grid">
+                                                    <a href="/admin/course-header/{{ $detail->course_header_id }}/edit" class="btn btn-warning">KEMBALI</a>
+                                                    @if ($detail->approval_id)
+                                                        <button type="submit" class="btn btn-success" disabled>SIMPAN</button>
+                                                        <small class="text-danger text-right">* Detail Materi menunggu approval dari Admin.</small>
+                                                    @else
                                                         <button type="submit" class="btn btn-success">SIMPAN</button>
-                                                    </div>
-                                                {{-- @endif --}}
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </form>

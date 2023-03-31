@@ -13,6 +13,10 @@ class PageController extends Controller
     public function index()
     {
         $data = [
+            'approvals'             => $this->course_header_approval->selectRaw("'Detail Materi', COUNT(id) AS Jumlah")
+                                        ->union(
+                                            $this->course_detail_approval->selectRaw("'Detail Video', COUNT(id) AS Jumlah")
+                                        ),
             'c_menu'                => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
             'companion'             => $this->companion->select('trx_companion.id', 'trx_companion.title', 'trx_standard_process.description', 'trx_standard_process.standard', 'trx_standard_process.process')
                                         ->join('trx_standard_process', 'trx_standard_process.companion_id', '=', 'trx_companion.id')
@@ -21,6 +25,7 @@ class PageController extends Controller
             'count_video'           => $this->course_detail->select('id')->where('disabled', 0)->count(),
             'count_document'        => $this->course_detail_document->select('id')->where('disabled', 0)->count(),
         ];
+        // dd($data['approvals']);
         
         return view('patient.dashboard', $data);
     }
@@ -37,7 +42,7 @@ class PageController extends Controller
     public function store_registration(Request $request)
     {
         $validate = $request->validate([
-            'email'                 => 'unique:mst_user,email,1,disabled|unique:mst_user_approval,email,1,disabled',
+            'email'                 => 'required|unique:mst_user,email,1,disabled|unique:mst_user_approval,email,1,disabled',
             'full_name'             => 'required',
             'gender'                => 'required',
             'home_number'           => 'unique:mst_user,home_number,1,disabled|unique:mst_user_approval,home_number,1,disabled',

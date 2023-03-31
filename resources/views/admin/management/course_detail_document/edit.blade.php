@@ -73,6 +73,7 @@
                                                 <input type="hidden" name="old_document" value="{{ $detail->file }}">
                                                 <input type="file" class="form-control @error('document') is-invalid @enderror" id="document" name="document" value="{{ old('document', $detail->file) }}" onchange="readURL(this)">
                                                 <a href="{{ asset('/storage/'.$detail->file) }}">{{ $detail->file_name }}</a>
+                                                <small class="text-danger">* Maksimal ukuran dokumen 50 MB</small>
                                                 @error('document')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

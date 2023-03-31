@@ -18,7 +18,7 @@ class CourseDetailController extends Controller
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first();
-        if ($data['access']->view == 0 || $data['access']->add == 0) abort(403);
+        if ($data['access']->view == 0 && $data['access']->add == 0) abort(403);
 
         return view('admin.management.course_detail.create', $data);
     }
@@ -44,7 +44,7 @@ class CourseDetailController extends Controller
                 $extension = $request->video->getClientOriginalExtension();  // Get Extension
                 $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
                 (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
-                    : $filePath = $file->storeAs('storage/production/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                    : $filePath = $file->storeAs('storage/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/videos', $filePath);  
                 $data += [
                     'duration'                  => $this->getID3->analyze($request->video)['playtime_seconds'],
@@ -62,10 +62,30 @@ class CourseDetailController extends Controller
                 'updated_by'                    => session()->get('sname').' ('.session()->get('srole').')',
             ];
             $this->course_header->where('id', $request->id)->update($data);
-        } else {
-        }
 
-        return redirect('/admin/course-header/'.$request->id.'/edit')->with('status', 'Data Berhasil Ditambahkan.');
+            return redirect('/admin/course-header/'.$request->id.'/edit')->with('status', 'Data Berhasil Ditambahkan.');
+        } else {
+            $data['action'] = 'add';
+
+            if ($request->video) {
+                $file = $request->file('video');
+                $extension = $request->video->getClientOriginalExtension();  // Get Extension
+                $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
+                (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
+                    : $filePath = $file->storeAs('storage/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                // $file->move(storage_path().'/videos', $filePath);  
+                $data += [
+                    'duration'                  => $this->getID3->analyze($request->video)['playtime_seconds'],
+                    'playtime'                  => $this->getID3->analyze($request->video)['playtime_string'],
+                    'video'                     => $filePath,
+                    'video_name'                => $fileName,
+                ];
+            }
+
+            $this->course_detail_approval->insert($data);
+
+            return redirect('/admin/course-header/'.$request->id.'/edit')->with('status', 'Data yang Ditambahkan Menunggu Approval.');
+        }
     }
 
     public function show($id)
@@ -76,7 +96,7 @@ class CourseDetailController extends Controller
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
-        if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
+        if ($data['access']->view == 0 && $data['access']->detail == 0) abort(403);
         
         return view('admin.management.course_detail.show', $data);
     }
@@ -87,13 +107,18 @@ class CourseDetailController extends Controller
         $data = [
             'c_menu'                            => $this->submenu->select('id', 'title', 'url', 'menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
             'detail'                            => $this->course_detail->select('id', 'course_header_id', 'title', 'video', 'description')->where('id', $id)->where('disabled', 0)->first(),
+            'detail'                            => $this->course_detail->select(
+                                                        'trx_course_detail.id', 'trx_course_detail_approval.id AS approval_id', 'trx_course_detail.title', 'trx_course_detail.description', 
+                                                        'trx_course_detail.course_header_id', 'trx_course_detail.video', 'trx_course_detail.video_name'
+                                                    )->leftJoin('trx_course_detail_approval', 'trx_course_detail_approval.course_detail_id', '=', 'trx_course_detail.id')
+                                                    ->where('trx_course_detail.disabled', 0)->where('trx_course_detail.id', $id)->first(),
         ];
         $data += [
             'data'                              => $this->course_detail_document->select('id', 'title', 'description')->where('disabled', 0)->where('course_detail_id', $data['detail']->id)->get(),
             'access'                            => $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
                                                     ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first(),
         ];
-        if ($data['access']->view == 0 || $data['access']->edit == 0) abort(403);
+        if ($data['access']->view == 0 && $data['access']->edit == 0) abort(403);
 
         return view('admin.management.course_detail.edit', $data);
     }
@@ -109,8 +134,8 @@ class CourseDetailController extends Controller
             'course_header_id'                  => $request->id,
             'title'                             => $request->title,
             'description'                       => $request->description,
-            'created_at'                        => now(),
-            'created_by'                        => session()->get('sname').' ('.session()->get('srole').')',
+            'updated_at'                        => now(),
+            'updated_by'                        => session()->get('sname').' ('.session()->get('srole').')',
         ];
         
         if (session()->get('srole') == 'adm') {
@@ -121,7 +146,7 @@ class CourseDetailController extends Controller
                 $extension = $request->video->getClientOriginalExtension();  // Get Extension
                 $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
                 (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
-                    : $filePath = $file->storeAs('storage/production/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                    : $filePath = $file->storeAs('storage/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/videos', $filePath);  
                 $data += [
                     'duration'                  => $this->getID3->analyze($request->video)['playtime_seconds'],
@@ -139,22 +164,43 @@ class CourseDetailController extends Controller
                 'updated_by'                    => session()->get('sname').' ('.session()->get('srole').')',
             ];
             $this->course_header->where('id', $request->id)->update($data);
+
+            return redirect(url()->previous())->with('status', 'Data Berhasil Diubah.');
         } else {
+            $data += [
+                'action'                        => 'edit',
+                'course_detail_id'              => $id,
+            ];
 
+            if ($request->video) {
+                $file = $request->file('video');
+                $extension = $request->video->getClientOriginalExtension();  // Get Extension
+                $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
+                (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
+                    : $filePath = $file->storeAs('storage/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                // $file->move(storage_path().'/videos', $filePath);  
+                $data += [
+                    'duration'                  => $this->getID3->analyze($request->video)['playtime_seconds'],
+                    'playtime'                  => $this->getID3->analyze($request->video)['playtime_string'],
+                    'video'                     => $filePath,
+                    'video_name'                => $fileName,
+                ]; 
+            }
+            $this->course_detail_approval->insert($data);
+
+            return redirect('/admin/course-header/'.$request->id.'/edit')->with('status', 'Data yang Diubah Menunggu Approval.');
         }
-
-        return redirect(url()->previous())->with('status', 'Data Berhasil Diubah.');
     }
 
     public function destroy(Request $request, $id)
     {
+        $data = [
+            'disabled'                          => 1,
+            'updated_at'                        => now(),
+            'updated_by'                        => session()->get('sname').' ('.session()->get('srole').')',
+        ];
+
         if (session()->get('srole') == 'adm') {
-            $data = [
-                'disabled'                          => 1,
-                'updated_at'                        => now(),
-                'updated_by'                        => session()->get('sname').' ('.session()->get('srole').')',
-            ];
-    
             $this->course_detail->where('id', $id)->update($data);
             $sum = $this->course_detail->selectRaw('SUM(duration) AS duration')->where('course_header_id', $request->id)->where('disabled', 0)->first();
             $data = [
@@ -163,10 +209,26 @@ class CourseDetailController extends Controller
                 'updated_by'                    => session()->get('sname').' ('.session()->get('srole').')',
             ];
             $this->course_header->where('id', $request->id)->update($data);
-        } else {
 
+            return redirect(url()->previous())->with('status', 'Data Berhasil Dihapus.');
+        } else {
+            $check = $this->course_detail->where('id', $id)->where('disabled', 0)->first();
+
+            $data += [
+                'title'                         => $check->title,
+                'description'                   => $check->description,
+                'video'                         => $check->video,
+                'video_name'                    => $check->video_name,
+                'course_header_id'              => $check->course_header_id,
+                'action'                        => 'delete',
+                'course_detail_id'              => $id,
+            ];
+
+            $this->course_detail_approval->insert($data);
+
+            return redirect('/admin/course-header/'.$id.'/edit')->with('status', 'Data yang Dihapus Menunggu Approval.');
         }
 
-        return redirect(url()->previous())->with('status', 'Data Berhasil Dihapus.');
+        
     }
 }

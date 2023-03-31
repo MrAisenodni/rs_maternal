@@ -89,28 +89,84 @@
             </div>
 
             {{-- Pending Approval --}}
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header text-center">
-                            <div class="h5 mb-n2">Tugas Approval</div>
+            @if (session()->get('sid'))
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <div class="h5 mb-n2">Tugas Approval</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 5%">No</th>
+                                                <th>Informasi</th>
+                                                <th>Jumlah</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ($approvals)
+                                                @foreach ($approvals as $item)
+                                                    <tr data-id="{{ $item->id }}">
+                                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td class="text-center" style="width: 20mm">
+                                                            @if ($access->detail == 1)
+                                                                <a href="{{ $c_menu->url }}/{{ $item->id }}"><i class="fa fa-eye"></i></a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body text-center">
-                            <div class="h2 mt-n1 mb-n1">{{ $count_video }}</div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <div class="h5 mb-n2">Menunggu Approval</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 5%">No</th>
+                                                <th>Informasi</th>
+                                                <th>Jumlah</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ($approvals)
+                                                @foreach ($approvals as $item)
+                                                    <tr data-id="{{ $item->id }}">
+                                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td class="text-center" style="width: 20mm">
+                                                            @if ($access->detail == 1)
+                                                                <a href="{{ $c_menu->url }}/{{ $item->id }}"><i class="fa fa-eye"></i></a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header text-center">
-                            <div class="h5 mb-n2">Menunggu Approval</div>
-                        </div>
-                        <div class="card-body text-center">
-                            <div class="h2 mt-n1 mb-n1">{{ $count_video }}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endif
         </div>
     </div>
 @endsection
