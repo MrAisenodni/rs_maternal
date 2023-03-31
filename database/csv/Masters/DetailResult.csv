@@ -1,0 +1,90 @@
+1;1;MATERNAL STANDAR
+2;1;MATERNAL PROSES
+3;1;NEONATAL STANDAR
+4;1;NEONATAL PROSES
+5;1;TATAKELOLA STANDAR
+6;1;TATAKELOLA PROSES
+7;1;PENCEGAHAN STANDAR
+8;1;PENCEGAHAN PROSES
+9;1;TOTAL STANDAR
+10;1;TOTAL PROSES
+11;2;Respon Emergensi
+12;2;PPH
+13;2;PEB/Eklampsi
+14;2;Sepsis Maternal
+15;2;Persalinan Macet
+16;2;Persalinan Prematur
+17;2;Total
+18;3;Respon Emergensi
+19;3;PPH
+20;3;PEB/Eklampsi
+21;3;Sepsis Maternal
+22;3;Persalinan Macet
+23;3;Persalinan Prematur
+24;3;Total
+25;4;Respon Emergensi
+26;4;Resusitasi Neonatus
+27;4;Kejang
+28;4;Dehidrasi
+29;4;Sepsis Neonatus
+30;4;Asfiksia
+31;4;Neonatus dengan COVID-19
+32;4;Hipotermi
+33;4;Hipoglikemi
+34;4;Hiperbilirubinemia
+35;4;IMD & ASI Ekslusif
+36;4;Tatakelola ASI
+37;4;PMK
+38;4;BBLR
+39;4;TOTAL
+40;5;Respon Emergensi
+41;5;Resusitasi Neonatus
+42;5;Kejang
+43;5;Dehidrasi
+44;5;Sepsis Neonatus
+45;5;Asfiksia
+46;5;Neonatus dengan COVID-19
+47;5;Hipotermi
+48;5;Hipoglikemi
+49;5;Hiperbilirubinemia
+50;5;IMD & ASI Ekslusif
+51;5;Tatakelola ASI
+52;5;PMK
+53;5;BBLR
+54;5;TOTAL
+55;6;Evaluasi Kinerja
+56;6;Peningkatan Mutu & Keselamatan Pasien
+57;6;Pemberdayaan Pasien, Keluarga & Masyarakat
+58;6;Total
+59;7;Evaluasi Kinerja
+60;7;Peningkatan Mutu & Keselamatan Pasien
+61;7;Pemberdayaan Pasien, Keluarga & Masyarakat
+62;7;Total
+63;8;Kamar Bersalin dan Ruang Nifas
+64;8;Ruang Perina
+65;8;Kamar Operasi
+66;8;Ruang Gawat Darurat
+67;8;Tatakelola PI Pencegahan COVID19
+68;8;Total
+69;9;Kamar Bersalin dan Ruang Nifas
+70;9;Ruang Perina
+71;9;Kamar Operasi
+72;9;Ruang Gawat Darurat
+73;9;Tatakelola PI Pencegahan COVID19
+74;9;Total
+75;10;Jejaring Rujukan
+76;10;Kesiapan UGD 24 Jam
+77;10;Ambulan Gadar
+78;10;AMPSR
+79;10;Akuntabilitas Publik
+80;10;Pembinaan
+81;10;Rujukan Kembali
+82;10;TOTAL
+83;11;Jejaring Rujukan
+84;11;Kesiapan UGD 24 Jam
+85;11;Ambulan Gadar
+86;11;AMPSR
+87;11;Akuntabilitas Publik
+88;11;Pembinaan
+89;11;Rujukan Kembali
+90;11;TOTAL

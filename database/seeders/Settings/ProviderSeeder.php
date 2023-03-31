@@ -16,8 +16,8 @@ class ProviderSeeder extends CsvSeeder
             'created_by'    => 'Migrasi'
         ];
         $this->mapping = [
-            'provider_npwp', 'provider_name', 'provider_birth_place', 'provider_birth_date', 'provider_email', 'provider_logo', 
-            'provider_picture'
+            'provider_npwp', 'provider_name', 'provider_address_1', 'provider_email', 'provider_phone_number', 'provider_home_number',
+            'provider_logo', 'provider_picture'
         ];
         $this->header = false;
     }

@@ -11,7 +11,7 @@
 
                 <!-- Brand -->
                 <a href="/" class="navbar-brand">
-                    <img src="{{ asset($provider->provider_logo) }}" class="mr-2" alt="{{ $provider->provider_name }}" />
+                    <img src="{{ asset('/storage/'.$provider->provider_logo) }}" class="mr-2" alt="#" style="max-height: 50px" />
                     <span class="d-none d-xs-md-block">{{ $provider->provider_name }}</span>
                 </a>
 
@@ -23,7 +23,7 @@
                             <a href="/login" class="text-white">Masuk</a><a href="#" class="text-white">&nbsp / &nbsp</a><a href="/registration" class="text-white">Daftar</a>
                         @else
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                <img src="{{ asset('/assets/images/people/50/guy-6.jpg') }}" alt="Avatar" class="rounded-circle" width="40">
+                                <img src="{{ asset('/storage/'.session()->get('spicture')) }}" alt="Avatar" class="rounded-circle" width="40">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="/profil/{{ session()->get('suser_id') }}">

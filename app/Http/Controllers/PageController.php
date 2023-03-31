@@ -10,22 +10,33 @@ class PageController extends Controller
 {
     protected $path = '/';
 
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->search;
+
         $data = [
             'approvals'             => $this->course_header_approval->selectRaw("'Detail Materi', COUNT(id) AS Jumlah")
                                         ->union(
                                             $this->course_detail_approval->selectRaw("'Detail Video', COUNT(id) AS Jumlah")
                                         ),
             'c_menu'                => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
-            'companion'             => $this->companion->select('trx_companion.id', 'trx_companion.title', 'trx_standard_process.description', 'trx_standard_process.standard', 'trx_standard_process.process')
-                                        ->join('trx_standard_process', 'trx_standard_process.companion_id', '=', 'trx_companion.id')
-                                        ->where('trx_companion.disabled', 0)->get(),
-            'count_user'            => $this->user->selectRaw('COUNT(role) AS count, role')->where('disabled', 0)->where('role', '!=', 'adm')->groupBy('role')->orderBy('role')->get(),
+            'companions'            => $this->companion->select('id', 'title')->where('disabled', 0)->get(),
+            'hospitals'             => $this->hospital->select('id', 'name')->where('disabled', 0)->where('type', 'int')->get(),
+            'results'               => $this->result->select('id', 'title', 'subtitle')->where('disabled', 0)->get(),
+            'clinic_results'        => $this->clinic_results->select('id', 'companion_id', 'hospital_id', 'result_id', 'detail_result_id', 'value')->where('hospital_id', 1)->where('disabled', 0)->get(),
+            // 'companion'             => $this->companion->select('trx_companion.id', 'trx_companion.title', 'trx_standard_process.description', 'trx_standard_process.standard', 'trx_standard_process.process')
+            //                             ->join('trx_standard_process', 'trx_standard_process.companion_id', '=', 'trx_companion.id')
+            //                             ->where('trx_companion.disabled', 0)->get(),
+            'count_user'            => $this->user->selectRaw("'pat', COUNT(id) AS jumlah")->where('disabled', 0)->where('role', 'pat')
+                                        ->union(
+                                            $this->user->selectRaw("'tec', COUNT(id) AS jumlah")->where('disabled', 0)->where('role', 'tec')
+                                        )->get(),
             'count_video'           => $this->course_detail->select('id')->where('disabled', 0)->count(),
             'count_document'        => $this->course_detail_document->select('id')->where('disabled', 0)->count(),
+            'search'                => $search,
         ];
-        // dd($data['approvals']);
+        
+        if ($search) $data['clinic_results'] = $this->clinic_results->select('id', 'companion_id', 'hospital_id', 'result_id', 'detail_result_id', 'value')->where('hospital_id', $search)->where('disabled', 0)->get();
         
         return view('patient.dashboard', $data);
     }

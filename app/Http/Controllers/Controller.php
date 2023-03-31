@@ -6,10 +6,13 @@ use App\Models\Masters\{
     Category,
     City,
     Country,
+    DetailResult,
     District,
+    Hospital,
     Level,
     Province,
     Religion,
+    Result,
     Role,
     Ward,
 };
@@ -24,6 +27,7 @@ use App\Models\Settings\{
     LoginApproval,
 };
 use App\Models\Transactions\{
+    ClinicResults,
     Companion,
     CourseDetail,
     CourseDetailApproval,
@@ -31,7 +35,6 @@ use App\Models\Transactions\{
     CourseDetailDocumentApproval,
     CourseHeader,
     CourseHeaderApproval,
-    StandardProcess,
 };
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -59,14 +62,18 @@ class Controller extends BaseController
         $this->category                         = new Category();
         $this->city                             = new City();
         $this->country                          = new Country();
+        $this->detail_result                    = new DetailResult();
         $this->district                         = new District();
+        $this->hospital                         = new Hospital();
         $this->level                            = new Level();
         $this->province                         = new Province();
         $this->religion                         = new Religion();
+        $this->result                           = new Result();
         $this->role                             = new Role();
         $this->ward                             = new Ward();
 
         // Global Variabel untuk Transaction
+        $this->clinic_results                   = new ClinicResults();
         $this->companion                        = new Companion();
         $this->course_detail                    = new CourseDetail();
         $this->course_detail_approval           = new CourseDetailApproval();
@@ -74,7 +81,6 @@ class Controller extends BaseController
         $this->course_detail_document_approval  = new CourseDetailDocumentApproval();
         $this->course_header                    = new CourseHeader();
         $this->course_header_approval           = new CourseHeaderApproval();
-        $this->standard_process                 = new StandardProcess();
 
         // Additional plugins
         $this->getID3                           = new getID3;

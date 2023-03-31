@@ -91,6 +91,14 @@ class CourseDetailApprovalController extends Controller
             $this->course_detail_approval_approval->where('id', $request->course_detail_approval_id)->delete();
         } else {
             $this->course_detail->where('id', $request->course_detail_id)->update($data);
+            $sum = $this->course_detail->selectRaw('SUM(duration) AS duration')->where('course_header_id', $request->id)->where('disabled', 0)->first();
+            $data = [
+                'duration'                      => $sum->duration,
+                'updated_at'                    => now(),
+                'updated_by'                    => session()->get('sname').' ('.session()->get('srole').')',
+            ];
+
+            $this->course_header->where('id', $request->id)->update($data);
             $this->course_detail_approval->where('id', $id)->delete();
         }
 

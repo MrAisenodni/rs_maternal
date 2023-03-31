@@ -41,9 +41,9 @@ class CourseDetailDocumentController extends Controller
         if ($request->document) {
             $file = $request->file('document');
             $extension = $request->document->getClientOriginalExtension();  // Get Extension
-            $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
+            $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
             (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
-                : $filePath = $file->storeAs('storage/production/documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                : $filePath = $file->storeAs('storage/documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
             // $file->move(storage_path().'/documents', $filePath);  
             $data += [
                 'file'                          => $filePath,
@@ -102,9 +102,9 @@ class CourseDetailDocumentController extends Controller
             if ($request->old_document) File::delete(storage_path('app/public/'.$request->old_document));
             $file = $request->file('document');
             $extension = $request->document->getClientOriginalExtension();  // Get Extension
-            $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
+            $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
             (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
-                : $filePath = $file->storeAs('storage/production/documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                : $filePath = $file->storeAs('storage/documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
             // $file->move(storage_path().'/documents', $filePath);  
             $data += [
                 'file'                          => $filePath,

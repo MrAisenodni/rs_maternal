@@ -21,9 +21,8 @@
                     <!-- Search -->
                     <form class="search-form d-none d-md-flex" action="{{ $c_menu->url }}" method="GET">
                         @method('get')
-                        @csrf
                         <input type="text" class="form-control" placeholder="Search" name="search" value="{{ old('search', $search) }}">
-                        <button class="btn" type="button"><i class="material-icons font-size-24pt">search</i></button>
+                        <button class="btn" type="submit"><i class="material-icons font-size-24pt">search</i></button>
                     </form>
                     <!-- // END Search -->
                 </div>
@@ -35,7 +34,7 @@
                         <div class="card">
                             <div class="card-header text-center">
                                 <h4 class="card-title mb-0"><a href="/view-course/{{ $item->id }}/1"></a>{{ $item->title }}</h4>
-                                <div class="rating">
+                                {{-- <div class="rating">
                                     @php
                                         $sisa = $item->rating
                                     @endphp
@@ -51,7 +50,7 @@
                                             $sisa = $sisa - 1
                                         @endphp
                                     @endfor
-                                </div>
+                                </div> --}}
                             </div>
                             <a href="/view-course/{{ $item->id }}/{{ $item->min_course_detail[0]->id }}">
                                 <img src="{{ asset('/storage/'.$item->picture) }}" alt="{{ $item->title }}" style="width:100%;">

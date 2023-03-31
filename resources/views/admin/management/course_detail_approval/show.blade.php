@@ -43,6 +43,8 @@
                                     <input type="hidden" name="id" value="{{ $detail->id }}">
                                     <input type="hidden" name="course_header_id" value="{{ $detail->course_header_id }}">
                                     <input type="hidden" name="course_detail_id" value="{{ $detail->course_detail_id }}">
+                                    <input type="hidden" name="duration" value="{{ $detail->duration }}">
+                                    <input type="hidden" name="playtime" value="{{ $detail->playtime }}">
                                     <input type="hidden" name="action" value="{{ $detail->action }}">
                                     <div class="card">
                                         <div class="card-body">
@@ -51,113 +53,34 @@
                                             </div>
                                             <div class="row mb-2">
                                                 <div class="col-4">
-                                                    <label class="form-label" for="title">Judul Materi</label>
+                                                    <label class="form-label" for="title">Judul Pembelajaran</label>
                                                     <div class="">{{ $detail->title }}</div>
                                                     <input type="hidden" name="title" value="{{ $detail->title }}">
                                                 </div>
                                                 <div class="col-4">
-                                                    <label class="form-label" for="course_detail_title">Judul Pembelajaran</label>
-                                                    <div class="">{{ $detail->course_detail_title }}</div>
-                                                    <input type="hidden" name="course_detail_title" value="{{ $detail->course_detail_title }}">
+                                                    <label class="form-label" for="created_by">Dibuat Oleh</label>
+                                                    <div class="">{{ $detail->created_by }}</div>
+                                                    <input type="hidden" class="form-control" id="created_by" name="created_by" value="{{ $detail->created_by }}">
                                                 </div>
                                                 <div class="col-4">
-                                                    <label class="form-label" for="course_detail_document_title">Judul Dokumen</label>
-                                                    <div class="">{{ $detail->course_detail_document_title }}</div>
-                                                    <input type="hidden" name="course_detail_document_title" value="{{ $detail->course_detail_document_title }}">
+                                                    <label class="form-label" for="created_at">Dibuat Dari</label>
+                                                    <div class="">{{ date('d-M-Y', strtotime($detail->created_at)) }}</div>
+                                                    <input type="hidden" class="form-control" id="created_at" name="created_at" value="{{ $detail->created_at }}">
                                                 </div>
                                             </div>
                                             <div class="row mb-2">
-                                                <div class="col-4">
-                                                    <label class="form-label" for="picture">Foto Materi</label>
-                                                    <span class="desc"></span>
-                                                    <img id="show_picture" class="img-fluid" src="{{ asset('/storage/'.$detail->picture) }}" alt="" style="max-width:100%; max-height: 250px">
-                                                    <input type="hidden" name="picture" value="{{ $detail->picture }}">
-                                                    <input type="hidden" name="picture_name" value="{{ $detail->picture_name }}">
-                                                </div>
-                                                <div class="col-4">
+                                                <div class="col-6">
                                                     <label class="form-label" for="video">Upload Video</label>
-                                                    <iframe id="show_video" class="embed-responsive-item" src="{{ asset('/storage/'.$detail->video) }}" allowfullscreen="" style="width: 100%; height: 250px"></iframe>
+                                                    <iframe id="show_video" class="embed-responsive-item" src="{{ asset('/storage/'.$detail->video) }}" allowfullscreen="" style="width: 100%; height: 350px"></iframe>
                                                     <input type="hidden" name="video" value="{{ $detail->video }}">
                                                     <input type="hidden" name="video_name" value="{{ $detail->video_name }}">
                                                     <input type="hidden" name="playtime" value="{{ $detail->playtime }}">
-                                                    <input type="hidden" name="course_detail_duration" value="{{ $detail->course_detail_duration }}">
+                                                    <input type="hidden" name="duration" value="{{ $detail->duration }}">
                                                 </div>
-                                                <div class="col-4">    
-                                                    <label class="form-label" for="document">Dokumen </label>
-                                                    <span class="desc"></span><br>
-                                                    <a href="{{ asset('/storage/'.$detail->file) }}">{{ $detail->file_name }}</a>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-2">
-                                                <div class="col-4">
+                                                <div class="col-6">
                                                     <label class="form-label" for="description">Deskripsi Materi</label>
                                                     <div class="">{{ $detail->description }}</div>
                                                     <input type="hidden" name="description" value="{{ $detail->description }}">
-                                                </div>
-                                                <div class="col-4">
-                                                    <label class="form-label" for="course_detail_description">Deskripsi Pembelajaran</label>
-                                                    <div class="">{{ $detail->course_detail_description }}</div>
-                                                    <input type="hidden" name="course_detail_description" value="{{ $detail->course_detail_description }}">
-                                                </div>
-                                                <div class="col-4">
-                                                    <label class="form-label" for="course_detail_document_description">Deskripsi Dokumen</label>
-                                                    <div class="">{{ $detail->course_detail_document_description }}</div>
-                                                    <input type="hidden" name="course_detail_document_description" value="{{ $detail->course_detail_document_description }}">
-                                                </div>
-                                            </div>
-                                            <div class="row mb-2">
-                                                <div class="col-4">
-                                                    <label class="form-label" for="created_by">Dibuat Oleh</label>
-                                                    <div class="">{{ $detail->created_by }}</div>
-                                                    <input type="hidden" class="form-control" id="created_by" name="created_by" value="{{ $detail->created_by }}">
-                                                </div>
-                                                <div class="col-4">
-                                                    <label class="form-label" for="created_by">Dibuat Oleh</label>
-                                                    <div class="">{{ $detail->created_by }}</div>
-                                                    <input type="hidden" class="form-control" id="created_by" name="created_by" value="{{ $detail->created_by }}">
-                                                </div>
-                                                <div class="col-4">
-                                                    <label class="form-label" for="created_by">Dibuat Oleh</label>
-                                                    <div class="">{{ $detail->created_by }}</div>
-                                                    <input type="hidden" class="form-control" id="created_by" name="created_by" value="{{ $detail->created_by }}">
-                                                </div>
-                                            </div>
-                                            <div class="row mb-2">
-                                                <div class="col-4">
-                                                    <label class="form-label" for="created_at">Dibuat Dari</label>
-                                                    <div class="">{{ date('d-M-Y', strtotime($detail->created_at)) }}</div>
-                                                    <input type="hidden" class="form-control" id="created_at" name="created_at" value="{{ $detail->created_at }}">
-                                                </div>
-                                                <div class="col-4">
-                                                    <label class="form-label" for="created_at">Dibuat Dari</label>
-                                                    <div class="">{{ date('d-M-Y', strtotime($detail->created_at)) }}</div>
-                                                    <input type="hidden" class="form-control" id="created_at" name="created_at" value="{{ $detail->created_at }}">
-                                                </div>
-                                                <div class="col-4">
-                                                    <label class="form-label" for="created_at">Dibuat Dari</label>
-                                                    <div class="">{{ date('d-M-Y', strtotime($detail->created_at)) }}</div>
-                                                    <input type="hidden" class="form-control" id="created_at" name="created_at" value="{{ $detail->created_at }}">
-                                                </div>
-                                            </div>
-                                            <div class="row mb-2">
-                                                <div class="col-4">
-                                                    <label class="form-label" for="doctor">Dokter Pengajar</label>
-                                                    <div class="">[{{ $detail->teacher->nik }}] {{ $detail->teacher->full_name }}</div>
-                                                    <input type="hidden" name="doctor" value="{{ $detail->course_teacher_id }}">
-                                                </div>
-                                            </div>
-                                            <div class="row mb-2">
-                                                <div class="col-4">
-                                                    <label class="form-label" for="category">Kategori</label>
-                                                    <div class="">{{ $detail->category->name }}</div>
-                                                    <input type="hidden" name="category" value="{{ $detail->category_id }}">
-                                                </div>
-                                            </div>
-                                            <div class="row mb-2">
-                                                <div class="col-4">
-                                                    <label class="form-label" for="level">Tingkatan</label>
-                                                    <div class="">{{ $detail->level->name }}</div>
-                                                    <input type="hidden" name="level" value="{{ $detail->level_id }}">
                                                 </div>
                                             </div>
                                             <hr>

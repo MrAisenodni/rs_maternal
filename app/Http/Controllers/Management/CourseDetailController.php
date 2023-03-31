@@ -42,7 +42,7 @@ class CourseDetailController extends Controller
             if ($request->video) {
                 $file = $request->file('video');
                 $extension = $request->video->getClientOriginalExtension();  // Get Extension
-                $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
+                $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
                 (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
                     : $filePath = $file->storeAs('storage/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/videos', $filePath);  
@@ -70,7 +70,7 @@ class CourseDetailController extends Controller
             if ($request->video) {
                 $file = $request->file('video');
                 $extension = $request->video->getClientOriginalExtension();  // Get Extension
-                $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
+                $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
                 (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
                     : $filePath = $file->storeAs('storage/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/videos', $filePath);  
@@ -144,7 +144,7 @@ class CourseDetailController extends Controller
                     : File::delete(storage_path('app/public/'.$request->old_video));
                 $file = $request->file('video');
                 $extension = $request->video->getClientOriginalExtension();  // Get Extension
-                $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
+                $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
                 (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
                     : $filePath = $file->storeAs('storage/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/videos', $filePath);  
@@ -175,7 +175,7 @@ class CourseDetailController extends Controller
             if ($request->video) {
                 $file = $request->file('video');
                 $extension = $request->video->getClientOriginalExtension();  // Get Extension
-                $fileName = substr(Hash::make($request->title.$request->doctor.session()->get('sid')), 0, 25).'.'.$extension;  // Concatenate both to get FileName
+                $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
                 (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
                     : $filePath = $file->storeAs('storage/videos/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
                 // $file->move(storage_path().'/videos', $filePath);  

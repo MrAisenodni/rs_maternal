@@ -1,5 +1,5 @@
-1;2022082812345;Developer;l;Bekasi;1998-10-07;developer.pro@hotmail.com;1;adm
-2;2022082854321;Administrator;l;Bekasi;1990-10-09;administrator.maternal@gmail.com;1;adm
-3;2022082854322;Dokter;l;Bekasi;1990-10-11;dokter.maternal@gmail.com;1;tec
-4;1233217482294;Pasien Maternal;l;Bekasi;1990-10-08;pasien.maternal@gmail.com;1;pat
-5;1233217482295;Pasien Neonatal;l;Bekasi;1990-10-08;pasien.neonatal@gmail.com;1;pat
+1;2022082812345;Developer;l;1;developer.pro@hotmail.com;adm;profiles/5. Developer.jpg;5. Developer.jpg
+2;2022082854321;Administrator;l;1;administrator.maternal@mpku.com;adm;profiles/4. Admin.jpg;4. Admin.jpg
+3;2022082854322;Samsul Mujakar;l;1;samsul.mujakar@mpku.com;tec;profiles/1. Samsul Mujakar.png;1. Samsul Mujakar.png
+4;1233217482294;Fita Asfianti;p;1;fifa.asfianti@mpku.com;tec;profiles/2. Fita Asfianti.png;2. Fita Asfianti.png
+5;1233217482295;Suci Dwi Fatmaningrum;p;1;suci.dwi.fatmaningrum@mpku.com;tec;profiles/3. Suci Dwi Fatmaningrum.png;3. Suci Dwi Fatmaningrum.png

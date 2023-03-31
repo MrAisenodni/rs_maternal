@@ -62,7 +62,7 @@
                         <div class="card-header">
                             <div class="media align-items-center">
                                 <div class="media-left">
-                                    <img src="{{ asset($data->teacher->picture) }}" alt="About Adrian" width="50" class="rounded-circle">
+                                    <img src="{{ asset('/storage/'.$data->teacher->picture) }}" alt="#" width="50" class="rounded-circle">
                                 </div>
                                 <div class="media-body">
                                     <h4 class="card-title"><a href="#">{{ $data->teacher->full_name }}</a></h4>
@@ -117,7 +117,7 @@
                         </ul>
                     </div>
 
-                    <div class="card">
+                    {{-- <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Peringkat</h4>
                         </div>
@@ -141,7 +141,7 @@
                             </div>
                             <small class="text-muted">20 ratings</small>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

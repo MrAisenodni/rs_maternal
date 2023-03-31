@@ -11,7 +11,7 @@
         <meta name="robots" content="noindex">
 
         <!-- Favicon -->
-        <link rel="icon" href="{{ asset($provider->provider_logo) }}" type="image/png" />
+        <link rel="icon" href="{{ asset('/storage/'.$provider->provider_logo) }}" type="image/png" />
 
         <!-- Custom Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500%7CRoboto:400,500&display=swap" rel="stylesheet">
