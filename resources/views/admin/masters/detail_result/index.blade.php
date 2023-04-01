@@ -8,6 +8,10 @@
 
     {{-- Sweet Alert --}}
     <link href="{{ asset('/assets/plugins/sweet-alert/sweetalert2.min.css') }}" rel="stylesheet" />
+
+    {{-- Select2 --}}
+    <link href="{{ asset('/assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
 @endsection
     
 @section('content')
@@ -41,7 +45,8 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 5%">No</th>
-                                                    <th>Nama</th>
+                                                    <th>Judul</th>
+                                                    <th>Sub Judul</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -50,7 +55,8 @@
                                                     @foreach ($data as $item)
                                                         <tr data-id="{{ $item->id }}">
                                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                                            <td>{{ $item->name }}</td>
+                                                            <td>{{ $item->result->title }}</td>
+                                                            <td>{{ $item->title }}</td>
                                                             <td class="text-center" style="width: 20%">
                                                                 @if ($access->edit == 1)
                                                                     <a href="{{ $c_menu->url }}/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
@@ -79,11 +85,11 @@
                             <div class="card">
                                 <div class="card-body">
                                     @if (request()->path() == substr($c_menu->url, 1))
-                                        @include('admin.masters.religion.create')
+                                        @include('admin.masters.detail_result.create')
                                     @elseif (substr(request()->path(), -4) == 'edit')
-                                        @include('admin.masters.religion.edit')
+                                        @include('admin.masters.detail_result.edit')
                                     @else
-                                        @include('admin.masters.religion.show')
+                                        @include('admin.masters.detail_result.show')
                                     @endif
                                 </div>
                             </div>
@@ -104,4 +110,8 @@
     {{-- Sweet Alert --}}
     <script src="{{ asset('/assets/plugins/sweet-alert/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('/assets/js/sweet-alert.init.js') }}"></script>
+
+    {{-- Select2 --}}
+    <script src="{{ asset('/assets/plugins/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/form-select2.js') }}"></script>
 @endsection

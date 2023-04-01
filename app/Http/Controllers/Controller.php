@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Masters\{
     Category,
     City,
+    Companion,
     Country,
     DetailResult,
     District,
@@ -28,7 +29,6 @@ use App\Models\Settings\{
 };
 use App\Models\Transactions\{
     ClinicResults,
-    Companion,
     CourseDetail,
     CourseDetailApproval,
     CourseDetailDocument,

@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\Transactions;
+namespace Database\Seeders\Masters;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -10,8 +10,8 @@ class CompanionSeeder extends CsvSeeder
 {
     public function __construct()
     {
-        $this->file = '/database/csv/Transactions/Companion.csv';
-        $this->tablename = 'trx_companion';
+        $this->file = '/database/csv/Masters/Companion.csv';
+        $this->tablename = 'mst_companion';
         $this->defaults = [
             'created_by'    => 'Migrasi'
         ];

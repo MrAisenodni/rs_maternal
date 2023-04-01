@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             // Masters\CountrySeeder::class,
             // Masters\ProvinceSeeder::class,
             // Masters\CitySeeder::class,
+            Masters\CompanionSeeder::class,
             // Masters\DistrictSeeder::class,
             // // Masters\WardSeeder::class, // Komentar sementara untuk mempercepat Migrasi
             // Masters\CategorySeeder::class,
@@ -22,10 +23,10 @@ class DatabaseSeeder extends Seeder
             
             // // Seeder untuk Tabel Setting
             // Settings\LoginSeeder::class,
-            // Settings\MainMenuSeeder::class,
-            // Settings\MenuSeeder::class,
-            // Settings\SubMenuSeeder::class,
-            // Settings\MenuAccessSeeder::class,
+            Settings\MainMenuSeeder::class,
+            Settings\MenuSeeder::class,
+            Settings\SubMenuSeeder::class,
+            Settings\MenuAccessSeeder::class,
             // Settings\ProviderSeeder::class,
             // Settings\UserSeeder::class,
 
@@ -33,13 +34,12 @@ class DatabaseSeeder extends Seeder
             // Transactions\CourseHeaderSeeder::class,
             // Transactions\CourseDetailSeeder::class,
             // Transactions\CourseDetailDocumentSeeder::class,
-            // Transactions\CompanionSeeder::class,
 
             // // Seeder untuk Tabel Dashboard
             // Masters\HospitalSeeder::class,
             // Masters\ResultSeeder::class,
             // Masters\DetailResultSeeder::class,
-            Transactions\ClinicResultsSeeder::class,
+            // Transactions\ClinicResultsSeeder::class,
         ]);
     }
 }

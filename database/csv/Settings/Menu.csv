@@ -16,3 +16,8 @@
 16;Daftar Pembelajaran;fa fa-video;;1;2;1;1
 17;Daftar Dokumen;fa fa-file;;1;2;1;1
 18;Sampah Materi;fa fa-trash;/admin/trash-courses;0;2;1;0
+19;Rumah Sakit;fa fa-hospital;/master/hospital;0;3;1;1
+20;Pendamping;fa fa-people-carry;/master/companion;0;3;1;1
+21;Kriteria Capaian;fa fa-medal;/master/result;0;3;1;1
+22;Detail Kriteria Capaian;fa fa-trophy;/master/detail-result;0;3;1;1
+23;Data Rutin Capaian;fa fa-notes-medical;/admin/clinic-results;0;2;1;1

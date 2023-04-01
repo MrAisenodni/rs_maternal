@@ -79,11 +79,11 @@
                             <div class="card">
                                 <div class="card-body">
                                     @if (request()->path() == substr($c_menu->url, 1))
-                                        @include('admin.masters.religion.create')
+                                        @include('admin.masters.hospital.create')
                                     @elseif (substr(request()->path(), -4) == 'edit')
-                                        @include('admin.masters.religion.edit')
+                                        @include('admin.masters.hospital.edit')
                                     @else
-                                        @include('admin.masters.religion.show')
+                                        @include('admin.masters.hospital.show')
                                     @endif
                                 </div>
                             </div>

@@ -4,11 +4,15 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\Masters\{
     CategoryController,
     CityController,
+    CompanionController,
     CountryController,
     DistrictController,
+    DetailResultController,
+    HospitalController,
     LevelController,
     ProvinceController,
     ReligionController,
+    ResultController,
     RoleController,
     WardController,
 };
@@ -82,11 +86,15 @@ Route::middleware('authcheck')->group(function() {
     // Master
     Route::resource('/master/category', CategoryController::class);
     Route::resource('/master/city', CityController::class);
+    Route::resource('/master/companion', CompanionController::class);
     Route::resource('/master/country', CountryController::class);
+    Route::resource('/master/detail-result', DetailResultController::class);
     Route::resource('/master/district', DistrictController::class);
+    Route::resource('/master/hospital', HospitalController::class);
     Route::resource('/master/level', LevelController::class);
     Route::resource('/master/province', ProvinceController::class);
     Route::resource('/master/religion', ReligionController::class);
+    Route::resource('/master/result', ResultController::class);
     Route::resource('/master/role', RoleController::class);
     Route::resource('/master/ward', WardController::class);
 

@@ -4,11 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTrxCompanion extends Migration
+class CreateMstCompanion extends Migration
 {
     public function up()
     {
-        Schema::create('trx_companion', function (Blueprint $table) {
+        Schema::create('mst_companion', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
             
@@ -26,6 +26,6 @@ class CreateTrxCompanion extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('trx_companion');
+        Schema::dropIfExists('mst_companion');
     }
 }

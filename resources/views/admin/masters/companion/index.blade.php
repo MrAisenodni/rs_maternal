@@ -50,7 +50,7 @@
                                                     @foreach ($data as $item)
                                                         <tr data-id="{{ $item->id }}">
                                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                                            <td>{{ $item->name }}</td>
+                                                            <td>{{ $item->title }}</td>
                                                             <td class="text-center" style="width: 20%">
                                                                 @if ($access->edit == 1)
                                                                     <a href="{{ $c_menu->url }}/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
@@ -79,11 +79,11 @@
                             <div class="card">
                                 <div class="card-body">
                                     @if (request()->path() == substr($c_menu->url, 1))
-                                        @include('admin.masters.religion.create')
+                                        @include('admin.masters.companion.create')
                                     @elseif (substr(request()->path(), -4) == 'edit')
-                                        @include('admin.masters.religion.edit')
+                                        @include('admin.masters.companion.edit')
                                     @else
-                                        @include('admin.masters.religion.show')
+                                        @include('admin.masters.companion.show')
                                     @endif
                                 </div>
                             </div>

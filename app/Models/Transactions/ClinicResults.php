@@ -2,7 +2,7 @@
 
 namespace App\Models\Transactions;
 
-use App\Models\Masters\{ DetailResult, Hospital, Result };
+use App\Models\Masters\{ Companion, DetailResult, Hospital, Result };
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
