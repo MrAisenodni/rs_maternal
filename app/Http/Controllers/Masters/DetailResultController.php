@@ -18,7 +18,7 @@ class DetailResultController extends Controller
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
-        if ($data['access']->view == 0 || $data['access']->add == 0) abort(403);
+        if ($data['access']->view == 0 && $data['access']->add == 0) abort(403);
 
         return view('admin.masters.detail_result.index', $data);
     }
@@ -47,7 +47,7 @@ class DetailResultController extends Controller
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
-        if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
+        if ($data['access']->view == 0 && $data['access']->detail == 0) abort(403);
         
         return view('admin.masters.detail_result.index', $data);
     }
@@ -62,7 +62,7 @@ class DetailResultController extends Controller
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
-        if ($data['access']->view == 0 || $data['access']->edit == 0) abort(403);
+        if ($data['access']->view == 0 && $data['access']->edit == 0) abort(403);
         
         return view('admin.masters.detail_result.index', $data);
     }

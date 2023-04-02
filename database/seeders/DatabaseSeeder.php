@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
             // Settings\MainMenuSeeder::class,
             // Settings\MenuSeeder::class,
             // Settings\SubMenuSeeder::class,
-            // Settings\MenuAccessSeeder::class,
-            Settings\ProviderSeeder::class,
+            Settings\MenuAccessSeeder::class,
+            // Settings\ProviderSeeder::class,
             // Settings\UserSeeder::class,
 
             // // Seeder untuk Tabel Transaksi
