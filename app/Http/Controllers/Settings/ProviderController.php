@@ -30,8 +30,8 @@ class ProviderController extends Controller
             'owner_npwp'            => 'unique:stg_provider,owner_npwp,'.$request->id.',id,disabled,1',
             'owner_nik'             => 'unique:stg_provider,owner_nik,'.$request->id.',id,disabled,1',
             'owner_email'           => 'unique:stg_provider,owner_email,'.$request->id.',id,disabled,1',
-            'owner_address_2'       => 'min:1|max:3',
-            'owner_address_3'       => 'min:1|max:3',
+            'owner_address_2'       => 'max:3',
+            'owner_address_3'       => 'max:3',
         ]);
 
         $data = [

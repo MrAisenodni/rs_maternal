@@ -17,6 +17,7 @@ use App\Http\Controllers\Masters\{
     WardController,
 };
 use App\Http\Controllers\Management\{
+    ClinicResultsController,
     CourseHeaderController,
     CourseHeaderApprovalController,
     CourseDetailController,
@@ -74,6 +75,7 @@ Route::middleware('authcheck')->group(function() {
     Route::get('/view-course/{id}/{ids}', [ViewCourseController::class, 'index']);
 
     // Management
+    Route::resource('/admin/clinic-results', ClinicResultsController::class);
     Route::resource('/admin/course-header', CourseHeaderController::class);
     Route::resource('/admin/course-header-approval', CourseHeaderApprovalController::class);
     Route::get('/admin/course-detail/{id}/create', [CourseDetailController::class, 'create']);
