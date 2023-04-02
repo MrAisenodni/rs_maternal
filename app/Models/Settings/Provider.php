@@ -12,8 +12,8 @@ class Provider extends Model
 
     protected $table = 'stg_provider';
 
-    public function provider_ward()
+    public function provider_district()
     {
-        return $this->belongsTo(District::class, 'provider_ward_id', 'id')->select('id', 'name', 'post_code')->where('disabled', 0);
+        return $this->belongsTo(District::class, 'provider_district_id', 'id')->select('id', 'name')->where('disabled', 0);
     }
 }

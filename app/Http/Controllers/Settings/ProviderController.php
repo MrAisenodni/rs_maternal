@@ -16,8 +16,6 @@ class ProviderController extends Controller
             'c_menu'            => $this->menu->select('id', 'title', 'main_menu_id', 'url')->where('url', $this->path)->first(),
             'detail'            => $this->provider->where('disabled', 0)->first(),
             'districts'         => $this->district->select('id', 'name')->where('disabled', 0)->get(),
-            // 'wards'         => $this->ward->select('id', 'name', 'post_code')->where('disabled', 0)->get(),
-            // 'wards'         => $this->ward->select('id', 'name', 'post_code')->where('disabled', 0)->paginate(100),
         ];
 
         return view('admin.settings.provider', $data);
@@ -25,61 +23,67 @@ class ProviderController extends Controller
 
     public function store(Request $request)
     {
-        $input = $request->all();
-
         $validate = $request->validate([
-            'provider_npwp'         => 'required|unique:stg_provider,provider_npwp,'.$input['id'].',id,disabled,1',
+            'provider_npwp'         => 'required|unique:stg_provider,provider_npwp,'.$request->id.',id,disabled,1',
             'provider_name'         => 'required',
+            'provider_email'        => 'unique:stg_provider,provider_email,'.$request->id.',id,disabled,1',
+            'owner_npwp'            => 'unique:stg_provider,owner_npwp,'.$request->id.',id,disabled,1',
+            'owner_nik'             => 'unique:stg_provider,owner_nik,'.$request->id.',id,disabled,1',
+            'owner_email'           => 'unique:stg_provider,owner_email,'.$request->id.',id,disabled,1',
+            'owner_address_2'       => 'min:1|max:3',
+            'owner_address_3'       => 'min:1|max:3',
         ]);
 
         $data = [
-            'provider_npwp'         => $input['provider_npwp'],
-            'provider_name'         => $input['provider_name'],
-            'provider_birth_place'  => $input['provider_birth_place'],
-            'provider_birth_date'   => date('Y-m-d', strtotime(str_replace('/', '-', $input['provider_birth_date']))),
-            'provider_email'        => $input['provider_email'],
-            'provider_phone_number' => $input['provider_phone_number'],
-            'provider_address'      => $input['provider_address'],
-            'provider_ward_id'      => $input['provider_ward'],
-            'provider_logo'         => $input['old_provider_logo'],
-            'provider_picture'      => $input['old_provider_picture'],
-            'owner_npwp'            => $input['owner_npwp'],
-            'owner_nik'             => $input['owner_nik'],
-            'owner_name'            => $input['owner_name'],
-            'owner_birth_place'     => $input['owner_birth_place'],
-            'owner_birth_date'      => date('Y-m-d', strtotime(str_replace('/', '-', $input['owner_birth_date']))),
-            'owner_email'           => $input['owner_email'],
-            'owner_phone_number'    => $input['owner_phone_number'],
-            'owner_address_1'       => $input['owner_address_1'],
-            'owner_address_2'       => $input['owner_address_2'],
-            'owner_address_3'       => $input['owner_address_3'],
-            'owner_ward_id'         => $input['owner_ward'],
+            'provider_npwp'         => $request->provider_npwp,
+            'provider_name'         => $request->provider_name,
+            'provider_birth_place'  => $request->provider_birth_place,
+            'provider_birth_date'   => date('Y-m-d', strtotime($request->provider_birth_date)),
+            'provider_email'        => $request->provider_email,
+            'provider_phone_number' => $request->provider_phone_number,
+            'provider_address_1'    => $request->provider_address,
+            'provider_district_id'  => $request->provider_district,
+            'provider_ward'         => $request->provider_ward,
+            'provider_logo'         => $request->old_provider_logo,
+            'provider_picture'      => $request->old_provider_picture,
+            'owner_npwp'            => $request->owner_npwp,
+            'owner_nik'             => $request->owner_nik,
+            'owner_name'            => $request->owner_name,
+            'owner_birth_place'     => $request->owner_birth_place,
+            'owner_birth_date'      => date('Y-m-d', strtotime($request->owner_birth_date)),
+            'owner_email'           => $request->owner_email,
+            'owner_phone_number'    => $request->owner_phone_number,
+            'owner_address_1'       => $request->owner_address_1,
+            'owner_address_2'       => $request->owner_address_2,
+            'owner_address_3'       => $request->owner_address_3,
+            'owner_district_id'     => $request->owner_district,
+            'owner_ward'            => $request->owner_ward,
             'created_at'            => now(),
             'created_by'            => session()->get('sname').' ('.session()->get('srole').')',
         ];
         // dd($data);
 
         if ($request->provider_logo) {
-            if ($request->old_provider_logo) File::delete(public_path().$request->old_provider_logo);
+            if ($request->old_provider_logo) File::delete(storage_path('app/public/'.$request->old_provider_logo));
             $file = $request->file('provider_logo');
-            // $extension = $request->provider_logo->getClientOriginalExtension();  //Get Image Extension
-            // $fileName =  strtotime(now()).'_'.$request->nis.'_'.$request->full_name.'.'.$extension;  //Concatenate both to get FileName (eg: file.jpg)
-            $file->move(public_path(), '/favicon.ico');  
-            $data['provider_logo'] = '/favicon.ico'; 
+            $extension = $request->provider_logo->getClientOriginalExtension();  // Get Extension
+            $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
+            (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('provider/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
+                : $filePath = $file->storeAs('storage/provider/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+            $data['provider_logo'] = $filePath;
         }
 
         if ($request->provider_picture) {
-            if ($request->old_provider_picture) File::delete(public_path().$request->old_provider_picture);
+            if ($request->old_provider_picture) File::delete(storage_path('app/public/'.$request->old_provider_picture));
             $file = $request->file('provider_picture');
-            // $extension = $request->provider_picture->getClientOriginalExtension();  //Get Image Extension
-            // $fileName =  strtotime(now()).'_'.$request->nis.'_'.$request->full_name.'.'.$extension;  //Concatenate both to get FileName (eg: file.jpg)
-            $file->move(public_path(), '/images/favicon-32x32.png');  
-
-            $data['provider_picture'] = '/images/favicon-32x32.png'; 
+            $extension = $request->provider_picture->getClientOriginalExtension();  // Get Extension
+            $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
+            (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('provider/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
+                : $filePath = $file->storeAs('storage/provider/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+            $data['provider_picture'] = $filePath;
         }
-        // dd($data);
 
-        $this->provider->where('id', $input['id'])->update($data);
+        $this->provider->where('id', $request->id)->update($data);
 
         return redirect($this->path)->with('status', 'Perubahan Berhasil Disimpan.');
     }

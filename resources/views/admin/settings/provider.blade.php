@@ -27,15 +27,11 @@
                     <div class="row">
                         @if (session('status'))
                             <div class="col-12">
-                                <div class="alert border-0 bg-light-success alert-dismissible fade show py-2">
-                                    <div class="d-flex align-items-center">
-                                        <div class="fs-3 text-success"><i class="bi bi-check-circle-fill"></i>
-                                        </div>
-                                        <div class="ms-3">
-                                            <div class="text-success">{{ session('status') }}</div>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <div class="alert alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <strong>Sukses - </strong> {{ session('status') }}
                                 </div>
                             </div>
                         @endif 
@@ -53,9 +49,9 @@
                                                     <div class="col-12">
                                                         <label class="form-label" for="provider_logo">Logo Perusahaan</label>
                                                         <span class="desc"></span>
-                                                        <img class="img-fluid" src="{{ asset($detail->provider_logo) }}" alt="" style="max-width:100%;">
+                                                        <img id="show_logo" class="img-fluid" src="{{ asset('/storage/'.$detail->provider_logo) }}" alt="" style="max-width:100%;">
                                                         <input type="hidden" name="old_provider_logo" value="{{ $detail->provider_logo }}">
-                                                        <input type="file" class="form-control @error('provider_logo') is-invalid @enderror" id="image" name="provider_logo" value="{{ old('provider_logo', $detail->provider_logo) }}">
+                                                        <input type="file" class="form-control @error('provider_logo') is-invalid @enderror" id="image" name="provider_logo" value="{{ old('provider_logo', $detail->provider_logo) }}" onchange="readURLLogo(this)">
                                                         @error('provider_logo')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
@@ -65,9 +61,9 @@
                                                     <div class="col-12">
                                                         <label class="form-label" for="provider_picture">Label Perusahaan</label>
                                                         <span class="desc"></span>
-                                                        <img class="img-preview img-fluid mb-2" src="{{ asset($detail->provider_picture) }}" alt="" style="max-width:100%;">
+                                                        <img id="show_picture" class="img-preview img-fluid mb-2" src="{{ asset('/storage/'.$detail->provider_picture) }}" alt="" style="max-width:100%;">
                                                         <input type="hidden" name="old_provider_picture" value="{{ $detail->provider_picture }}">
-                                                        <input type="file" class="form-control @error('provider_picture') is-invalid @enderror" id="image" name="provider_picture" value="{{ old('provider_picture', $detail->provider_picture) }}">
+                                                        <input type="file" class="form-control @error('provider_picture') is-invalid @enderror" id="image" name="provider_picture" value="{{ old('provider_picture', $detail->provider_picture) }}" onchange="readURLPicture(this)">
                                                         @error('provider_picture')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
@@ -101,7 +97,7 @@
                                                     </div>
                                                     <div class="col-3">
                                                         <label class="form-label" for="provider_birth_date">Tanggal Didirikan</label>
-                                                        <input type="text" class="form-control datepicker @error('provider_birth_date') is-invalid @enderror" id="provider_birth_date" name="provider_birth_date" value="{{ old('provider_birth_date', date('d/m/Y', strtotime($detail->provider_birth_date))) }}">
+                                                        <input type="date" class="form-control @error('provider_birth_date') is-invalid @enderror" id="provider_birth_date" name="provider_birth_date" value="{{ old('provider_birth_date', date('d/m/Y', strtotime($detail->provider_birth_date))) }}">
                                                         @error('provider_birth_date')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
@@ -140,16 +136,23 @@
                                                     </div>
                                                 </div>
                                                 <div class="row mb-2">
-                                                    <div class="col-12">
-                                                        <label class="form-label" for="provider_ward">Kelurahan</label>
-                                                        <select class="single-select form-control @error('provider_ward') is-invalid @enderror" id="provider_ward" name="provider_ward">
+                                                    <div class="col-6">
+                                                        <label class="form-label" for="provider_district">Kecamatan</label>
+                                                        <select class="select-min form-control @error('provider_district') is-invalid @enderror" id="provider_district" name="provider_district">
                                                             <option value="">=== SILAHKAN PILIH ===</option>
                                                             @if ($districts)
                                                                 @foreach ($districts as $district)
-                                                                    <option value="{{ $district->id }}" @if ($district->id == $detail->provider_ward_id) selected @endif>{{ $district->name }}</option>
+                                                                    <option value="{{ $district->id }}" @if ($district->id == $detail->provider_district_id) selected @endif>{{ $district->name }}</option>
                                                                 @endforeach
                                                             @endif
                                                         </select>
+                                                        @error('provider_district')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label class="form-label" for="provider_ward">Kelurahan</label>
+                                                        <input type="text" class="form-control @error('provider_ward') is-invalid @enderror" id="provider_ward" name="provider_ward" value="{{ old('provider_ward', $detail->provider_ward) }}">
                                                         @error('provider_ward')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
@@ -193,7 +196,7 @@
                                             </div>
                                             <div class="col-3">
                                                 <label class="form-label" for="owner_birth_date">Tanggal Lahir</label>
-                                                <input type="text" class="form-control datepicker @error('owner_birth_date') is-invalid @enderror" id="owner_birth_date" name="owner_birth_date" value="{{ old('owner_birth_date', date('d/m/Y', strtotime($detail->owner_birth_date))) }}">
+                                                <input type="date" class="form-control @error('owner_birth_date') is-invalid @enderror" id="owner_birth_date" name="owner_birth_date" value="{{ old('owner_birth_date', date('d/m/Y', strtotime($detail->owner_birth_date))) }}">
                                                 @error('owner_birth_date')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -246,14 +249,23 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="col-10">
-                                                <label class="form-label" for="owner_ward">Kelurahan</label>
-                                                <select class="single-select form-control @error('owner_ward') is-invalid @enderror" id="owner_ward" name="owner_ward">
+                                            <div class="col-5">
+                                                <label class="form-label" for="owner_district">Kecamatan</label>
+                                                <select class="select-min form-control @error('owner_district') is-invalid @enderror" id="owner_district" name="owner_district">
                                                     <option value="">=== SILAHKAN PILIH ===</option>
-                                                    @if ($detail->owner_ward_id)
-                                                        <option value="{{ $detail->owner_ward->id }}" selected>[{{ $detail->owner_ward->post_code }}] {{ $detail->owner_ward->name }}</option>
+                                                    @if ($districts)
+                                                        @foreach ($districts as $district)
+                                                            <option value="{{ $district->id }}" @if ($district->id == $detail->owner_district_id) selected @endif>{{ $district->name }}</option>
+                                                        @endforeach
                                                     @endif
                                                 </select>
+                                                @error('owner_district')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-5">
+                                                <label class="form-label" for="owner_ward">Kelurahan</label>
+                                                <input type="text" class="form-control @error('owner_ward') is-invalid @enderror" id="owner_ward" name="owner_ward" value="{{ old('owner_ward', $detail->owner_ward) }}">
                                                 @error('owner_ward')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -286,4 +298,36 @@
     {{-- Select2 --}}
     <script src="{{ asset('/assets/plugins/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('/assets/js/form-select2.js') }}"></script>
+
+    <script>
+        // For Upload Picture
+        function readURLLogo(input) 
+        {
+            if (input.files && input.files[0])
+            {
+                var reader = new FileReader()
+    
+                reader.onload = function (e) 
+                {
+                    $('#show_logo').attr('src', e.target.result)
+                }
+    
+                reader.readAsDataURL(input.files[0])
+            }
+        }
+        function readURLPicture(input) 
+        {
+            if (input.files && input.files[0])
+            {
+                var reader = new FileReader()
+    
+                reader.onload = function (e) 
+                {
+                    $('#show_picture').attr('src', e.target.result)
+                }
+    
+                reader.readAsDataURL(input.files[0])
+            }
+        }
+    </script>
 @endsection
