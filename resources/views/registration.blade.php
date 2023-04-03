@@ -195,7 +195,21 @@
                             <div class="form-group">
                                 <label class="form-label" for="email">Masukkan Email Anda:</label>
                                 <div class="input-group input-group-merge">
-                                    <input id="email" type="email" name="username" class="form-control form-control-prepended @error('username') is-invalid @enderror" placeholder="Masukkan Email Anda" value="{{ old('username') }}">
+                                    <input id="email" type="email" name="email" class="form-control form-control-prepended @error('email') is-invalid @enderror" placeholder="Masukkan Email Anda" value="{{ old('email') }}">
+                                    @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="fa fa-envelope"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="username">Masukkan Nama Pengguna Anda:</label>
+                                <div class="input-group input-group-merge">
+                                    <input id="username" type="text" name="username" class="form-control form-control-prepended @error('username') is-invalid @enderror" placeholder="Masukkan Nama Pengguna Anda" value="{{ old('username') }}">
                                     @error('username')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

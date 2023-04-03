@@ -73,6 +73,7 @@ class PageController extends Controller
             'email'                 => $request->email,
             'phone_number'          => $request->phone_number,
             'home_number'           => $request->home_number,
+            'religion_id'           => $request->religion,
             'role'                  => $request->role,
         ];
 
