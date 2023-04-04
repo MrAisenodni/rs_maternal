@@ -122,7 +122,7 @@
                                             <div class="col-12">
                                                 <div class="d-grid">
                                                     <a href="{{ $c_menu->url }}" class="btn btn-warning">KEMBALI</a>
-                                                    <a href="{{ $c_menu->url }}" class="btn btn-danger">TOLAK</a>
+                                                    <a href="{{ $c_menu->url }}/{{ $detail->id }}/delete" class="btn btn-danger">TOLAK</a>
                                                     <button type="submit" class="btn btn-success">SETUJU</button>
                                                 </div>
                                             </div>

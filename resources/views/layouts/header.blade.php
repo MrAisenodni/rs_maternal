@@ -26,7 +26,7 @@
                                 <img src="{{ asset('/storage/'.session()->get('spicture')) }}" alt="Avatar" class="rounded-circle" width="40">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="/profil/{{ session()->get('suser_id') }}">
+                                <a class="dropdown-item" href="/profile/{{ session()->get('suser_id') }}">
                                     <i class="material-icons">person</i> Profil
                                 </a>
                                 <a class="dropdown-item" href="/logout">

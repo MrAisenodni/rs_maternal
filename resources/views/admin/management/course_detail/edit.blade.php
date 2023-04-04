@@ -9,6 +9,12 @@
 
     <!-- Quill Theme -->
     <link type="text/css" href="{{ asset('/assets/css/quill.css') }}" rel="stylesheet">
+
+    {{-- Data Table --}}
+    <link href="{{ asset('/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+
+    {{-- Sweet Alert --}}
+    <link href="{{ asset('/assets/plugins/sweet-alert/sweetalert2.min.css') }}" rel="stylesheet" />
 @endsection
     
 @section('content')
@@ -188,6 +194,15 @@
     {{-- Quill Theme --}}
     <script src="{{ asset('/assets/vendor/quill.min.js') }}"></script>
     <script src="{{ asset('/assets/js/quill.js') }}"></script>
+    
+    {{-- Data Table --}}
+    <script src="{{ asset('/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/table-datatable.js') }}"></script>
+    
+    {{-- Sweet Alert --}}
+    <script src="{{ asset('/assets/plugins/sweet-alert/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/sweet-alert.init.js') }}"></script>
 
     {{-- Auto Preview --}}
     <script type="text/javascript">

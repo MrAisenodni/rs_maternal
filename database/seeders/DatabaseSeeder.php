@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             // // Seeder untuk Tabel Setting
             // Settings\LoginSeeder::class,
             // Settings\MainMenuSeeder::class,
-            // Settings\MenuSeeder::class,
+            Settings\MenuSeeder::class,
             // Settings\SubMenuSeeder::class,
             Settings\MenuAccessSeeder::class,
             // Settings\ProviderSeeder::class,

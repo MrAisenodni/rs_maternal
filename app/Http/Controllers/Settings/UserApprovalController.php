@@ -99,8 +99,8 @@ class UserApprovalController extends Controller
             'updated_by'    => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
-        $this->user_approval->where('id', $id)->update($data);
-        $this->login->where('user_id', $id)->update($data);
+        $this->login_approval->where('user_id', $id)->delete();
+        $this->user_approval->where('id', $id)->delete();
 
         return redirect($this->path)->with('status', 'Data Berhasil Dihapus.');
     }

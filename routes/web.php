@@ -31,6 +31,7 @@ use App\Http\Controllers\Patient\{
 };
 use App\Http\Controllers\Settings\{
     LoginController,
+    ProfileController,
     ProviderController,
     UserController,
     UserApprovalController,
@@ -77,11 +78,14 @@ Route::middleware('authcheck')->group(function() {
     // Management
     Route::resource('/admin/clinic-results', ClinicResultsController::class);
     Route::resource('/admin/course-header', CourseHeaderController::class);
+    Route::get('/admin/course-header-approval/{id}/delete', [CourseHeaderApprovalController::class, 'destroy']);
     Route::resource('/admin/course-header-approval', CourseHeaderApprovalController::class);
     Route::get('/admin/course-detail/{id}/create', [CourseDetailController::class, 'create']);
     Route::resource('/admin/course-detail', CourseDetailController::class);
+    Route::get('/admin/course-detail-approval/{id}/delete', [CourseDetailApprovalController::class, 'destroy']);
     Route::resource('/admin/course-detail-approval', CourseDetailApprovalController::class);
     Route::get('/admin/course-detail-document/{id}/create', [CourseDetailDocumentController::class, 'create']);
+    Route::get('/admin/course-detail-document-approval/{id}/delete', [CourseDetailDocumentApprovalController::class, 'destroy']);
     Route::resource('/admin/course-detail-document-approval', CourseDetailDocumentApprovalController::class);
     Route::resource('/admin/course-detail-document', CourseDetailDocumentController::class);
 
@@ -101,7 +105,9 @@ Route::middleware('authcheck')->group(function() {
     Route::resource('/master/ward', WardController::class);
 
     // Setting
+    Route::resource('/profile', ProfileController::class);
     Route::resource('/setting/provider', ProviderController::class);
     Route::resource('/setting/user', UserController::class);
+    Route::get('/setting/user-approval/{id}/delete', [UserApprovalController::class, 'destroy']);
     Route::resource('/setting/user-approval', UserApprovalController::class);
 });
