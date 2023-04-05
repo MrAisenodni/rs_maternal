@@ -97,9 +97,9 @@
                             <div class="form-group ">
                                 <button type="submit"class="btn btn-primary btn-block">Masuk</button>
                             </div>
-                            <div class="text-center">
+                            {{-- <div class="text-center">
                                 <a href="/forgot-password" class="text-black-70" style="text-decoration: underline;">Lupa Kata Sandi?</a>
-                            </div>
+                            </div> --}}
                         </form>
                     </div>
                     <div class="card-footer text-center text-black-50">

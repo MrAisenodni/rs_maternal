@@ -8,7 +8,6 @@
     <link href="{{ asset('/assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
 
     {{-- Quill Theme --}}
-    <!-- Quill Theme -->
     <link type="text/css" href="{{ asset('/assets/css/quill.css') }}" rel="stylesheet">
 @endsection
     
@@ -147,7 +146,7 @@
                                             </div>
                                             <div class="col-2">
                                                 <label class="form-label" for="address_3">RW</label>
-                                                <input type="text" class="form-control @error('address_3') is-invalid @enderror" id="address_3" name="address_3" value="{{ old('address_3', $detail->address_2) }}">
+                                                <input type="text" class="form-control @error('address_3') is-invalid @enderror" id="address_3" name="address_3" value="{{ old('address_3', $detail->address_3) }}">
                                                 @error('address_3')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

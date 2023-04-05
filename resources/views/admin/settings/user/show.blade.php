@@ -86,7 +86,7 @@
                                             </div>
                                             <div class="col-2">
                                                 <label class="form-label" for="address_3">RW</label>
-                                                <input type="text" class="form-control @error('address_3') is-invalid @enderror" id="address_3" name="address_3" value="{{ old('address_3', $detail->address_2) }}" disabled>
+                                                <input type="text" class="form-control @error('address_3') is-invalid @enderror" id="address_3" name="address_3" value="{{ old('address_3', $detail->address_3) }}" disabled>
                                             </div>
                                             <div class="col-4">
                                                 <label class="form-label" for="religion">Agama</label>

@@ -15,7 +15,7 @@ class UserSeeder extends CsvSeeder
         $this->defaults = [
             'created_by'    => 'Migrasi'
         ];
-        $this->mapping = ['id', 'nik', 'full_name', 'gender', 'religion_id', 'emai', 'role', 'picture', 'picture_name'];
+        $this->mapping = ['id', 'nik', 'full_name', 'gender', 'religion_id', 'email', 'role', 'picture', 'picture_name'];
         $this->header = false;
     }
 

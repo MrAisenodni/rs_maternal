@@ -71,10 +71,13 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <p>E: {{ $data->teacher->email }}<br>P: {{ $data->teacher->phone_number }}<br>H: {{ $data->teacher->home_number }}</p>
-                            <a href="{{ $data->teacher->facebook }}" class="btn btn-light"><i class="fab fa-facebook"></i></a>
-                            <a href="{{ $data->teacher->twitter }}" class="btn btn-light"><i class="fab fa-twitter"></i></a>
-                            <a href="{{ $data->teacher->github }}" class="btn btn-light"><i class="fab fa-github"></i></a>
+                            {!! $data->teacher->biography !!}
+                        </div>
+                        <div class="card-footer text-center">
+                            <a target="_blank" href="{{ url('https://id-id.facebook.com/'.$data->teacher->facebook) }}" class="btn btn-light"><i class="fab fa-facebook"></i></a>
+                            <a target="_blank" href="{{ url('https://twitter.com/'.$data->teacher->twitter) }}" class="btn btn-light"><i class="fab fa-twitter"></i></a>
+                            <a target="_blank" href="{{ url('https://www.instagram.com/'.$data->teacher->instagram) }}" class="btn btn-light"><i class="fab fa-instagram"></i></a>
+                            <a target="_blank" href="{{ url('https://github.com/'.$data->teacher->github) }}" class="btn btn-light"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
 
