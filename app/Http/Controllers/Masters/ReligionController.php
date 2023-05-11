@@ -44,6 +44,9 @@ class ReligionController extends Controller
             'detail'        => $this->religion->select('id', 'name')->where('id', $id)->where('disabled', 0)->first(),
             'data'          => $this->religion->select('id', 'name')->where('disabled', 0)->get(),
         ];
+        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
+            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
+        if ($data['access']->view == 0 || $data['access']->detail == 0) abort(403);
         
         return view('admin.masters.religion.index', $data);
     }
@@ -55,6 +58,9 @@ class ReligionController extends Controller
             'detail'        => $this->religion->select('id', 'name')->where('id', $id)->where('disabled', 0)->first(),
             'data'          => $this->religion->select('id', 'name')->where('disabled', 0)->get(),
         ];
+        $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
+            ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
+        if ($data['access']->view == 0 || $data['access']->edit == 0) abort(403);
         
         return view('admin.masters.religion.index', $data);
     }

@@ -52,19 +52,19 @@
                                                             <td class="text-center">{{ $loop->iteration }}</td>
                                                             <td>{{ $item->name }}</td>
                                                             <td class="text-center" style="width: 20%">
-                                                                {{-- @if ($access->edit == 1) --}}
+                                                                @if ($access->edit == 1)
                                                                     <a href="{{ $c_menu->url }}/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
-                                                                {{-- @endif
-                                                                @if ($access->delete == 1) --}}
-                                                                <form action="{{ $c_menu->url }}/{{ $item->id }}" method="POST" class="d-inline">
-                                                                    @method('delete')
-                                                                    @csrf
-                                                                    <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
-                                                                </form>
-                                                                {{-- @endif
-                                                                @if ($access->detail == 1) --}}
+                                                                @endif
+                                                                @if ($access->delete == 1)
+                                                                    <form action="{{ $c_menu->url }}/{{ $item->id }}" method="POST" class="d-inline">
+                                                                        @method('delete')
+                                                                        @csrf
+                                                                        <button id="delete" type="submit" class="fa fa-trash text-danger sa-warning" style="border: 0px; background: 0%"></button>
+                                                                    </form>
+                                                                @endif
+                                                                @if ($access->detail == 1)
                                                                     <a href="{{ $c_menu->url }}/{{ $item->id }}"><i class="fa fa-eye"></i></a>
-                                                                {{-- @endif --}}
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -79,11 +79,11 @@
                             <div class="card">
                                 <div class="card-body">
                                     @if (request()->path() == substr($c_menu->url, 1))
-                                        @include('admin.masters.religion.create')
+                                        @include('admin.masters.category.create')
                                     @elseif (substr(request()->path(), -4) == 'edit')
-                                        @include('admin.masters.religion.edit')
+                                        @include('admin.masters.category.edit')
                                     @else
-                                        @include('admin.masters.religion.show')
+                                        @include('admin.masters.category.show')
                                     @endif
                                 </div>
                             </div>

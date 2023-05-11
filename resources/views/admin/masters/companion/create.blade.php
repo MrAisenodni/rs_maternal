@@ -2,7 +2,7 @@
     @csrf
     <div class="col-12 mb-2">
         <label class="form-label" for="title">Nama {{ $c_menu->title }}</label>
-        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}">
+        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" @if($access->add == 0) disabled @endif>
         @error('title')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
