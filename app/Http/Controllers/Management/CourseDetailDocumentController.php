@@ -38,30 +38,54 @@ class CourseDetailDocumentController extends Controller
             'created_by'                        => session()->get('sname').' ('.session()->get('srole').')',
         ];
         
-        if ($request->document) {
-            $file = $request->file('document');
-            $extension = $request->document->getClientOriginalExtension();  // Get Extension
-            $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
-            (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
-                : $filePath = $file->storeAs('storage/documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
-            // $file->move(storage_path().'/documents', $filePath);  
-            $data += [
-                'file'                          => $filePath,
-                'file_name'                     => $fileName,
-            ]; 
+        if (session()->get('srole') == 'adm') {
+            if ($request->document) {
+                $file = $request->file('document');
+                $extension = $request->document->getClientOriginalExtension();  // Get Extension
+                $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
+                (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
+                    : $filePath = $file->storeAs('storage/documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                // $file->move(storage_path().'/documents', $filePath);  
+                $data += [
+                    'file'                      => $filePath,
+                    'file_name'                 => $fileName,
+                ];
+            }
+
+            $this->course_detail_document->insert($data);
+
+            return redirect('/admin/course-detail/'.$request->id.'/edit')->with('status', 'Data Berhasil Ditambahkan.');
+        } else {
+            $data['action'] = 'add';
+
+            if ($request->document) {
+                $file = $request->file('document');
+                $extension = $request->document->getClientOriginalExtension();  // Get Extension
+                $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
+                (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
+                    : $filePath = $file->storeAs('storage/documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                // $file->move(storage_path().'/documents', $filePath);  
+                $data += [
+                    'file'                      => $filePath,
+                    'file_name'                 => $fileName,
+                ];
+            }
+
+            $this->course_detail_document_approval->insert($data);
+
+            return redirect('/admin/course-detail/'.$request->id.'/edit')->with('status', 'Data yang Ditambahkan Menunggu Approval.');
         }
-
-        (session()->get('srole') == 'adm') ? $this->course_detail_document->insert($data)
-            : $this->course_detail_document_approval->insert($data);
-
-        return redirect('/admin/course-detail/'.$request->id.'/edit')->with('status', 'Data Berhasil Ditambahkan.');
     }
 
     public function show($id)
     {
         $data = [
             'c_menu'                            => $this->submenu->select('id', 'title', 'url')->where('disabled', 0)->where('url', $this->path)->first(),
-            'detail'                            => $this->course_detail_document->select('id', 'course_detail_id', 'title', 'file', 'file_name', 'description')->where('id', $id)->where('disabled', 0)->first(),
+            'detail'                            => $this->course_detail_document->select(
+                                                        'trx_course_detail_document.id', 'trx_course_detail_document_approval.id AS approval_id', 'trx_course_detail_document.title', 'trx_course_detail_document.description', 
+                                                        'trx_course_detail_document.course_detail_id', 'trx_course_detail_document.file', 'trx_course_detail_document.file_name'
+                                                    )->leftJoin('trx_course_detail_document_approval', 'trx_course_detail_document_approval.course_detail_document_id', '=', 'trx_course_detail_document.id')
+                                                    ->where('trx_course_detail_document.disabled', 0)->where('trx_course_detail_document.id', $id)->first(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first();
@@ -94,28 +118,51 @@ class CourseDetailDocumentController extends Controller
             'course_detail_id'                  => $request->id,
             'title'                             => $request->title,
             'description'                       => $request->description,
-            'created_at'                        => now(),
-            'created_by'                        => session()->get('sname').' ('.session()->get('srole').')',
+            'updated_at'                        => now(),
+            'updated_by'                        => session()->get('sname').' ('.session()->get('srole').')',
         ];
-        
-        if ($request->document) {
-            if ($request->old_document) File::delete(storage_path('app/public/'.$request->old_document));
-            $file = $request->file('document');
-            $extension = $request->document->getClientOriginalExtension();  // Get Extension
-            $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
-            (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
-                : $filePath = $file->storeAs('storage/documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
-            // $file->move(storage_path().'/documents', $filePath);  
+
+        if (session()->get('srole') == 'adm') {
+            if ($request->document) {
+                if ($request->old_document) (env('APP_ENV') == 'local') ? File::delete(storage_path('app/public/'.$request->old_document)) 
+                    : File::delete(storage_path('app/public/'.$request->old_document));
+                $file = $request->file('document');
+                $extension = $request->document->getClientOriginalExtension();  // Get Extension
+                $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
+                (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
+                    : $filePath = $file->storeAs('storage/documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                // $file->move(storage_path().'/documents', $filePath);  
+                $data += [
+                    'file'                      => $filePath,
+                    'file_name'                 => $fileName,
+                ]; 
+            }
+    
+            $this->course_detail_document->where('id', $id)->update($data);
+
+            return redirect(url()->previous())->with('status', 'Data Berhasil Diubah.');
+        } else {
             $data += [
-                'file'                          => $filePath,
-                'file_name'                     => $fileName,
-            ]; 
+                'action'                        => 'edit',
+                'course_detail_document_id'     => $id,
+            ];
+
+            if ($request->document) {
+                $file = $request->file('document');
+                $extension = $request->document->getClientOriginalExtension();  // Get Extension
+                $fileName = date('Y-m-d H-i-s', strtotime(now())).'_'.$request->title.$request->doctor.session()->get('sid').'.'.$extension;  // Concatenate both to get FileName
+                (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
+                    : $filePath = $file->storeAs('storage/documents/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
+                // $file->move(storage_path().'/documents', $filePath);  
+                $data += [
+                    'file'                      => $filePath,
+                    'file_name'                 => $fileName,
+                ]; 
+            }
+            $this->course_detail_document_approval->insert($data);
+
+            return redirect('/admin/course-detail/'.$request->id.'/edit')->with('status', 'Data yang Diubah Menunggu Approval.');
         }
-
-        (session()->get('srole') == 'adm') ? $this->course_detail_document->where('id', $id)->update($data)
-            : $this->course_detail_document_approval->where('id', $id)->update($data);
-
-        return redirect('/admin/course-detail/'.$request->id.'/edit')->with('status', 'Data Berhasil Diubah.');
     }
 
     public function destroy($id)
@@ -126,9 +173,26 @@ class CourseDetailDocumentController extends Controller
             'updated_by'    => session()->get('sname').' ('.session()->get('srole').')',
         ];
 
-        (session()->get('srole') == 'adm') ? $this->course_detail_document->where('id', $id)->update($data)
-            : $this->course_detail_document_approval->where('id', $id)->update($data);
+        if (session()->get('srole') == 'adm') {
+            $this->course_detail_document->where('id', $id)->update($data);
 
-        return redirect(url()->previous())->with('status', 'Data Berhasil Dihapus.');
+            return redirect(url()->previous())->with('status', 'Data Berhasil Dihapus.');
+        } else {
+            $check = $this->course_detail_document->where('id', $id)->where('disabled', 0)->first();
+
+            $data += [
+                'title'                         => $check->title,
+                'description'                   => $check->description,
+                'file'                          => $check->file,
+                'file_name'                     => $check->file_name,
+                'course_detail_id'              => $check->course_detail_id,
+                'action'                        => 'delete',
+                'course_detail_document_id'     => $id,
+            ];
+
+            $this->course_detail_document_approval->insert($data);
+
+            return redirect('/admin/course-detail/'.$check->course_detail_id.'/edit')->with('status', 'Data yang Dihapus Menunggu Approval.');
+        }
     }
 }

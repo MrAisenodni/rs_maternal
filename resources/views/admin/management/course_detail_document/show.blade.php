@@ -81,8 +81,10 @@
                                             <div class="col-12">
                                                 <div class="d-grid">
                                                     <a href="/admin/course-detail/{{ $detail->course_detail_id }}/edit" class="btn btn-warning">KEMBALI</a>
-                                                    @if ($access->edit == 1)
-                                                        <a href="{{ $c_menu->url }}/{{ $detail->id }}/edit" class="btn btn-primary">UBAH</a>
+                                                    @if (!$detail->approval_id)
+                                                        @if ($access->edit == 1)
+                                                            <a href="{{ $c_menu->url }}/{{ $detail->id }}/edit" class="btn btn-primary">UBAH</a>
+                                                        @endif
                                                     @endif
                                                 </div>
                                             </div>

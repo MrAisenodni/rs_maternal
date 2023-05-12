@@ -114,10 +114,15 @@ class CourseDetailController extends Controller
                                                     ->where('trx_course_detail.disabled', 0)->where('trx_course_detail.id', $id)->first(),
         ];
         $data += [
-            'data'                              => $this->course_detail_document->select('id', 'title', 'description')->where('disabled', 0)->where('course_detail_id', $data['detail']->id)->get(),
+            'data'                              => $this->course_detail_document->select(
+                                                        'trx_course_detail_document.id', 'trx_course_detail_document_approval.id AS approval_id', 'trx_course_detail_document.title', 'trx_course_detail_document.description', 
+                                                        'trx_course_detail_document.course_detail_id', 'trx_course_detail_document.file', 'trx_course_detail_document.file_name'
+                                                    )->leftJoin('trx_course_detail_document_approval', 'trx_course_detail_document_approval.course_detail_document_id', '=', 'trx_course_detail_document.id')
+                                                    ->where('trx_course_detail_document.disabled', 0)->where('trx_course_detail_document.course_detail_id', $data['detail']->id)->get(),
             'access'                            => $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
                                                     ->where('role', session()->get('srole'))->where('submenu_id', $data['c_menu']->id)->first(),
         ];
+        
         if ($data['access']->view == 0 && $data['access']->edit == 0) abort(403);
 
         return view('admin.management.course_detail.edit', $data);
@@ -228,7 +233,5 @@ class CourseDetailController extends Controller
 
             return redirect('/admin/course-header/'.$id.'/edit')->with('status', 'Data yang Dihapus Menunggu Approval.');
         }
-
-        
     }
 }

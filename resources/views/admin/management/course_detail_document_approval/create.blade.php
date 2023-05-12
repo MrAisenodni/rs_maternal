@@ -8,6 +8,7 @@
     <link href="{{ asset('/assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
 
     {{-- Quill Theme --}}
+    <!-- Quill Theme -->
     <link type="text/css" href="{{ asset('/assets/css/quill.css') }}" rel="stylesheet">
 @endsection
     
@@ -55,53 +56,9 @@
                                                 @enderror
                                             </div>
                                             <div class="col-6">
-                                                <label class="form-label" for="doctor">Dokter <small class="text-danger">*</small></label>
-                                                @if (session()->get('srole') == 'tec')
-                                                    <input type="hidden" class="form-control" id="doctor" name="doctor" value="{{ $doctor->id }}">
-                                                    <input type="text" class="form-control @error('doctor') is-invalid @enderror" id="doctor" value="[{{ $doctor->nik }}] {{ $doctor->full_name }}" disabled>
-                                                @else
-                                                    <select class="single-select form-control @error('doctor') is-invalid @enderror" id="doctor" name="doctor">
-                                                        <option value="">=== SILAHKAN PILIH ===</option>
-                                                        @if ($doctors)
-                                                            @foreach ($doctors as $item)
-                                                                <option value="{{ $item->id }}" @if ($item->id == old('doctor')) selected @endif>[{{ $item->nik }}] {{ $item->full_name }}</option>
-                                                            @endforeach
-                                                        @endif
-                                                    </select>
-                                                @endif
-                                                @error('doctor')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-6">
-                                                <label class="form-label" for="category">Kategori <small class="text-danger">*</small></label>
-                                                <select class="single-select form-control @error('category') is-invalid @enderror" id="category" name="category">
-                                                    <option value="">=== SILAHKAN PILIH ===</option>
-                                                    @if ($categories)
-                                                        @foreach ($categories as $item)
-                                                            <option value="{{ $item->id }}" @if ($item->id == old('category')) selected @endif>{{ $item->name }}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                @error('category')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="form-label" for="level">Tingkatan <small class="text-danger">*</small></label>
-                                                <select class="single-select form-control @error('level') is-invalid @enderror" id="level" name="level">
-                                                    <option value="">=== SILAHKAN PILIH ===</option>
-                                                    @if ($levels)
-                                                        @foreach ($levels as $item)
-                                                            <option value="{{ $item->id }}" @if ($item->id == old('level')) selected @endif>{{ $item->name }}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                @error('level')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
+                                                <label class="form-label" for="document">Dokumen </label>
+                                                <span class="desc"></span><br>
+                                                <a href="{{ asset('/storage/'.$detail->file) }}">{{ $detail->file_name }}</a>
                                             </div>
                                         </div>
                                         <div class="row">

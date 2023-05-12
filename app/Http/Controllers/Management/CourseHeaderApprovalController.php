@@ -73,6 +73,7 @@ class CourseHeaderApprovalController extends Controller
             'category_id'                       => $request->category,
             'level_id'                          => $request->level,
             'description'                       => $request->description,
+            'disabled'                          => $request->disabled,
             'updated_at'                        => $request->updated_at,
             'updated_by'                        => $request->updated_by,
             'approved_at'                       => now(),
