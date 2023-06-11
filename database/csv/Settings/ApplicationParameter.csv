@@ -1,0 +1,9 @@
+1;Max Dokumen Upload;max:51400
+2;Format Dokumen;*
+3;Max Video Upload;max:514000
+4;Format Video;mimes:mp4,mkv
+5;Max Gambar Upload;max:5140
+6;Format Gambar;mimes:png,jpg,jpeg
+7;Template;_eduor
+8;Jumlah Halaman Artikel;6
+9;Jumlah Halaman Materi;6

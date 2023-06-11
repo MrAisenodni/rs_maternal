@@ -113,10 +113,12 @@
                                                                 @endif
                                                             </td>
                                                             <td>
-                                                                @if ($item->position != null)        
-                                                                    {{ $item->position->name }}
+                                                                @if ($item->role == 'adm')     
+                                                                    Administrator   
+                                                                @elseif ($item->role == 'tec')
+                                                                    Pengajar
                                                                 @else
-                                                                    -
+                                                                    Member
                                                                 @endif
                                                             </td>
                                                             <td class="text-center" style="width: 20mm">

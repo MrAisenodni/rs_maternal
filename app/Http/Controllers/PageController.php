@@ -12,14 +12,30 @@ class PageController extends Controller
 
     public function index(Request $request)
     {
+        $count = $this->count_history->select('id', 'count')->where('type', 'guest')->first();
+        $template = $this->application_parameter->select('value')->where('id', 7)->first();
+
+        ($count) ? $this->count_history->where('id', $count->id)->update(['count' => $count->count + 1])
+            : $this->count_history->insert(['type' => 'guest', 'count' => 1]);
+
+        $data = [
+            'c_menu'                => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
+        ];
+
+        return view('patient'.$template->value.'.home', $data);
+    }
+
+    public function dashboard(Request $request)
+    {
         $search = $request->search;
+        $template = $this->application_parameter->select('value')->where('id', 7)->first();
 
         $data = [
             'approvals'             => $this->course_header_approval->selectRaw("'Detail Materi', COUNT(id) AS Jumlah")
                                         ->union(
                                             $this->course_detail_approval->selectRaw("'Detail Video', COUNT(id) AS Jumlah")
                                         ),
-            'c_menu'                => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
+            'c_menu'                => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', '/dashboard')->first(),
             'companions'            => $this->companion->select('id', 'title')->where('disabled', 0)->get(),
             'hospitals'             => $this->hospital->select('id', 'name')->where('disabled', 0)->where('type', 'int')->get(),
             'results'               => $this->result->select('id', 'title', 'subtitle')->where('disabled', 0)->get(),
@@ -33,12 +49,13 @@ class PageController extends Controller
                                         )->get(),
             'count_video'           => $this->course_detail->select('id')->where('disabled', 0)->count(),
             'count_document'        => $this->course_detail_document->select('id')->where('disabled', 0)->count(),
+            'history'               => $this->count_history->selectRaw('type, SUM(count) AS count')->where('disabled', 0)->groupBy('type')->orderBy('type')->get(),
             'search'                => $search,
         ];
         
         if ($search) $data['clinic_results'] = $this->clinic_results->select('id', 'companion_id', 'hospital_id', 'result_id', 'detail_result_id', 'value')->where('hospital_id', $search)->where('disabled', 0)->get();
         
-        return view('patient.dashboard', $data);
+        return view('patient'.$template->value.'.dashboard', $data);
     }
 
     public function registration()
@@ -79,7 +96,7 @@ class PageController extends Controller
 
         $id = $this->user_approval->insertGetId($data);
 
-        $date = [
+        $data = [
             'created_at'            => now(),
             'created_by'            => $id,
         ];
@@ -97,7 +114,12 @@ class PageController extends Controller
         return redirect('/login')->with('status', 'Akun Anda berhasil diajukan. Silahkan tunggu hingga akun Anda disetujui.');
     }
 
-    public function download(Request $request) {
-        return Storage::download($request->file_name);
+    public function download($id) {     
+        $count = $this->count_history->select('id', 'count')->where('type', 'document')->where('foreign_id', $id)->first();
+        
+        ($count) ? $this->count_history->where('id', $count->id)->update(['count' => $count->count + 1])
+            : $this->count_history->insert(['type' => 'document', 'foreign_id' => $id, 'count' => 1]);
+
+        return false;
     }
 }

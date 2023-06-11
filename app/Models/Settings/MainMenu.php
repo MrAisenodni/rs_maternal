@@ -14,9 +14,9 @@ class MainMenu extends Model
     public function menus()
     {
         if (session()->get('suser_id')) {
-            return $this->hasMany(Menu::class)->select('id', 'title', 'url', 'icon', 'parent')->where('disabled', 0)->where('is_shown', 1);
+            return $this->hasMany(Menu::class)->select('id', 'title', 'url', 'icon', 'parent')->where('disabled', 0)->where('is_shown', 1)->orderBy('order_no');
         } else {
-            return $this->hasMany(Menu::class)->select('id', 'title', 'url', 'icon', 'parent', 'is_login')->where('is_login', 0)->where('disabled', 0)->where('is_shown', 1);
+            return $this->hasMany(Menu::class)->select('id', 'title', 'url', 'icon', 'parent', 'is_login')->where('is_login', 0)->where('disabled', 0)->where('is_shown', 1)->orderBy('order_no');
         }
     }
 

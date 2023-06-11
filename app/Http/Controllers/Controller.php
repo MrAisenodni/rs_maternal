@@ -18,6 +18,7 @@ use App\Models\Masters\{
     Ward,
 };
 use App\Models\Settings\{
+    ApplicationParameter,
     Login,
     Menu,
     MenuAccess,
@@ -28,7 +29,9 @@ use App\Models\Settings\{
     LoginApproval,
 };
 use App\Models\Transactions\{
+    Article,
     ClinicResults,
+    CountHistory,
     CourseDetail,
     CourseDetailApproval,
     CourseDetailDocument,
@@ -49,6 +52,7 @@ class Controller extends BaseController
     public function __construct()
     {
         // Global Variabel untuk Setting
+        $this->application_parameter            = new ApplicationParameter();
         $this->login                            = new Login();
         $this->login_approval                   = new LoginApproval();
         $this->menu                             = new Menu();
@@ -73,8 +77,10 @@ class Controller extends BaseController
         $this->ward                             = new Ward();
 
         // Global Variabel untuk Transaction
+        $this->article                          = new Article();
         $this->clinic_results                   = new ClinicResults();
         $this->companion                        = new Companion();
+        $this->count_history                    = new CountHistory();
         $this->course_detail                    = new CourseDetail();
         $this->course_detail_approval           = new CourseDetailApproval();
         $this->course_detail_document           = new CourseDetailDocument();

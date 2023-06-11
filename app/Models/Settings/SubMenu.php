@@ -13,7 +13,7 @@ class SubMenu extends Model
 
     public function menu()
     {
-        return $this->belongsTo(Menu::class, 'menu_id', 'id')->select('id', 'title', 'url', 'icon', 'parent', 'main_menu_id')->where('disabled', 0)->where('is_shown', 1);
+        return $this->belongsTo(Menu::class, 'menu_id', 'id')->select('id', 'title', 'url', 'icon', 'parent', 'main_menu_id')->where('disabled', 0)->where('is_shown', 1)->orderBy('order_no');
     }
 
     public function menu_access()

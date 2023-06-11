@@ -16,6 +16,7 @@ class CreateStgSubMenu extends Migration
             $table->boolean('parent')->default(0);
             $table->boolean('is_login')->default(0);
             $table->boolean('is_shown')->default(1);
+            $table->integer('order_no')->nullable();
             $table->unsignedInteger('menu_id')->nullable();
             
             // Struktur Baku

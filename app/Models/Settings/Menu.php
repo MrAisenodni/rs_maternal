@@ -13,15 +13,15 @@ class Menu extends Model
 
     public function main_menu()
     {
-        return $this->belongsTo(MainMenu::class, 'main_menu_id', 'id')->select('id', 'title', 'url', 'icon', 'parent')->where('disabled', 0)->where('is_shown', 1);
+        return $this->belongsTo(MainMenu::class, 'main_menu_id', 'id')->select('id', 'title', 'url', 'icon', 'parent')->where('disabled', 0)->where('is_shown', 1)->orderBy('order_no');
     }
 
     public function submenus()
     {
         if (session()->get('suser_id')) {
-            return $this->hasMany(SubMenu::class)->select('id', 'title', 'url', 'icon', 'parent')->where('disabled', 0)->where('is_shown', 1);
+            return $this->hasMany(SubMenu::class)->select('id', 'title', 'url', 'icon', 'parent')->where('disabled', 0)->where('is_shown', 1)->orderBy('order_no');
         } else {
-            return $this->hasMany(SubMenu::class)->select('id', 'title', 'url', 'icon', 'parent', 'is_login')->where('is_login', 0)->where('disabled', 0)->where('is_shown', 1);
+            return $this->hasMany(SubMenu::class)->select('id', 'title', 'url', 'icon', 'parent', 'is_login')->where('is_login', 0)->where('disabled', 0)->where('is_shown', 1)->orderBy('order_no');
         }
     }
 

@@ -15,7 +15,7 @@ class SubMenuSeeder extends CsvSeeder
         $this->defaults = [
             'created_by'    => 'Migrasi'
         ];
-        $this->mapping = ['id', 'title', 'icon', 'url', 'parent', 'menu_id', 'is_login', 'is_shown'];
+        $this->mapping = ['id', 'title', 'icon', 'url', 'parent', 'menu_id', 'is_login', 'is_shown', 'order_no'];
         $this->header = false;
     }
 

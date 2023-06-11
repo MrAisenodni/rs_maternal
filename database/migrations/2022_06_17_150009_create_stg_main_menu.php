@@ -15,6 +15,7 @@ class CreateStgMainMenu extends Migration
             $table->string('url')->nullable();
             $table->boolean('parent')->default(0);
             $table->boolean('is_login')->default(0);
+            $table->integer('order_no')->nullable();
             
             // Struktur Baku
             $table->string('access_code')->nullable();

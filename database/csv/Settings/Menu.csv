@@ -1,24 +1,27 @@
-1;Home;fa fa-user-graduate;/;0;1;0;1
-2;Daftar Materi;fa fa-book-reader;/list-courses;0;1;0;1
-3;Materi Saya;fa fa-bookmark;/my-courses;0;1;1;0
-4;Agama;fa fa-star-and-crescent;/master/religion;0;3;1;1
-5;Kategori;fa fa-th-large;/master/category;0;3;1;1
-6;Level;fa fa-chart-line;/master/level;0;3;1;1
-7;Peran;fa fa-key;/master/role;0;3;1;1
-8;Pengguna;fa fa-user-circle;;1;4;1;1
-9;Pemilik;fa fa-user-tie;/setting/provider;0;4;1;1
-10;Detail Materi;fa fa-book-open;/view-course;0;1;1;0
-11;Daftar Materi;fa fa-book-reader;;1;2;1;1
-12;Negara;fa fa-flag;/master/country;0;3;1;1
-13;Provinsi;fa fa-archway;/master/province;0;3;1;1
-14;Kota;fa fa-city;/master/city;0;3;1;1
-15;Kecamatan;fa fa-warehouse;/master/district;0;3;1;1
-16;Daftar Pembelajaran;fa fa-video;;1;2;1;1
-17;Daftar Dokumen;fa fa-file;;1;2;1;1
-18;Sampah Materi;fa fa-trash;/admin/trash-courses;0;2;1;0
-19;Rumah Sakit;fa fa-hospital;/master/hospital;0;3;1;1
-20;Pendamping;fa fa-people-carry;/master/companion;0;3;1;1
-21;Kriteria Capaian;fa fa-medal;/master/result;0;3;1;1
-22;Detail Kriteria Capaian;fa fa-trophy;/master/detail-result;0;3;1;1
-23;Data Rutin Capaian;fa fa-notes-medical;/admin/clinic-results;0;2;1;1
-24;Profile;fa fa-user;/profile;0;4;1;0
+1;Dashboard;fa fa-user-graduate;/dashboard;0;1;0;1;2
+2;Daftar Materi;fa fa-book-reader;/list-courses;0;1;1;1;4
+3;Materi Saya;fa fa-bookmark;/my-courses;0;1;1;0;5
+4;Agama;fa fa-star-and-crescent;/master/religion;0;3;1;1;6
+5;Kategori;fa fa-th-large;/master/category;0;3;1;1;7
+6;Level;fa fa-chart-line;/master/level;0;3;1;1;8
+7;Peran;fa fa-key;/master/role;0;3;1;1;9
+8;Pengguna;fa fa-user-circle;NULL;1;4;1;1;10
+9;Pemilik;fa fa-user-tie;/setting/provider;0;4;1;1;11
+10;Detail Materi;fa fa-book-open;/view-course;0;1;1;0;12
+11;Daftar Materi;fa fa-book-reader;NULL;1;2;1;1;13
+12;Negara;fa fa-flag;/master/country;0;3;1;1;14
+13;Provinsi;fa fa-archway;/master/province;0;3;1;1;15
+14;Kota;fa fa-city;/master/city;0;3;1;1;16
+15;Kecamatan;fa fa-warehouse;/master/district;0;3;1;1;17
+16;Daftar Pembelajaran;fa fa-video;NULL;1;2;1;1;18
+17;Daftar Dokumen;fa fa-file;NULL;1;2;1;1;19
+18;Sampah Materi;fa fa-trash;/admin/trash-courses;0;2;1;0;20
+19;Rumah Sakit;fa fa-hospital;/master/hospital;0;3;1;1;21
+20;Pendamping;fa fa-people-carry;/master/companion;0;3;1;1;22
+21;Kriteria Capaian;fa fa-medal;/master/result;0;3;1;1;23
+22;Detail Kriteria Capaian;fa fa-trophy;/master/detail-result;0;3;1;1;24
+23;Data Rutin Capaian;fa fa-notes-medical;/admin/clinic-results;0;2;1;1;25
+24;Profile;fa fa-user;/profile;0;4;1;0;26
+25;Home;fa fa-home;/;0;1;0;1;1
+26;Daftar Best Practice;fa fa-newspaper;/admin/best-practice;0;2;1;1;27
+27;Best Practice;fa fa-newspaper;/best-practice;0;1;0;1;3

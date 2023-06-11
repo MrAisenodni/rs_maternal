@@ -1,10 +1,6 @@
-
-
-
 $(function() {
 	"use strict";
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    console.log(CSRF_TOKEN)
     
     $('.single-select').select2({
         theme: 'bootstrap4',

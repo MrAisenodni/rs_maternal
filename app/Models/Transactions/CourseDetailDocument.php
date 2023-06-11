@@ -14,5 +14,10 @@ class CourseDetailDocument extends Model
     public function course_detail()
     {
         return $this->belongsTo(CourseDetail::class)->where('disabled', 0);
+    }    
+
+    public function count_viewers()
+    {
+        return $this->belongsTo(CountHistory::class, 'id', 'foreign_id')->select('count')->where('type', 'document');
     }
 }

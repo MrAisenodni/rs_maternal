@@ -17,6 +17,7 @@ use App\Http\Controllers\Masters\{
     WardController,
 };
 use App\Http\Controllers\Management\{
+    ArticleController,
     ClinicResultsController,
     CourseHeaderController,
     CourseHeaderApprovalController,
@@ -26,6 +27,7 @@ use App\Http\Controllers\Management\{
     CourseDetailDocumentApprovalController,
 };
 use App\Http\Controllers\Patient\{
+    ListArticlesController,
     ListCoursesController,
     ViewCourseController,
 };
@@ -49,7 +51,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Dashboard
+// Home
 Route::get('/', [PageController::class, 'index']);
 
 // Login or Logout or Registration
@@ -59,8 +61,9 @@ Route::resource('/login', LoginController::class);
 Route::get('/logout', [LoginController::class, 'logout']);
 
 // Patient Menu
-Route::resource('/list-courses', ListCoursesController::class);
-Route::get('/download', [PageController::class, 'download']);
+Route::get('/dashboard', [PageController::class, 'dashboard']);
+Route::resource('/best-practice', ListArticlesController::class);
+Route::get('/download/{id}', [PageController::class, 'download']);
 
 // Storage Link for Production
 Route::get('/storage-link', function () {
@@ -73,9 +76,11 @@ Route::get('/migrate-seed', function () {
 // Menu must be login first
 Route::middleware('authcheck')->group(function() {
     // Learning
+    Route::resource('/list-courses', ListCoursesController::class);
     Route::get('/view-course/{id}/{ids}', [ViewCourseController::class, 'index']);
 
     // Management
+    Route::resource('/admin/best-practice', ArticleController::class);
     Route::resource('/admin/clinic-results', ClinicResultsController::class);
     Route::resource('/admin/course-header', CourseHeaderController::class);
     Route::get('/admin/course-header-approval/{id}/delete', [CourseHeaderApprovalController::class, 'destroy']);
