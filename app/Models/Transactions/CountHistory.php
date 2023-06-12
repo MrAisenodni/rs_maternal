@@ -13,11 +13,11 @@ class CountHistory extends Model
 
     public function course_detail()
     {
-        return $this->belongsTo(CourseDetail::class, 'foreign_id', 'id')->select('id', 'course_header_id', 'title', 'video', 'video_name', 'description', 'playtime', 'duration')->where('disabled', 0)->where('type', 'video');
+        return $this->belongsTo(CourseDetail::class, 'foreign_id', 'id')->select('id', 'course_header_id', 'title', 'video', 'video_name', 'description', 'playtime', 'duration', 'created_at')->where('disabled', 0);
     }
 
     public function course_detail_document()
     {
-        return $this->belongsTo(CourseDetailDocument::class, 'foreign_id', 'id')->select('id', 'course_detail_id', 'title', 'file', 'file_name', 'description')->where('disabled', 0)->where('type', 'document');
+        return $this->belongsTo(CourseDetailDocument::class, 'foreign_id', 'id')->select('id', 'course_detail_id', 'title', 'file', 'file_name', 'description')->where('disabled', 0);
     }
 }

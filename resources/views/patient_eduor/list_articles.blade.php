@@ -38,11 +38,13 @@
                     <div class="tf__heading_area mb_15">
                         <h2 class="mb-2 text-primary">DAFTAR {{ strtoupper($c_menu->title) }}</h2>
                     </div>
-                    <form class="search-form d-none d-md-flex" action="{{ $c_menu->url }}" method="GET">
-                        @method('get')
-                        <input type="text" class="form-control" placeholder="Search" name="search" value="{{ old('search', $search) }}">
-                        <button class="common_btn" style="margin-left: 0.5rem!important;" type="submit"><i class="fa fa-search"></i></button>
-                    </form>
+                    <div class="tf__sidebar_search">
+                        <form class="" action="{{ $c_menu->url }}" method="GET">
+                            @method('get')
+                            <input type="text" placeholder="Search" name="search" value="{{ old('search', $search) }}">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="row">

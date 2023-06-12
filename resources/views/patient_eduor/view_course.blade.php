@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts_eduor.main')
 
 @section('title', $c_menu->title)
 
@@ -6,91 +6,71 @@
 @endsection
     
 @section('content')
-    <div class="mdk-drawer-layout__content page ">
-
-        <div class="container-fluid page__container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/list-courses">Daftar Materi</a></li>
-                <li class="breadcrumb-item active">{{ $detail->course_header->title }}</li>
-            </ol>
-            <h1 class="h2">{{ $detail->course_header->title }}</h1>
+    <!--=================================
+        BREADCRUMB START
+    ==================================-->
+    <section class="tf__breadcrumb" style="background: url({{ asset('/assets/eduor/images/breadcrumb_bg_1.jpg') }});">
+        <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="{{ asset('/storage/'.$detail->video) }}" allowfullscreen=""></iframe>
-                        </div>
-                        <div class="card-body">
-                            {!! $detail->description !!}
-                        </div>
+                <div class="col-12">
+                    <div class="tf__breadcrumb_text">
+                        <h2>{{ $c_menu->title }}</h2>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/list-courses">Daftar Materi</a></li>
+                            <li><a href="#">{{ $detail->course_header->title }}</a></li>
+                        </ul>
                     </div>
-
-                    <!-- Lessons -->
-                    <ul class="card list-group list-group-fit">
-                        @if ($data->course_detail)
-                            @foreach ($data->course_detail as $item)
-                                <li class="list-group-item @if ($item->id == $detail->id) active @endif">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <div class="text-muted">{{ $loop->iteration }}.</div>
-                                        </div>
-                                        <div class="media-body">
-                                            <a @if ($item->id == $detail->id) class="text-white" @endif href="{{ $c_menu->url }}/{{ $item->course_header_id }}/{{ $item->id }}">{{ $item->title }}</a>
-                                        </div>
-                                        <div class="media-right">
-                                            <small class="text-muted-light">{{ $item->playtime }}</small>
-                                        </div>
-                                    </div>
-                                </li>
-                            @endforeach
-                        @endif
-                    </ul>
                 </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h1 class="h5">Unduh Buku Saku</h1><hr>
-                            @if ($detail->course_detail_document)
-                                @foreach ($detail->course_detail_document as $item)
-                                    <a class="file_download" data-id="{{ $item->id }}" href="{{ asset('/storage/'.$item->file) }}">
-                                        <i class="fa fa-file"></i> {{ $item->title }}
-                                    </a><br>
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="media align-items-center">
-                                <div class="media-left">
-                                    <img src="{{ asset('/storage/'.$data->teacher->picture) }}" alt="#" width="50" class="rounded-circle">
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="card-title"><a href="#">{{ $data->teacher->full_name }}</a></h4>
-                                    <p class="card-subtitle">Pengajar (Dokter)</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            {!! $data->teacher->biography !!}
-                        </div>
-                        <div class="card-footer text-center">
-                            <a target="_blank" href="{{ url('https://id-id.facebook.com/'.$data->teacher->facebook) }}" class="btn btn-light"><i class="fab fa-facebook"></i></a>
-                            <a target="_blank" href="{{ url('https://twitter.com/'.$data->teacher->twitter) }}" class="btn btn-light"><i class="fab fa-twitter"></i></a>
-                            <a target="_blank" href="{{ url('https://www.instagram.com/'.$data->teacher->instagram) }}" class="btn btn-light"><i class="fab fa-instagram"></i></a>
-                            <a target="_blank" href="{{ url('https://github.com/'.$data->teacher->github) }}" class="btn btn-light"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </section>
+    <!--=================================
+        BREADCRUMB END
+    ==================================-->
 
-                    <div class="card">
-                        <ul class="list-group list-group-fit">
-                            <li class="list-group-item">
-                                <div class="media align-items-center">
-                                    <div class="media-left">
-                                        <i class="fa fa-clock text-muted-light"></i>
-                                    </div>
-                                    <div class="media-body">
+    <!--=================================
+        COURSES DETAILS START
+    ==================================-->
+    <section class="tf__courses_details mt_195 xs_mt_100">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8">
+                    <div class="tf__courses_details_area">
+                        <div class="tf__courses_details_img">
+                            <iframe class="img-fluid w-100" style="height: 100%" src="{{ asset('/storage/'.$detail->video) }}" allowfullscreen=""></iframe>
+                        </div>
+                        <div class="tf__courses_details_header d-flex flex-wrap align-items-center">
+                            <div class="img">
+                                <img src="{{ asset('/storage/'.$data->teacher->picture) }}" alt="Pengajar" class="img-fluid w-100">
+                            </div>
+                            <ul class="text d-flex flex-wrap align-items-center">
+                                <li>
+                                    <h4>Pengajar</h4>
+                                    <p>{{ $data->teacher->full_name }}</p>
+                                </li>
+                                <li>
+                                    <h4>Kategori</h4>
+                                    <p>{{ $data->category->name }}</p>
+                                </li>
+                                <li>
+                                    <h4>Tingkatan</h4>
+                                    <p>{{ $data->level->name }}</p>
+                                </li>
+                                <li>
+                                    <h4>Penonton</h4>
+                                    <p>
+                                        @if ($review)
+                                            {{ $review->count }} 
+                                        @else
+                                            0
+                                        @endif
+                                        Orang
+                                    </p>
+                                </li>
+                                <li>
+                                    <h4>Durasi</h4>
+                                    <p>
                                         @if (gmdate('H', $data->duration) != '00')
                                             {{ gmdate('H', $data->duration) }} <small class="text-muted">jam</small> &nbsp; 
                                         @endif
@@ -100,57 +80,113 @@
                                         @if (gmdate('s', $data->duration) != '00')
                                             {{ gmdate('s', $data->duration) }} <small class="text-muted">detik</small> &nbsp; 
                                         @endif
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media align-items-center">
-                                    <div class="media-left">
-                                        <i class="fa fa-th-large text-muted-light"></i>
-                                    </div>
-                                    <div class="media-body">{{ $data->category->name }}</div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media align-items-center">
-                                    <div class="media-left">
-                                        <i class="fa fa-chart-line text-muted-light"></i>
-                                    </div>
-                                    <div class="media-body">{{ $data->level->name }}</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
 
-                    {{-- <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Peringkat</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="rating">
-                                @php
-                                    $sisa = $data->rating
-                                @endphp
-                                @for ($i = 1; $i <= 5; $i++) 
-                                    @if ($sisa >= 1)
-                                        <i class="material-icons">star</i>
-                                    @elseif ($sisa >= 0.5 && $sisa < 1)
-                                        <i class="material-icons">star_half</i>
-                                    @else
-                                        <i class="material-icons">star_border</i>
-                                    @endif 
-                                    @php
-                                        $sisa = $sisa - 1
-                                    @endphp
-                                @endfor
+                        <div class="tf__courses_det_text">
+                            <h2>{{ $detail->title }}</h2>
+
+                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                        aria-selected="true">Deskripsi</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-profile" type="button" role="tab"
+                                        aria-controls="pills-profile" aria-selected="false">Pengajar</button>
+                                </li>
+                                {{-- <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-contact" type="button" role="tab"
+                                        aria-controls="pills-contact" aria-selected="false">Komentar</button>
+                                </li> --}}
+                            </ul>
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                                    aria-labelledby="pills-home-tab" tabindex="0">
+                                    <div class="tf__course_overview">
+                                        <h3>Deskripsi</h3>
+                                        {!! $detail->description !!}
+                                        <hr>
+                                        <h5 class="mb-2">Unduh Buku Saku</h5>
+                                        @if ($detail->course_detail_document)
+                                            @foreach ($detail->course_detail_document as $item)
+                                                <a class="file_download" data-id="{{ $item->id }}" href="{{ asset('/storage/'.$item->file) }}">
+                                                    <i class="fa fa-file"></i> {{ $item->title }}
+                                                </a><br>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                                    aria-labelledby="pills-profile-tab" tabindex="0">
+                                    <div class="tf__course_instructor">
+                                        <div class="row">
+                                            <div class="col-xl-5 col-md-6">
+                                                <div class="tf__course_instructor_img">
+                                                    <img src="{{ asset('/storage/'.$data->teacher->picture) }}" alt="Pengajar" class="img-fluid w-100">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-7 col-md-6">
+                                                <div class="tf__course_instructor_text">
+                                                    <h4>{{ $data->teacher->full_name }}</h4>
+                                                    <p>{{ $data->teacher->biography }}</p>
+                                                    <p>{{ $data->teacher->phone_number }}</p>
+                                                    <p>{{ $data->teacher->email }}</p>
+                                                    <ul class="d-flex flex-wrap align-items-center">
+                                                        <li><a href="{{ $data->teacher->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+                                                        <li><a href="{{ $data->teacher->twitter }}"><i class="fab fa-twitter"></i></a></li>
+                                                        <li><a href="{{ $data->teacher->instagram }}"><i class="fab fa-instagram"></i></a></li>
+                                                        <li><a href="{{ $data->teacher->github }}"><i class="fab fa-github"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <small class="text-muted">20 ratings</small>
                         </div>
-                    </div> --}}
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="tf__sidebar" id="sticky_sidebar">
+                        <div class="tf__sidebar_search">
+                            <form class="" action="/list-courses" method="GET">
+                                @method('get')
+                                <input type="text" placeholder="Search" name="search" value="{{ old('search', $search) }}">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        <div class="tf__sidebar_blog sidebar_item">
+                            <h3>Materi Paling Populer</h3>
+                            <ul>
+                                @if ($popular)
+                                    @foreach ($popular as $item)
+                                        <li>
+                                            <div class="img">
+                                                <img src="{{ asset('/storage/'.$item->course_detail->course_header->picture) }}" alt="Materi" class="img-fluid w-100">
+                                            </div>
+                                            <div class="text">
+                                                <p><i class="far fa-calendar-alt"></i> {{ date('d-M-Y', strtotime($item->course_detail->course_header->created_at)) }}</p>
+                                                <a href="/view-course/{{ $item->course_detail->course_header_id }}/{{ $item->course_detail->id }}">{{ $item->course_detail->course_header->title }}</a>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+    <!--=================================
+        COURSES DETAILS END
+    ==================================-->
 @endsection
 
 @section('scripts')
