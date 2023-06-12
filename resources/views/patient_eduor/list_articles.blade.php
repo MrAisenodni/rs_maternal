@@ -52,7 +52,7 @@
                     @foreach ($data as $item)
                         <div class="col-xl-4 col-md-6 wow fadeInUp" data-wow-duration="1.5s">
                             <div class="tf__single_blog">
-                                <a class="tf__single_blog_img" href="blog_details.html">
+                                <a class="tf__single_blog_img" href="/best-practice/{{ $item->id }}">
                                     <img src="{{ asset('/storage/'.$item->picture) }}" alt="{{ $item->title }}" class="img-fluid w-100" style="max-height: 250px; background: url({{ asset('/assets/eduor/images/breadcrumb_bg_1.jpg') }});">
                                 </a>
                                 <div class="tf__single_blog_text">

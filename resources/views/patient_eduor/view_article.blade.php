@@ -45,6 +45,13 @@
                             <ul class="date d-flex flex-wrap">
                                 <li><i class="far fa-user-edit"></i> {{ $detail->created_by }}</li>
                                 <li><i class="fal fa-calendar-alt"></i> {{ date('d M Y', strtotime($detail->created_at)) }}</li>
+                                <li><i class="fal fa-eye"></i> 
+                                    @if ($review)
+                                        {{ $review->count }}
+                                    @else
+                                        0    
+                                    @endif
+                                </li>
                             </ul>
                             <h3>{{ $detail->title }}</h3>
                             {!! $detail->description !!}

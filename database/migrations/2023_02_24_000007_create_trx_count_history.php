@@ -10,7 +10,7 @@ class CreateTrxCountHistory extends Migration
     {
         Schema::create('trx_count_history', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['guest', 'video', 'document']);
+            $table->enum('type', ['guest', 'video', 'document', 'article']);
             $table->unsignedInteger('foreign_id')->nullable();
             $table->integer('count')->nullable();
             

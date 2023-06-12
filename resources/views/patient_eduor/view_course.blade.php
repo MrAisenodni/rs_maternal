@@ -161,6 +161,27 @@
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
+                        <div class="tf__sidebar_category sidebar_item">
+                            <ul>
+                                @if ($reviews)
+                                    @foreach ($reviews as $item)
+                                        <li>
+                                            <a href="#"> Total 
+                                                @if ($item->type == 'video')
+                                                    Penonton <span>({{ $item->count }})</span>
+                                                @elseif ($item->type == 'document')
+                                                    Unduhan <span>({{ $item->count }})</span>
+                                                @elseif ($item->type == 'article')
+                                                    Pembaca <span>({{ $item->count }})</span>
+                                                @else
+                                                    Pengunjung <span>({{ $item->count }})</span>
+                                                @endif
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
+                        </div>
                         <div class="tf__sidebar_blog sidebar_item">
                             <h3>Materi Paling Populer</h3>
                             <ul>

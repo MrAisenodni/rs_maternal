@@ -23,7 +23,7 @@ class PageController extends Controller
             'c_menu'                => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
             'detail'                => $this->article->where('type', 'home')->first(),
             'popular'               => $this->count_history->selectRaw('foreign_id, SUM(count) as count')->where('disabled', 0)->where('type', 'video')->orderByDesc('count')->groupBy('foreign_id')->limit(5)->get(),
-            'review'                => $this->count_history->selectRaw('type, SUM(count) AS count')->where('disabled', 0)->orderBy('type')->groupBy('type')->get(),
+            'reviews'               => $this->count_history->selectRaw('type, SUM(count) AS count')->where('disabled', 0)->orderBy('type')->groupBy('type')->get(),
             'search'                => $search,
         ];
 

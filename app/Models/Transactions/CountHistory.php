@@ -20,4 +20,9 @@ class CountHistory extends Model
     {
         return $this->belongsTo(CourseDetailDocument::class, 'foreign_id', 'id')->select('id', 'course_detail_id', 'title', 'file', 'file_name', 'description')->where('disabled', 0);
     }
+
+    public function article()
+    {
+        return $this->belongsTo(Article::class, 'foreign_id', 'id')->where('disabled', 0);
+    }
 }
