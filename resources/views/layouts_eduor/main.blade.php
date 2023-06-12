@@ -41,22 +41,22 @@
     <!--=================================
         FOOTER START
     ==================================-->
-    <footer class="tf__footer mt_100" style="background: url({{ asset('/assets/eduor/images/footer_bg.jpg') }});">
+    <footer class="tf__footer mt_100">
         <div class="tf__footer_overlay pt_75">
             <div class="container">
                 <div class="row justify-content-between">
                     <div class="col-xl-6 col-sm-12 col-md-6 col-lg-6">
                         <div class="tf__footer_logo_area">
-                            <a class="footer_logo" href="index.html">
+                            <a class="footer_logo" href="/">
                                 <img src="{{ asset('/storage/'.$provider->provider_picture) }}" alt="#" class="img-fluid w-100" style="background: white;">
                             </a>
                             <p>{{ $provider->provider_name }}</p>
                             <ul class="d-flex flex-wrap">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                {{-- <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                 <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li> --}}
                             </ul>
                         </div>
                     </div>
