@@ -91,17 +91,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        @if ($detail->type == 'home') 
-                                            <div class="row mb-2">
-                                                <div class="col-12">
-                                                    <label class="form-label" for="side_description">Deskripsi Pendamping </label>
-                                                    <textarea id="side-description" class="elm1 form-control @error('side_description') is-invalid @enderror" id="side_description" name="side_description">{!! old('description', $detail->side_description) !!}</textarea>
-                                                    @error('side_description')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        @endif
                                         <hr>
                                         <div class="row">
                                             <div class="col-12">

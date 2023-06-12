@@ -22,13 +22,14 @@ class DatabaseSeeder extends Seeder
             // Masters\RoleSeeder::class,
             
             // // Seeder untuk Tabel Setting
-            Settings\ApplicationParameterSeeder::class,
+            // Settings\ApplicationParameterSeeder::class,
             // Settings\LoginSeeder::class,
             // Settings\MainMenuSeeder::class,
-            Settings\MenuSeeder::class,
+            // Settings\MenuSeeder::class,
             // Settings\SubMenuSeeder::class,
             // Settings\MenuAccessSeeder::class,
             // Settings\ProviderSeeder::class,
+            Settings\ProviderSocialMediaSeeder::class,
             // Settings\UserSeeder::class,
 
             // // Seeder untuk Tabel Transaksi

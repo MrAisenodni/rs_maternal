@@ -23,6 +23,7 @@ use App\Models\Settings\{
     Menu,
     MenuAccess,
     Provider,
+    ProviderSocialMedia,
     SubMenu,
     User,
     UserApproval,
@@ -58,6 +59,7 @@ class Controller extends BaseController
         $this->menu                             = new Menu();
         $this->menu_access                      = new MenuAccess();
         $this->provider                         = new Provider();
+        $this->provider_social_media            = new ProviderSocialMedia();
         $this->submenu                          = new SubMenu();
         $this->user                             = new User();
         $this->user_approval                    = new UserApproval();

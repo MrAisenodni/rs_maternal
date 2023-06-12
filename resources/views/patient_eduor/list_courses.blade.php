@@ -36,7 +36,7 @@
             <div class="row wow fadeInUp" data-wow-duration="1.5s">
                 <div class="col-xl-6 col-md-8 col-lg-6 m-auto">
                     <div class="tf__heading_area mb_15">
-                        <h2 class="mb-2 text-primary">DAFTAR {{ strtoupper($c_menu->title) }}</h2>
+                        <h2 class="mb-2 text-primary">{{ strtoupper($c_menu->title) }}</h2>
                     </div>
                     <div class="tf__sidebar_search">
                         <form class="" action="{{ $c_menu->url }}" method="GET">
@@ -53,8 +53,8 @@
                         @php $a = 3; $b = 2 @endphp
                         <div class="col-xl-4 col-md-6 wow fadeInUp" data-wow-duration="1.5s">
                             <div class="tf__single_courses">
-                                <div class="tf__single_courses_img">
-                                    <img src="{{ asset('/storage/'.$item->picture) }}" alt="{{ $item->title }}" class="img-fluid w-100" style="max-height: 250px; background: url({{ asset('/assets/eduor/images/breadcrumb_bg_1.jpg') }});">
+                                <div class="tf__single_courses_img" style="height: 200px">
+                                    <img src="{{ asset('/storage/'.$item->picture) }}" alt="{{ $item->title }}" class="img-fluid w-100" style="max-height: 250px; background: url({{ asset('/assets/eduor/images/breadcrumb_bg_1.jpg') }}); object-fit: scale-down !important;">
                                     <a class="categories 
                                         @if ($item->id % $a == 0)
                                             orange
@@ -63,7 +63,7 @@
                                         @else
                                             red
                                         @endif
-                                    " href="#">{{ $item->category->name }}</a>
+                                    " href="#" style="text-align: left">{{ $item->category->name }}</a>
                                     {{-- <span>$50.00</span> --}}
                                 </div>
                                 <ul class="tf__single_course_header">

@@ -23,6 +23,9 @@ class ProviderController extends Controller
 
     public function store(Request $request)
     {
+        $input = $request->all();
+        $count = $this->provider_social_media->where('disabled', 0)->count();
+
         $validate = $request->validate([
             'provider_npwp'         => 'required|unique:stg_provider,provider_npwp,'.$request->id.',id,disabled,1',
             'provider_name'         => 'required',
@@ -61,7 +64,6 @@ class ProviderController extends Controller
             'created_at'            => now(),
             'created_by'            => session()->get('sname').' ('.session()->get('srole').')',
         ];
-        // dd($data);
 
         if ($request->provider_logo) {
             if ($request->old_provider_logo) File::delete(storage_path('app/public/'.$request->old_provider_logo));
@@ -81,6 +83,11 @@ class ProviderController extends Controller
             (env('APP_ENV') == 'local') ? $filePath = $file->storeAs('provider/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public')
                 : $filePath = $file->storeAs('storage/provider/'.session()->get('srole').session()->get('suser_id'), $fileName, 'public');
             $data['provider_picture'] = $filePath;
+        }
+
+        for ($i = 1; $i < $count; $i++)
+        {
+            $this->provider_social_media->where('id', $i)->update(['link' => $input['social'.$i]]);
         }
 
         $this->provider->where('id', $request->id)->update($data);

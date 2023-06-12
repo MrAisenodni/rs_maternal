@@ -52,11 +52,11 @@
                             </a>
                             <p>{{ $provider->provider_name }}</p>
                             <ul class="d-flex flex-wrap">
-                                {{-- <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li> --}}
+                                @if ($provider->social_media)
+                                    @foreach ($provider->social_media as $item)
+                                        <li><a href="{{ $item->link }}"><i class="{{ $item->icon_1 }}"></i></a></li>
+                                    @endforeach                                    
+                                @endif
                             </ul>
                         </div>
                     </div>

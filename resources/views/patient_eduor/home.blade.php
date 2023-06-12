@@ -15,9 +15,6 @@
                 <div class="col-12">
                     <div class="tf__breadcrumb_text">
                         <h2>Home</h2>
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -38,7 +35,7 @@
                     <div class="tf__blog_details_area">
                         <div class="tf__blog_details_img wow fadeInUp" data-wow-duration="1.5s">
                             @if ($detail->picture)
-                                <img src="{{ asset('/storage/'.$detail->picture) }}" alt="Foto" class="img-fluid w-100">
+                                <img src="{{ asset('/storage/'.$detail->picture) }}" alt="Foto" class="img-fluid w-100" style="background: url({{ asset('/assets/eduor/images/breadcrumb_bg_1.jpg') }}); object-fit: scale-down !important;">
                             @endif
                         </div>
                         <div class="tf__blog_details_text wow fadeInUp" data-wow-duration="1.5s">

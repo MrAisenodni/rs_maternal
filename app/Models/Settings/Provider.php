@@ -16,4 +16,9 @@ class Provider extends Model
     {
         return $this->belongsTo(District::class, 'provider_district_id', 'id')->select('id', 'name')->where('disabled', 0);
     }
+
+    public function social_media()
+    {
+        return $this->hasMany(ProviderSocialMedia::class, 'provider_id', 'id')->where('disabled', 0);
+    }
 }

@@ -160,6 +160,83 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row mb-2">
+                                            @if ($detail->social_media)
+                                                @if ($detail->social_media->count() % 4 == 0)
+                                                    @foreach ($detail->social_media as $item)
+                                                        <div class="col-2 mb-2">
+                                                            <div class="form-group">
+                                                                <div class="input-group input-group-merge">
+                                                                    <input type="text" class="form-control form-control-prepended @error('social'.$item->id) is-invalid @enderror" id="social{{ $item->id }}" name="social{{ $item->id }}" value="{{ old('social'.$item->id, $item->link) }}">
+                                                                    @error('social'.$item->id)
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @enderror
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">
+                                                                            <span class="{{ $item->icon_1 }}"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @elseif ($detail->social_media->count() % 3 == 0)
+                                                    @foreach ($detail->social_media as $item)
+                                                        <div class="col-4 mb-2">
+                                                            <div class="form-group">
+                                                                <div class="input-group input-group-merge">
+                                                                    <input type="text" class="form-control form-control-prepended @error('social'.$item->id) is-invalid @enderror" id="social{{ $item->id }}" name="social{{ $item->id }}" value="{{ old('social'.$item->id, $item->link) }}">
+                                                                    @error('social'.$item->id)
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @enderror
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">
+                                                                            <span class="{{ $item->icon_1 }}"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @elseif ($detail->social_media->count() % 2 == 0)
+                                                    @foreach ($detail->social_media as $item)
+                                                        <div class="col-6 mb-2">
+                                                            <div class="form-group">
+                                                                <div class="input-group input-group-merge">
+                                                                    <input type="text" class="form-control form-control-prepended @error('social'.$item->id) is-invalid @enderror" id="social{{ $item->id }}" name="social{{ $item->id }}" value="{{ old('social'.$item->id, $item->link) }}">
+                                                                    @error('social'.$item->id)
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @enderror
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">
+                                                                            <span class="{{ $item->icon_1 }}"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($detail->social_media as $item)
+                                                        <div class="col-12 mb-2">
+                                                            <div class="form-group">
+                                                                <div class="input-group input-group-merge">
+                                                                    <input type="text" class="form-control form-control-prepended @error('social'.$item->id) is-invalid @enderror" id="social{{ $item->id }}" name="social{{ $item->id }}" value="{{ old('social'.$item->id, $item->link) }}">
+                                                                    @error('social'.$item->id)
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @enderror
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">
+                                                                            <span class="{{ $item->icon_1 }}"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            @endif
+                                        </div>
                                         <hr>
                                         <h6 class="mb-0 text-uppercase">Data Pemilik Perusahaan</h6>
                                         <hr>
