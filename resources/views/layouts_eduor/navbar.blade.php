@@ -57,6 +57,13 @@
                             <li class="nav-item">
                                 <a class="nav-link common_btn" href="/setting/provider">Go To Admin</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Keluar</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link common_btn" href="/logout">Keluar</a>
+                            </li>
                         @endif
                     @else
                         <li class="nav-item">
