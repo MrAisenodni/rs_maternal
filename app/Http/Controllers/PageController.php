@@ -12,6 +12,7 @@ class PageController extends Controller
 
     public function index(Request $request)
     {
+        $search = $request->search;
         $count = $this->count_history->select('id', 'count')->where('type', 'guest')->first();
         $template = $this->application_parameter->select('value')->where('id', 7)->first();
 
@@ -20,6 +21,10 @@ class PageController extends Controller
 
         $data = [
             'c_menu'                => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
+            'detail'                => $this->article->where('type', 'home')->first(),
+            'popular'               => $this->count_history->selectRaw('foreign_id, SUM(count) as count')->where('disabled', 0)->where('type', 'video')->orderByDesc('count')->groupBy('foreign_id')->limit(5)->get(),
+            'review'                => $this->count_history->selectRaw('type, SUM(count) AS count')->where('disabled', 0)->orderBy('type')->groupBy('type')->get(),
+            'search'                => $search,
         ];
 
         return view('patient'.$template->value.'.home', $data);

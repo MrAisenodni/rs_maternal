@@ -41,7 +41,7 @@
                     <div class="tf__sidebar_search">
                         <form class="" action="{{ $c_menu->url }}" method="GET">
                             @method('get')
-                            <input type="text" placeholder="Search" name="search" value="{{ old('search', $search) }}">
+                            <input type="text" placeholder="Cari Artikel" name="search" value="{{ old('search', $search) }}">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
