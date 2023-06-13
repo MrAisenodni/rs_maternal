@@ -268,7 +268,7 @@ class CourseHeaderController extends Controller
             'title'                             => 'required',
             'category'                          => 'required',
             'level'                             => 'required',
-            'picture'                           => 'required|max:5140|file|mimes:png,jpg,jpeg',
+            'picture'                           => 'max:5140|file|mimes:png,jpg,jpeg',
         ]);
         
         $data = [

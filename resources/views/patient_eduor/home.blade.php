@@ -7,6 +7,36 @@
     
 @section('content')
     <!--=================================
+        BANNER START
+    ==================================-->
+    {{-- <section class="tf__banner" style="background: url({{ asset('/assets/eduor/images/banner_bg.jpg') }});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-7 col-lg-8">
+                    <div class="tf__banner_text wow fadeInUp" data-wow-duration="1.5s">
+                        <h5>Welcome to Eduon!</h5>
+                        <h1>Students for <span>Little</span> Education from.</h1>
+                        <p>Our agency can only be as strong as our people & because of team have designed game changing
+                            products.</p>
+                        <ul class="d-flex flex-wrap align-items-center">
+                            <li><a class="common_btn" href="#">Read More</a></li>
+                            <li>
+                                <a class="venobox play_btn" data-autoplay="true" data-vbtype="video"
+                                    href="https://youtu.be/xsnCYCEbdr4">
+                                    <i class="fas fa-play"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> --}}
+    <!--=================================
+        BANNER END
+    ==================================-->
+
+    <!--=================================
         BREADCRUMB START
     ==================================-->
     <section class="tf__breadcrumb" style="background: url({{ asset('/assets/eduor/images/breadcrumb_bg_1.jpg') }});">
