@@ -230,9 +230,9 @@
         padding-bottom: 130px;
     }
 
-    .tf__breadcrumb .container .section-header {
+    .tf__breadcrumb .container::after {
         width: 350px;
-        height: 360px;
+        height: 400px;
         top: -40px;
     }
     /* .tf__breadcrumb .container::after {
