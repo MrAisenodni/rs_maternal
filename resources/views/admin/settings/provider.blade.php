@@ -164,7 +164,7 @@
                                             @if ($detail->social_media)
                                                 @if ($detail->social_media->count() % 4 == 0)
                                                     @foreach ($detail->social_media as $item)
-                                                        <div class="col-2 mb-2">
+                                                        <div class="col-3 mb-2">
                                                             <div class="form-group">
                                                                 <div class="input-group input-group-merge">
                                                                     <input type="text" class="form-control form-control-prepended @error('social'.$item->id) is-invalid @enderror" id="social{{ $item->id }}" name="social{{ $item->id }}" value="{{ old('social'.$item->id, $item->link) }}">

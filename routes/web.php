@@ -25,6 +25,7 @@ use App\Http\Controllers\Management\{
     CourseDetailApprovalController,
     CourseDetailDocumentController,
     CourseDetailDocumentApprovalController,
+    SectionHeaderController,
 };
 use App\Http\Controllers\Patient\{
     ListArticlesController,
@@ -93,6 +94,7 @@ Route::middleware('authcheck')->group(function() {
     Route::get('/admin/course-detail-document-approval/{id}/delete', [CourseDetailDocumentApprovalController::class, 'destroy']);
     Route::resource('/admin/course-detail-document-approval', CourseDetailDocumentApprovalController::class);
     Route::resource('/admin/course-detail-document', CourseDetailDocumentController::class);
+    Route::resource('/admin/section-header', SectionHeaderController::class);
 
     // Master
     Route::resource('/master/category', CategoryController::class);

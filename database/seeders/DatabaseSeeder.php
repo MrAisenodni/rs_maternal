@@ -27,9 +27,9 @@ class DatabaseSeeder extends Seeder
             // Settings\MainMenuSeeder::class,
             // Settings\MenuSeeder::class,
             // Settings\SubMenuSeeder::class,
-            // Settings\MenuAccessSeeder::class,
+            Settings\MenuAccessSeeder::class,
             // Settings\ProviderSeeder::class,
-            Settings\ProviderSocialMediaSeeder::class,
+            // Settings\ProviderSocialMediaSeeder::class,
             // Settings\UserSeeder::class,
 
             // // Seeder untuk Tabel Transaksi
@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             // Transactions\CourseHeaderSeeder::class,
             // Transactions\CourseDetailSeeder::class,
             // Transactions\CourseDetailDocumentSeeder::class,
+            // Transactions\SectionHeaderSeeder::class,
 
             // // Seeder untuk Tabel Dashboard
             // Masters\HospitalSeeder::class,

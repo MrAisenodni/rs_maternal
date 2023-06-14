@@ -39,6 +39,7 @@ use App\Models\Transactions\{
     CourseDetailDocumentApproval,
     CourseHeader,
     CourseHeaderApproval,
+    SectionHeader,
 };
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -89,6 +90,7 @@ class Controller extends BaseController
         $this->course_detail_document_approval  = new CourseDetailDocumentApproval();
         $this->course_header                    = new CourseHeader();
         $this->course_header_approval           = new CourseHeaderApproval();
+        $this->section_header                   = new SectionHeader();
 
         // Additional plugins
         $this->getID3                           = new getID3;

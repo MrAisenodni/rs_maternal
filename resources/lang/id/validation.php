@@ -183,6 +183,7 @@ return [
         'password'                      => 'Kata Sandi',
         'phone_number'                  => 'Nomor HP',
         'picture'                       => 'Foto/Gambar',
+        'picture_header'                => 'Foto/Gambar Header',
         'religion'                      => 'Agama',
         'repassword'                    => 'Kata Sandi Ulang',
         'role'                          => 'Peran',

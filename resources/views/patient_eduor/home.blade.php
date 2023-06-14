@@ -39,12 +39,12 @@
     <!--=================================
         BREADCRUMB START
     ==================================-->
-    <section class="tf__breadcrumb" style="background: url({{ asset('/assets/eduor/images/breadcrumb_bg_1.jpg') }});">
+    <section class="tf__breadcrumb" style="background: url({{ asset('/storage/'.$c_menu->section_header->picture_header) }});">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="tf__breadcrumb_text">
-                        <h2>Home</h2>
+                        <h2>{{ $c_menu->section_header->title }}</h2>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,6 @@
     <!--=================================
         BREADCRUMB END
     ==================================-->
-
 
     <!--=================================
         BLOG DETAILS PAGE START

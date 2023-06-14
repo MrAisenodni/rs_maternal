@@ -230,11 +230,16 @@
         padding-bottom: 130px;
     }
 
-    .tf__breadcrumb .container::after {
+    .tf__breadcrumb .container .section-header {
         width: 350px;
         height: 360px;
         top: -40px;
     }
+    /* .tf__breadcrumb .container::after {
+        width: 350px;
+        height: 360px;
+        top: -40px;
+    } */
 
     .tf__about_2_img .tf__about_large {
         width: 540px;
