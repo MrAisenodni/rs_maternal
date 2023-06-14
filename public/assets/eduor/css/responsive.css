@@ -231,9 +231,9 @@
     }
 
     .tf__breadcrumb .container::after {
-        width: 350px;
-        height: 400px;
-        top: -40px;
+        width: 250px;
+        height: 320px;
+        top: 20px;
     }
     /* .tf__breadcrumb .container::after {
         width: 350px;

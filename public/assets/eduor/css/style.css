@@ -327,20 +327,7 @@ button {
     position: relative;
 }
 
-.tf__breadcrumb .container .section-header {
-    position: absolute;
-    content: "";
-    /* background: url('/storage/logo.jpg'); */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 500px;
-    height: 500px;
-    top: -125px;
-    right: 0;
-    z-index: 1;
-}
-/* .tf__breadcrumb .container::after {
+.tf__breadcrumb .container::after {
     position: absolute;
     content: "";
     background: url('/storage/logo.jpg');
@@ -352,7 +339,7 @@ button {
     top: -125px;
     right: 0;
     z-index: 1;
-} */
+}
 
 .tf__breadcrumb_text h2 {
     font-size: 60px;
