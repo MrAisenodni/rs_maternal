@@ -46,12 +46,16 @@
                                         @method('put')
                                         @csrf
                                         <div class="row mb-2">
-                                            <div class="col-12">
+                                            <div class="col-11">
                                                 <label class="form-label" for="title">Judul <small class="text-danger">*</small></label>
                                                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $detail->title) }}">
                                                 @error('title')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
+                                            </div>
+                                            <div class="col-1">
+                                                <label class="form-label" for="title_color">&nbsp;</label>
+                                                <input type="color" class="form-control @error('title_color') is-invalid @enderror" id="title_color" name="title_color" value="{{ old('title_color', $detail->title_color) }}">
                                             </div>
                                         </div>
                                         <div class="row mb-2">

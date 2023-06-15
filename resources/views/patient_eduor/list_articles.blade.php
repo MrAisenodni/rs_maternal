@@ -9,12 +9,12 @@
     <!--=================================
         BREADCRUMB START
     ==================================-->
-    <section class="tf__breadcrumb" style="background: url({{ asset('/storage/'.$c_menu->section_header->picture_header) }}); margin-top: 100px;">
+    <section class="tf__breadcrumb" style="background: #2377a8 url('{{ asset('/storage/'.$c_menu->section_header->picture_header) }}'); margin-top: 80px;">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="tf__breadcrumb_text">
-                        <h2>{{ $c_menu->section_header->title }}</h2>
+                        <h2 style="color: {{ $c_menu->section_header->title_color }}">{{ $c_menu->section_header->title }}</h2>
                         <ul>
                             <li><a href="/">Home</a></li>
                             <li><a href="#">{{ $c_menu->title }}</a></li>

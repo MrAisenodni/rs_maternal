@@ -31,6 +31,7 @@ use App\Models\Settings\{
 };
 use App\Models\Transactions\{
     Article,
+    ArticleDocument,
     ClinicResults,
     CountHistory,
     CourseDetail,
@@ -81,6 +82,7 @@ class Controller extends BaseController
 
         // Global Variabel untuk Transaction
         $this->article                          = new Article();
+        $this->article_document                 = new ArticleDocument();
         $this->clinic_results                   = new ClinicResults();
         $this->companion                        = new Companion();
         $this->count_history                    = new CountHistory();

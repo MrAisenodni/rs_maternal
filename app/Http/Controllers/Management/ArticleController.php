@@ -91,6 +91,7 @@ class ArticleController extends Controller
     {
         $data = [
             'c_menu'            => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
+            'data'              => $this->article_document->where('disabled', 0)->where('article_id', $id)->get(),
             'detail'            => $this->article->where('disabled', 0)->where('id', $id)->first(),
             'app_param'         => $this->application_parameter->select('title', 'value')->whereIn('id', [5, 6])->get(),
         ];

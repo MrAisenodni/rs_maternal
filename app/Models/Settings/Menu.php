@@ -33,6 +33,6 @@ class Menu extends Model
 
     public function section_header()
     {
-        return $this->belongsTo(SectionHeader::class, 'id', 'menu_id')->select('id', 'title', 'menu_id', 'picture_header', 'picture_header_name', 'picture', 'picture_name')->where('disabled', 0);
+        return $this->belongsTo(SectionHeader::class, 'id', 'menu_id')->select('id', 'title', 'title_color', 'menu_id', 'picture_header', 'picture_header_name', 'picture', 'picture_name')->where('disabled', 0);
     }
 }

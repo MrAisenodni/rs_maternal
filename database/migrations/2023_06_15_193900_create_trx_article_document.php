@@ -4,19 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTrxSectionHeader extends Migration
+class CreateTrxArticleDocument extends Migration
 {
     public function up()
     {
-        Schema::create('trx_section_header', function (Blueprint $table) {
+        Schema::create('trx_article_document', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('menu_id')->nullable(); // Join ke Tabel stg_menu
+            $table->unsignedInteger('article_id')->nullable(); // Join ke trx_article
             $table->string('title')->nullable();
-            $table->string('title_color')->nullable();
-            $table->text('picture_header')->nullable();
-            $table->string('picture_header_name')->nullable();
-            $table->text('picture')->nullable();
-            $table->string('picture_name')->nullable();
+            $table->text('description')->nullable();
+            $table->text('file')->nullable();
+            $table->string('file_name')->nullable();
             
             // Struktur Baku
             $table->string('access_code')->nullable();
@@ -32,6 +30,6 @@ class CreateTrxSectionHeader extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('trx_section_header');
+        Schema::dropIfExists('trx_article_document');
     }
 }

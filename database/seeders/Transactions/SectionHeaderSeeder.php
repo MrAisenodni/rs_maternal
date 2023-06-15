@@ -15,7 +15,7 @@ class SectionHeaderSeeder extends CsvSeeder
         $this->defaults = [
             'created_by'    => 'Migrasi'
         ];
-        $this->mapping = ['id', 'menu_id', 'title', 'picture', 'picture_name', 'picture_header', 'picture_header_name'];
+        $this->mapping = ['id', 'menu_id', 'title', 'title_color', 'picture', 'picture_name', 'picture_header', 'picture_header_name'];
         $this->header = false;
     }
 

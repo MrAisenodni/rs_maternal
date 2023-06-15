@@ -14,7 +14,7 @@ class SectionHeaderController extends Controller
     {
         $data = [
             'c_menu'                            => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
-            'data'                              => $this->section_header->select('id', 'title', 'menu_id', 'created_at', 'created_by', 'updated_at', 'updated_by')->get(),
+            'data'                              => $this->section_header->select('id', 'title', 'title_color', 'menu_id', 'created_at', 'created_by', 'updated_at', 'updated_by')->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
@@ -27,7 +27,7 @@ class SectionHeaderController extends Controller
     {
         $data = [
             'c_menu'                            => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
-            'detail'                            => $this->section_header->select('id', 'title', 'menu_id', 'picture', 'picture_name', 'picture_header', 'picture_header_name', 'created_at', 'created_by', 'updated_at', 'updated_by')->where('disabled', 0)->where('id', $id)->first(),
+            'detail'                            => $this->section_header->select('id', 'title', 'title_color', 'menu_id', 'picture', 'picture_name', 'picture_header', 'picture_header_name', 'created_at', 'created_by', 'updated_at', 'updated_by')->where('disabled', 0)->where('id', $id)->first(),
             'app_param'                         => $this->application_parameter->select('title', 'value')->whereIn('id', [5, 6])->get(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
@@ -41,7 +41,7 @@ class SectionHeaderController extends Controller
     {
         $data = [
             'c_menu'                            => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
-            'detail'                            => $this->section_header->select('id', 'title', 'menu_id', 'picture', 'picture_name', 'picture_header', 'picture_header_name', 'created_at', 'created_by', 'updated_at', 'updated_by')->where('disabled', 0)->where('id', $id)->first(),
+            'detail'                            => $this->section_header->select('id', 'title', 'title_color', 'menu_id', 'picture', 'picture_name', 'picture_header', 'picture_header_name', 'created_at', 'created_by', 'updated_at', 'updated_by')->where('disabled', 0)->where('id', $id)->first(),
         ];
         $data['access'] = $this->menu_access->select('view', 'add', 'edit', 'delete', 'detail', 'approval')->where('disabled', 0)
             ->where('role', session()->get('srole'))->where('menu_id', $data['c_menu']->id)->first();
@@ -62,6 +62,7 @@ class SectionHeaderController extends Controller
 
         $data = [
             'title'                             => $request->title,
+            'title_color'                       => $request->title_color,
             'updated_at'                        => now(),
             'updated_by'                        => session()->get('sname').' ('.session()->get('srole').')',
         ];

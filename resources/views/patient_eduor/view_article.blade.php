@@ -55,6 +55,15 @@
                             </ul>
                             <h3>{{ $detail->title }}</h3>
                             {!! $detail->description !!}
+                            <hr>
+                            <h3>Dokumen Artikel</h3>
+                            <ul>
+                                @if ($detail->article_document)
+                                    @foreach ($detail->article_document as $item)
+                                        <li><a href="{{ asset('/storage/'.$item->file) }}" target="_blank">{{ $item->title }}</a></li>
+                                    @endforeach
+                                @endif
+                            </ul>
                         </div>
                     </div>
                 </div>

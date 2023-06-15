@@ -18,6 +18,7 @@ use App\Http\Controllers\Masters\{
 };
 use App\Http\Controllers\Management\{
     ArticleController,
+    ArticleDocumentController,
     ClinicResultsController,
     CourseHeaderController,
     CourseHeaderApprovalController,
@@ -82,6 +83,8 @@ Route::middleware('authcheck')->group(function() {
 
     // Management
     Route::resource('/admin/best-practice', ArticleController::class);
+    Route::get('/admin/best-practice-document/{id}/create', [ArticleDocumentController::class, 'create']);
+    Route::resource('/admin/best-practice-document', ArticleDocumentController::class);
     Route::resource('/admin/clinic-results', ClinicResultsController::class);
     Route::resource('/admin/course-header', CourseHeaderController::class);
     Route::get('/admin/course-header-approval/{id}/delete', [CourseHeaderApprovalController::class, 'destroy']);
