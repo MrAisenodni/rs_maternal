@@ -48,7 +48,7 @@
                     <div class="col-xl-6 col-sm-12 col-md-6 col-lg-6">
                         <div class="tf__footer_logo_area">
                             <a class="footer_logo" href="/">
-                                <img src="{{ asset('/storage/'.$provider->provider_picture) }}" alt="#" class="img-fluid w-100" style="background: white;">
+                                <img src="{{ asset('/storage/'.$provider->provider_picture) }}" alt="#" class="img-fluid w-100">
                             </a>
                             <p>{{ $provider->provider_name }}</p>
                             <ul class="d-flex flex-wrap">
