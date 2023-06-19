@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="tf__breadcrumb_text">
-                        <h2>{{ $c_menu->title }}</h2>
+                        <h2 style="color: {{ $c_menu->section_header->title_color }}">{{ $c_menu->section_header->title }}</h2>
                         <ul>
                             <li><a href="/">Home</a></li>
                             <li><a href="/list-courses">Daftar Materi</a></li>
