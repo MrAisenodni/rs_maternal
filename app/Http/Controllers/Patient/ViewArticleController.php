@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ViewArticleController extends Controller
 {
-    protected $path = '/view-article';
+    protected $path = '/best-practice';
 
     public function index(Request $request, $id, $ids)
     {
