@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\{ File, Hash };
 
 class ArticleController extends Controller
 {
@@ -108,7 +109,7 @@ class ArticleController extends Controller
 
         $validate = $request->validate([
             'title'             => 'required',
-            'picture'           => 'required|'.$app_param[0]->value.'|'.$app_param[1]->value,
+            'picture'           => $app_param[0]->value.'|'.$app_param[1]->value,
             'description'       => 'required',
         ]);
         

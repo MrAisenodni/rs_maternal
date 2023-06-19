@@ -57,8 +57,8 @@
                                 </a>
                                 <div class="tf__single_blog_text">
                                     {{-- <a class="category light_blue" href="#">design</a> --}}
-                                    <a class="title" href="/best-practice/{{ $item->id }}">@if (strlen($item->title) >= 15) {{ substr($item->title, 0, 15) }}... @else {{ $item->title }} @endif</a>
-                                    <p>@if (strlen($item->subtitle) >= 15 || !$item->subtitle) {{ substr($item->subtitle, 0, 15) }}... @else {{ $item->subtitle }} @endif</p>
+                                    <a class="title" href="/best-practice/{{ $item->id }}">{{ $item->title }}</a>
+                                    <p>{{ $item->subtitle }}&nbsp;</p>
                                     <a class="read_btn" href="/best-practice/{{ $item->id }}">Baca Detail <i class="fas fa-chevron-circle-right"></i></a>
                                 </div>
                             </div>

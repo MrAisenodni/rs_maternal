@@ -136,7 +136,7 @@
 
             {{-- Summary --}}
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card">
                         <div class="card-header text-center">
                             <div class="btn btn-primary btn-circle text-center mt-2"><i class="fa fa-user"></i></div>
@@ -147,7 +147,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card">
                         <div class="card-header text-center">
                             <div class="btn btn-secondary btn-circle text-center mt-2"><i class="fa fa-eye"></i></div>
@@ -158,14 +158,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card">
                         <div class="card-header text-center">
-                            <div class="btn btn-warning btn-circle text-center mt-2"><i class="fa fa-download"></i></div>
+                            <div class="btn btn-danger btn-circle text-center mt-2"><i class="fa fa-book"></i></div>
                             <div class="h5 mt-2">Unduhan</div>
                         </div>
                         <div class="card-body text-center">
                             <div class="h2 mt-n1 mb-n1">@if ($history) {{ $history[2]->count }} @endif</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <div class="btn btn-warning btn-circle text-center mt-2"><i class="fa fa-download"></i></div>
+                            <div class="h5 mt-2">Pembaca</div>
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="h2 mt-n1 mb-n1">@if ($history) {{ $history[3]->count }} @endif</div>
                         </div>
                     </div>
                 </div>

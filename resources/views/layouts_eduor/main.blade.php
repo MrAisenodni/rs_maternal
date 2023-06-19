@@ -54,7 +54,7 @@
                             <ul class="d-flex flex-wrap">
                                 @if ($provider->social_media)
                                     @foreach ($provider->social_media as $item)
-                                        <li><a href="{{ $item->link }}"><i class="{{ $item->icon_1 }}"></i></a></li>
+                                        <li><a href="{{ $item->link }}" target="_blank"><i class="{{ $item->icon_1 }}"></i></a></li>
                                     @endforeach                                    
                                 @endif
                             </ul>
