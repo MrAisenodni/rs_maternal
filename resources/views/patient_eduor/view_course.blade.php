@@ -9,7 +9,7 @@
     <!--=================================
         BREADCRUMB START
     ==================================-->
-    <section class="tf__breadcrumb" style="background: url({{ asset('/assets/eduor/images/breadcrumb_bg_1.jpg') }});">
+    <section class="tf__breadcrumb" style="background: #2377a8 url('{{ asset('/storage/'.$c_menu->section_header->picture_header) }}'); margin-top: 80px;">
         <div class="container">
             <div class="row">
                 <div class="col-12">

@@ -9,14 +9,16 @@
     <!--=================================
         BREADCRUMB START
     ==================================-->
-    <section class="tf__breadcrumb" style="background: url({{ asset('/assets/eduor/images/breadcrumb_bg_1.jpg') }});">
+    <section class="tf__breadcrumb" style="background: #2377a8 url('{{ asset('/storage/'.$c_menu->section_header->picture_header) }}'); margin-top: 80px;">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="tf__breadcrumb_text">
                         <h2>Home</h2>
                         <ul>
-                            <li><a href="#">Home</a></li>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/best-practice">Daftar Best Practice</a></li>
+                            <li><a href="#">{{ $detail->course_header->title }}</a></li>
                         </ul>
                     </div>
                 </div>
