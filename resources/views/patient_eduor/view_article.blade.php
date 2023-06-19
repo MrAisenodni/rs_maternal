@@ -18,7 +18,7 @@
                         <ul>
                             <li><a href="/">Home</a></li>
                             <li><a href="/best-practice">Daftar Best Practice</a></li>
-                            <li><a href="#">{{ $detail->course_header->title }}</a></li>
+                            <li><a href="#">{{ $detail->title }}</a></li>
                         </ul>
                     </div>
                 </div>
