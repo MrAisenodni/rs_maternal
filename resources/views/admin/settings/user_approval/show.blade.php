@@ -109,12 +109,12 @@
                                         <div class="row mb-2">
                                             <div class="col-6">
                                                 <label class="form-label" for="username">Nama Pengguna</label>
-                                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username', $detail->login->username) }}" readonly>
+                                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username', $detail->login_approval->username) }}" readonly>
                                             </div>
                                             <div class="col-6">
                                                 <label class="form-label" for="current_password">Kata Sandi Lama</label>
                                                 <input type="password" class="form-control @error('current_password') is-invalid @enderror" id="current_password" name="current_password" value="{{ old('current_password') }}" disabled>
-                                                <input type="hidden" name="password" value="{{ $detail->login->password }}">
+                                                <input type="hidden" name="password" value="{{ $detail->login_approval->password }}">
                                             </div>
                                         </div>
                                         <hr>
