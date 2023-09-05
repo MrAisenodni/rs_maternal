@@ -79,19 +79,19 @@
                                                             </td>
                                                             <td>
                                                                 @if ($item->email != null)
-                                                                    {{ $item->email != null }}
+                                                                    {{ $item->email }}
                                                                 @else
                                                                     -
                                                                 @endif
                                                             </td>
                                                             <td>
                                                                 @if ($item->phone_number != null)
-                                                                    {{ $item->phone_number != null }}
+                                                                    {{ $item->phone_number }}
                                                                 @else
                                                                     -
                                                                 @endif /
                                                                 @if ($item->home_number != null)
-                                                                    {{ $item->home_number != null }}
+                                                                    {{ $item->home_number }}
                                                                 @else
                                                                     -
                                                                 @endif
