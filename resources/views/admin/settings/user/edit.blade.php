@@ -181,14 +181,14 @@
                                         <div class="row mb-2">
                                             <div class="col-4">
                                                 <label class="form-label" for="username">Nama Pengguna <small class="text-danger">*</small></label>
-                                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username', $detail->login->username) }}" disabled>
+                                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username', $detail->login->username) }}" readonly>
                                                 @error('username')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="col-4">
                                                 <label class="form-label" for="current_password">Kata Sandi Lama</label>
-                                                <input type="password" class="form-control @error('current_password') is-invalid @enderror" id="current_password" name="current_password" value="{{ old('current_password') }}">
+                                                <input type="password" class="form-control @error('current_password') is-invalid @enderror" id="current_password" name="current_password" value="{{ old('current_password') }}" @if(session()->get('srole') == 'adm') disabled @endif>
                                                 @error('current_password')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

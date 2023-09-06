@@ -123,12 +123,17 @@ class UserController extends Controller
             'home_number'               => 'unique:mst_user,home_number,'.$id.',id,disabled,0',
             'nik'                       => 'required|unique:mst_user,nik,'.$id.',id,disabled,0',
             'phone_number'              => 'unique:mst_user,phone_number,'.$id.',id,disabled,0',
-            'current_password'          => 'required_with:new_password|min:8',
-            'new_password'              => 'required_with:current_password|different:current_password',
             'religion'                  => 'required',
             'role'                      => 'required',
             'username'                  => 'required',
         ]);
+
+        if (session()->get('srole') != 'adm') {
+            $validate = $request->validate([
+                'current_password'          => 'required_with:new_password|min:8',
+                'new_password'              => 'required_with:current_password|different:current_password',
+            ]);
+        }
 
         $data = [
             'nik'                       => $request->nik,
@@ -152,7 +157,15 @@ class UserController extends Controller
 
         $check = $this->login->select('username', 'password')->where('user_id', $id)->where('disabled', 0)->first();
 
-        if (Hash::check($request->current_password, $check->password)) {
+        if (session()->get('srole') != 'adm') {
+            if (Hash::check($request->current_password, $check->password)) {
+                $data = [
+                    'password'              => Hash::make($request->new_password),
+                ];
+            
+                $this->login->where('id', $id)->update($data);
+            }
+        } else {
             $data = [
                 'password'              => Hash::make($request->new_password),
             ];

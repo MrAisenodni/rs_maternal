@@ -57,8 +57,8 @@
                                 <label class="form-label" for="role">Pilih Peran Anda:</label>
                                 <div class="input-group input-group-merge">
                                     <select class="single-select form-control @error('role') is-invalid @enderror" id="role" name="role">
-                                        <option value="pat" @if (old('role') == 'pat') selected @endif>Member E-Learning</option>
                                         <option value="tec" @if (old('role') == 'tec') selected @endif>Dokter Pengajar</option>
+                                        <option value="pat" @if (old('role') == 'pat') selected @endif>Member E-Learning</option>
                                     </select>
                                     @error('role')
                                         <div class="invalid-feedback">{{ $message }}</div>
