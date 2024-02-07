@@ -15,6 +15,7 @@ class ListCoursesController extends Controller
         $template = $this->application_parameter->select('value')->whereIn('id', [7, 9])->get();
 
         $data = [
+            'provider'  => $this->provider->select('id', 'provider_name', 'provider_logo')->where('disabled', 0)->first(),
             'c_menu'    => $this->menu->select('id', 'title', 'url', 'main_menu_id')->where('disabled', 0)->where('url', $this->path)->first(),
             'data'      => $this->course_header->select('id', 'title', 'picture', 'rating', 'category_id', 'level_id', 'description', 'course_teacher_id')->where('disabled', 0)->where('title', 'LIKE', '%'.$search.'%')->paginate($template[1]->value),
             'search'    => $search,

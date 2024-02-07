@@ -36,6 +36,7 @@ class PageController extends Controller
         $template = $this->application_parameter->select('value')->where('id', 7)->first();
 
         $data = [
+            'provider'              => $this->provider->select('id', 'provider_name', 'provider_logo')->where('disabled', 0)->first(),
             'approvals'             => $this->course_header_approval->selectRaw("'Detail Materi', COUNT(id) AS Jumlah")
                                         ->union(
                                             $this->course_detail_approval->selectRaw("'Detail Video', COUNT(id) AS Jumlah")
