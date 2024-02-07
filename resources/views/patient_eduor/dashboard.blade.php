@@ -18,6 +18,13 @@
             right: 0;
             z-index: 1;
         }
+        @media (min-width: 1200px) and (max-width: 1399.99px) {
+            .tf__breadcrumb .container::after {
+                width: 250px;
+                height: 320px;
+                top: 20px;
+            }
+        }
     </style>
 
     {{-- Select2 --}}
