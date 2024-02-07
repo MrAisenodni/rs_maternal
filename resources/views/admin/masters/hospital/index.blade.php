@@ -8,6 +8,10 @@
 
     {{-- Sweet Alert --}}
     <link href="{{ asset('/assets/plugins/sweet-alert/sweetalert2.min.css') }}" rel="stylesheet" />
+
+    {{-- Select2 --}}
+    <link href="{{ asset('/assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
 @endsection
     
 @section('content')
@@ -42,6 +46,7 @@
                                                 <tr>
                                                     <th style="width: 5%">No</th>
                                                     <th>Nama</th>
+                                                    <th>Tipe</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -51,6 +56,15 @@
                                                         <tr data-id="{{ $item->id }}">
                                                             <td class="text-center">{{ $loop->iteration }}</td>
                                                             <td>{{ $item->name }}</td>
+                                                            <td>
+                                                                @if ($item->type == 'int')
+                                                                    Intervensi
+                                                                @elseif ($item->type == 'tec')
+                                                                    Mentor
+                                                                @else
+                                                                    Tim E-Learning Muhammadiyah
+                                                                @endif    
+                                                            </td>
                                                             <td class="text-center" style="width: 20%">
                                                                 @if ($access->edit == 1)
                                                                     <a href="{{ $c_menu->url }}/{{ $item->id }}/edit"><i class="fa fa-edit"></i></a>
@@ -104,4 +118,8 @@
     {{-- Sweet Alert --}}
     <script src="{{ asset('/assets/plugins/sweet-alert/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('/assets/js/sweet-alert.init.js') }}"></script>
+    
+    {{-- Select2 --}}
+    <script src="{{ asset('/assets/plugins/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/form-select2.js') }}"></script>
 @endsection

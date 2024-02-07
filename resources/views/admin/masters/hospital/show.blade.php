@@ -8,6 +8,13 @@
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
+    <div class="col-12 mb-2">
+        <label class="form-label" for="type">Nama {{ $c_menu->title }}</label>
+        <input type="text" class="form-control @error('type') is-invalid @enderror" id="type" name="type" value="{{ old('type', $detail->type) }}" disabled>
+        @error('type')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
     <div class="col-12">
         <div class="row">
             <div class="col-12">
