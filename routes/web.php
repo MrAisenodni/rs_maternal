@@ -73,7 +73,7 @@ Route::get('/storage-link', function () {
 });
 Route::get('/migrate-seed', function () { 
     Artisan::call('migrate:fresh --seed');
- });
+});
 
 // Menu must be login first
 Route::middleware('authcheck')->group(function() {

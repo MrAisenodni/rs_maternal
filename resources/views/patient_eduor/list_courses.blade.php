@@ -3,6 +3,22 @@
 @section('title', $c_menu->title)
 
 @section('styles')
+    {{-- Custom Section --}}
+    <style>
+        .tf__breadcrumb .container::after {
+            position: absolute;
+            content: "";
+            background: url('{{ asset('/storage/'.$provider->provider_logo) }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 500px;
+            height: 500px;
+            top: -125px;
+            right: 0;
+            z-index: 1;
+        }
+    </style>
 @endsection
     
 @section('content')

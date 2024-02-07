@@ -14,11 +14,16 @@ class Provider extends Model
 
     public function provider_district()
     {
-        return $this->belongsTo(District::class, 'provider_district_id', 'id')->select('id', 'name')->where('disabled', 0);
+        return $this->belongsTo(District::class, 'provider_district_id', 'id')->select('id', 'name', 'city_id')->where('disabled', 0);
     }
 
-    public function social_media()
+    public function owner_district()
     {
-        return $this->hasMany(ProviderSocialMedia::class, 'provider_id', 'id')->where('disabled', 0);
+        return $this->belongsTo(District::class, 'owner_district_id', 'id')->select('id', 'name', 'city_id')->where('disabled', 0);
     }
+
+    // public function social_media()
+    // {
+    //     return $this->hasMany(ProviderSocialMedia::class, 'provider_id', 'id')->where('disabled', 0);
+    // }
 }
