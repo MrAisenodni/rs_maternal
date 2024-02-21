@@ -167,7 +167,7 @@
                                                         <div class="col-3 mb-2">
                                                             <div class="form-group">
                                                                 <div class="input-group input-group-merge">
-                                                                    <input type="text" class="form-control form-control-prepended @error('social'.$item->id) is-invalid @enderror" id="social{{ $item->id }}" name="social{{ $item->id }}" value="{{ old('social'.$item->id, $item->link) }}">
+                                                                    <input type="text" class="form-control form-control-prepended @error('social'.$item->id) is-invalid @enderror" id="social{{ $item->id }}" name="social{{ $item->id }}" value="{{ old('social'.$item->id, ($item->link) ? $item->link : 'NA') }}">
                                                                     @error('social'.$item->id)
                                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                                     @enderror
@@ -185,7 +185,7 @@
                                                         <div class="col-4 mb-2">
                                                             <div class="form-group">
                                                                 <div class="input-group input-group-merge">
-                                                                    <input type="text" class="form-control form-control-prepended @error('social'.$item->id) is-invalid @enderror" id="social{{ $item->id }}" name="social{{ $item->id }}" value="{{ old('social'.$item->id, $item->link) }}">
+                                                                    <input type="text" class="form-control form-control-prepended @error('social'.$item->id) is-invalid @enderror" id="social{{ $item->id }}" name="social{{ $item->id }}" value="{{ old('social'.$item->id, ($item->link) ? $item->link : 'NA') }}">
                                                                     @error('social'.$item->id)
                                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                                     @enderror
@@ -203,7 +203,7 @@
                                                         <div class="col-6 mb-2">
                                                             <div class="form-group">
                                                                 <div class="input-group input-group-merge">
-                                                                    <input type="text" class="form-control form-control-prepended @error('social'.$item->id) is-invalid @enderror" id="social{{ $item->id }}" name="social{{ $item->id }}" value="{{ old('social'.$item->id, $item->link) }}">
+                                                                    <input type="text" class="form-control form-control-prepended @error('social'.$item->id) is-invalid @enderror" id="social{{ $item->id }}" name="social{{ $item->id }}" value="{{ old('social'.$item->id, ($item->link) ? $item->link : 'NA') }}">
                                                                     @error('social'.$item->id)
                                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                                     @enderror
@@ -221,7 +221,7 @@
                                                         <div class="col-12 mb-2">
                                                             <div class="form-group">
                                                                 <div class="input-group input-group-merge">
-                                                                    <input type="text" class="form-control form-control-prepended @error('social'.$item->id) is-invalid @enderror" id="social{{ $item->id }}" name="social{{ $item->id }}" value="{{ old('social'.$item->id, $item->link) }}">
+                                                                    <input type="text" class="form-control form-control-prepended @error('social'.$item->id) is-invalid @enderror" id="social{{ $item->id }}" name="social{{ $item->id }}" value="{{ old('social'.$item->id, ($item->link) ? $item->link : 'NA') }}">
                                                                     @error('social'.$item->id)
                                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                                     @enderror

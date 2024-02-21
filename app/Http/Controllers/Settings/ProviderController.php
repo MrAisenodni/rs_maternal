@@ -85,12 +85,12 @@ class ProviderController extends Controller
             $data['provider_picture'] = $filePath;
         }
 
-        for ($i = 1; $i < $count; $i++)
-        {
-            $this->provider_social_media->where('id', $i)->update(['link' => $input['social'.$i]]);
-        }
-
         $this->provider->where('id', $request->id)->update($data);
+
+        // for ($i = 1; $i < $count; $i++)
+        // {
+        //     $this->provider_social_media->where('id', $i)->update(['link' => $input['social'.$i]]);
+        // }
 
         return redirect($this->path)->with('status', 'Perubahan Berhasil Disimpan.');
     }
